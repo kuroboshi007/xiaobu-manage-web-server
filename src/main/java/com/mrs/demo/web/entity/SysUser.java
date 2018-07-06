@@ -1,6 +1,9 @@
 package com.mrs.demo.web.entity;
 
+import java.io.Serializable;
 import java.util.Date;
+
+import com.mrs.demo.common.base.BaseEntity;
 
 /**
  * sys_user表类
@@ -8,9 +11,13 @@ import java.util.Date;
  * @author Mmmmm
  *
  */
-public class SysUser {
+public class SysUser extends BaseEntity implements Serializable{
 
-	private String id;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	//private String id;
 	/** 用户账号 */
 	private String username;
 	/** 用户密码 */
@@ -44,13 +51,13 @@ public class SysUser {
 	/** 角色名称 **/
 	private String roleName;
 
-	public String getId() {
+	/*public String getId() {
 		return id;
 	}
 
 	public void setId(String id) {
 		this.id = id;
-	}
+	}*/
 
 	public String getUsername() {
 		return username;

@@ -2,7 +2,9 @@ package com.mrs.demo.common.base;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -10,6 +12,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.bind.ServletRequestDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 
+import com.mrs.demo.common.config.Code;
 import com.mrs.demo.common.constant.SessionAttr;
 import com.mrs.demo.common.util.ContextHolderUtil;
 import com.mrs.demo.common.util.DateConvertEditor;
@@ -62,5 +65,37 @@ public class BaseController {
 		SysUser user = (SysUser)session.getAttribute(SessionAttr.USER_LOGIN.getValue());
 		
 		return user;
+	}
+	
+	/** 把 ,连接的字符串 转化为 int[]数组
+	 * */
+	protected int[] str2Arr(String delitems){
+		delitems=delitems.trim();
+		String[] idStrArr = delitems.split(",");
+		
+		int[] idArr=new int[idStrArr.length];
+		
+		for (int i=0;i<idStrArr.length;i++) {
+			idArr[i]=Integer.parseInt(idStrArr[i]);
+		}
+		return idArr;
+	}
+	
+	/** 设置响应代码 */
+	protected Object actionResult(Code code){
+		return actionResult(code,null);
+	}
+	
+	/** 设置响应代码 
+	 * */
+	protected Object actionResult(Code code, Object data){
+		Map<String, Object> map = new HashMap<String, Object>();
+		if (data != null) {
+			map.put("result", data);
+		}
+		map.put("code", code.value());
+		map.put("message", code.message());
+		map.put("timestamp", System.currentTimeMillis());
+		return map;
 	}
 }

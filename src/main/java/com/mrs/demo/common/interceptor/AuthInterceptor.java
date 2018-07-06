@@ -9,6 +9,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.mrs.demo.common.constant.SessionAttr;
+import com.mrs.demo.web.entity.SysUser;
 
 @Component
 public class AuthInterceptor implements HandlerInterceptor{
@@ -36,20 +38,28 @@ public class AuthInterceptor implements HandlerInterceptor{
 	 */
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object obj) throws Exception {
-			
-			// session失效时，ajax请求拦截
-			String requestType = request.getHeader("X-Requested-With");
-			if(StringUtils.isNotEmpty(requestType) && requestType.equalsIgnoreCase("XMLHttpRequest")){
+			HttpSession session = request.getSession(true);
+	
+			SysUser user = (SysUser) session.getAttribute(SessionAttr.USER_LOGIN.getValue());
+			if(user != null){
 				
-				response.setHeader("sessionstatus", "timeout");  
-				response.sendError(518, "session timeout.");  
+				return true;
+			} else {
 				
-		    }else { 
-		    	
-		    	// 跳转到登录页面
-				request.getRequestDispatcher("/login/login").forward(request, response);
-				//request.getRequestDispatcher("Login.jsp").forward(request, response);
-		    }
-			return false;
+				// session失效时，ajax请求拦截
+				String requestType = request.getHeader("X-Requested-With");
+				if(StringUtils.isNotEmpty(requestType) && requestType.equalsIgnoreCase("XMLHttpRequest")){
+					
+					response.setHeader("sessionstatus", "timeout");  
+					response.sendError(518, "session timeout.");  
+					
+			    }else { 
+			    	
+			    	// 跳转到登录页面
+					request.getRequestDispatcher("/login/login").forward(request, response);
+			    }
+				
+				return false;
+			}
 	}
 }
