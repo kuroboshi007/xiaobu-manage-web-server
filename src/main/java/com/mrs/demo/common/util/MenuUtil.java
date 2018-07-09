@@ -9,7 +9,7 @@ import com.idp.web.system.entity.SysMenu;
 *//**
  * 菜单工具类
  * 
- * @author King
+ * @author Mmmmm
  *
  *//*
 public class MenuUtil {

@@ -16,7 +16,7 @@ import org.slf4j.LoggerFactory;
 /**
  * 通过反射机制给对象赋值
  * 
- * @author King
+ * @author Mmmmm
  *
  */
 public class ReflectUtil {

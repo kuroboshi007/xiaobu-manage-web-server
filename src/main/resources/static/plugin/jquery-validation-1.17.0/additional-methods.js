@@ -66,7 +66,7 @@ $.validator.addMethod( "accept", function( value, element, param ) {
 				.replace( /,/g, "|" )
 				.replace( /\/\*/g, "/.*" );
 
-		// Check if the element has a FileList before checking each file
+		// Check if the element has a FileList before checMmmmm each file
 		if ( element.files && element.files.length ) {
 			regex = new RegExp( ".?(" + typeParam + ")$", "i" );
 			for ( i = 0; i < element.files.length; i++ ) {
@@ -265,7 +265,7 @@ $.validator.addMethod( "cpfBR", function( value ) {
 	// Removing special characters from value
 	value = value.replace( /([~!@#$%^&*()_+=`{}\[\]\-|\\:;'<>,.\/? ])+/g, "" );
 
-	// Checking value to have 11 digits only
+	// ChecMmmmm value to have 11 digits only
 	if ( value.length !== 11 ) {
 		return false;
 	}
@@ -284,7 +284,7 @@ $.validator.addMethod( "cpfBR", function( value ) {
 		return ( result === cn );
 	};
 
-	// Checking for dump data
+	// ChecMmmmm for dump data
 	if ( value === "" ||
 		value === "00000000000" ||
 		value === "11111111111" ||
@@ -439,12 +439,12 @@ $.validator.addMethod( "creditcardtypes", function( value, element, param ) {
  *
  *  <input class="currencyInput" name="currencyInput">
  *
- * Soft symbol checking
+ * Soft symbol checMmmmm
  *  currencyInput: {
  *     currency: ["$", false]
  *  }
  *
- * Strict symbol checking (default)
+ * Strict symbol checMmmmm (default)
  *  currencyInput: {
  *     currency: "$"
  *     //OR
@@ -475,7 +475,7 @@ $.validator.addMethod( "dateFA", function( value, element ) {
 }, $.validator.messages.date );
 
 /**
- * Return true, if the value is a valid date, also making this formal check dd/mm/yyyy.
+ * Return true, if the value is a valid date, also maMmmmm this formal check dd/mm/yyyy.
  *
  * @example $.validator.methods.date("01/01/1900")
  * @result true
@@ -638,7 +638,7 @@ $.validator.addMethod( "iban", function( value, element ) {
 	// This prevents false negatives, while almost all
 	// false positives introduced by this, will be caught
 	// by the checksum validation below anyway.
-	// Strict checking should return FALSE for unknown
+	// Strict checMmmmm should return FALSE for unknown
 	// countries.
 	if ( typeof bbanpattern !== "undefined" ) {
 		ibanregexp = new RegExp( "^[A-Z]{2}\\d{2}" + bbanpattern + "$", "" );

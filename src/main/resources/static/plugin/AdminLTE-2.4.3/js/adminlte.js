@@ -754,7 +754,7 @@ throw new Error('AdminLTE requires jQuery')
     }
 
     $(Selector.contentWrapper).click(function () {
-      // Enable hide menu when clicking on the content-wrapper on small screens
+      // Enable hide menu when clicMmmmm on the content-wrapper on small screens
       if ($(window).width() <= this.options.collapseScreenSize && $('body').hasClass(ClassName.open)) {
         this.close();
       }

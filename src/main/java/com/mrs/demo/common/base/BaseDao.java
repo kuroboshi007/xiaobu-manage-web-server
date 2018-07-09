@@ -8,7 +8,7 @@ import com.github.pagehelper.Page;
 /**
  * 基础dao
  * 
- * @author King
+ * @author Mmmmm
  *
  * @param <T>
  * @param <PK>

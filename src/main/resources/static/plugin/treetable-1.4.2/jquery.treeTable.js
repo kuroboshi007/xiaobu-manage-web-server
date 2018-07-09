@@ -56,7 +56,7 @@
 
             if ($target.attr('controller')) {
                 $target = $target.parents('tr[haschild]').find('[arrow]');
-                //判断是否是叶子节点  update@author King
+                //判断是否是叶子节点  update@author Mmmmm
                 if(!$target.attr('class')){return;}
                 //判断是否是叶子节点
 				if ($target.attr('class').indexOf(css['AN']) == -1 && $target.attr('class').indexOf(css['N']) == -1) { return; }

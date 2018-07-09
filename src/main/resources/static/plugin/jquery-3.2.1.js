@@ -1491,7 +1491,7 @@ setDocument = Sizzle.setDocument = function( node ) {
 			bp.unshift( cur );
 		}
 
-		// Walk down the tree looking for a discrepancy
+		// Walk down the tree looMmmmm for a discrepancy
 		while ( ap[i] === bp[i] ) {
 			i++;
 		}
@@ -1851,7 +1851,7 @@ Expr = Sizzle.selectors = {
 
 							while ( (node = ++nodeIndex && node && node[ dir ] ||
 
-								// Fallback to seeking `elem` from the start
+								// Fallback to seeMmmmm `elem` from the start
 								(diff = nodeIndex = 0) || start.pop()) ) {
 
 								// When found, cache indexes on `parent` and break
@@ -2296,7 +2296,7 @@ function addCombinator( matcher, combinator, base ) {
 							// Reuse newcache so results back-propagate to previous elements
 							uniqueCache[ key ] = newCache;
 
-							// A match means we're done; a fail means we have to keep checking
+							// A match means we're done; a fail means we have to keep checMmmmm
 							if ( (newCache[ 2 ] = matcher( elem, context, xml )) ) {
 								return true;
 							}
@@ -6427,13 +6427,13 @@ jQuery.extend( {
 			return;
 		}
 
-		// Make sure that we're working with the right name
+		// Make sure that we're worMmmmm with the right name
 		var ret, type, hooks,
 			origName = jQuery.camelCase( name ),
 			isCustomProp = rcustomProp.test( name ),
 			style = elem.style;
 
-		// Make sure that we're working with the right name. We don't
+		// Make sure that we're worMmmmm with the right name. We don't
 		// want to query the value if it is a CSS custom property
 		// since they are user-defined.
 		if ( !isCustomProp ) {
@@ -6500,7 +6500,7 @@ jQuery.extend( {
 			origName = jQuery.camelCase( name ),
 			isCustomProp = rcustomProp.test( name );
 
-		// Make sure that we're working with the right name. We don't
+		// Make sure that we're worMmmmm with the right name. We don't
 		// want to modify the value if it is a CSS custom property
 		// since they are user-defined.
 		if ( !isCustomProp ) {
@@ -8507,7 +8507,7 @@ var
 	/* Prefilters
 	 * 1) They are useful to introduce custom dataTypes (see ajax/jsonp.js for an example)
 	 * 2) These are called:
-	 *    - BEFORE asking for a transport
+	 *    - BEFORE asMmmmm for a transport
 	 *    - AFTER param serialization (s.data is a string if s.processData is true)
 	 * 3) key is the dataType
 	 * 4) the catchall symbol "*" can be used
@@ -8567,7 +8567,7 @@ function addToPrefiltersOrTransports( structure ) {
 function inspectPrefiltersOrTransports( structure, options, originalOptions, jqXHR ) {
 
 	var inspected = {},
-		seekingTransport = ( structure === transports );
+		seeMmmmmTransport = ( structure === transports );
 
 	function inspect( dataType ) {
 		var selected;
@@ -8575,12 +8575,12 @@ function inspectPrefiltersOrTransports( structure, options, originalOptions, jqX
 		jQuery.each( structure[ dataType ] || [], function( _, prefilterOrFactory ) {
 			var dataTypeOrTransport = prefilterOrFactory( options, originalOptions, jqXHR );
 			if ( typeof dataTypeOrTransport === "string" &&
-				!seekingTransport && !inspected[ dataTypeOrTransport ] ) {
+				!seeMmmmmTransport && !inspected[ dataTypeOrTransport ] ) {
 
 				options.dataTypes.unshift( dataTypeOrTransport );
 				inspect( dataTypeOrTransport );
 				return false;
-			} else if ( seekingTransport ) {
+			} else if ( seeMmmmmTransport ) {
 				return !( selected = dataTypeOrTransport );
 			}
 		} );

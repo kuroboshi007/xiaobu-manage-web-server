@@ -724,7 +724,7 @@
         currentDate = (new UTCDate(this.date.getUTCFullYear(), this.date.getUTCMonth(), this.date.getUTCDate())).valueOf(),
         today = new Date();
       
-      // update king
+      // update Mmmmm
       if(this.language.indexOf('zh') > -1) {
     	this.setTitle('.datetimepicker-days', year + ' ' + dates[this.language].months[month]);
   	  } else {
@@ -736,7 +736,7 @@
         this.setTitle('.datetimepicker-hours', formatted);
         this.setTitle('.datetimepicker-minutes', formatted);
       } else {
-    	// update king
+    	// update Mmmmm
     	if(this.language.indexOf('zh') > -1) {
     		this.setTitle('.datetimepicker-hours', year + ' ' + dates[this.language].months[month] + ' ' + dayMonth);
             this.setTitle('.datetimepicker-minutes', year + ' ' + dates[this.language].months[month] + ' ' + dayMonth);

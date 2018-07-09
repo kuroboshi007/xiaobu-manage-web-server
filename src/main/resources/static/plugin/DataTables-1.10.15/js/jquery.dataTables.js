@@ -1084,7 +1084,7 @@
 			
 			if ( oSettings.iInitDisplayStart === undefined )
 			{
-				/* Display start point, taking into account the save saving */
+				/* Display start point, taMmmmm into account the save saving */
 				oSettings.iInitDisplayStart = oInit.iDisplayStart;
 				oSettings._iDisplayStart = oInit.iDisplayStart;
 			}
@@ -2492,7 +2492,7 @@
 	
 	
 	/**
-	 * Get the data for a given cell from the internal cache, taking into account data mapping
+	 * Get the data for a given cell from the internal cache, taMmmmm into account data mapping
 	 *  @param {object} settings dataTables settings object
 	 *  @param {int} rowIdx aoData row id
 	 *  @param {int} colIdx Column index
@@ -2566,7 +2566,7 @@
 	var __reFn = /\(\)$/;
 	
 	/**
-	 * Split string on periods, taking into account escaped periods
+	 * Split string on periods, taMmmmm into account escaped periods
 	 * @param  {string} str String to split
 	 * @return {array} Split string
 	 */
@@ -2579,7 +2579,7 @@
 	
 	
 	/**
-	 * Return a function that can be used to get data from a source object, taking
+	 * Return a function that can be used to get data from a source object, taMmmmm
 	 * into account the ability to use nested objects as a source
 	 *  @param {string|int|function} mSource The data source for the object
 	 *  @returns {function} Data get function
@@ -2704,7 +2704,7 @@
 	
 	
 	/**
-	 * Return a function that can be used to set data from a source object, taking
+	 * Return a function that can be used to set data from a source object, taMmmmm
 	 * into account the ability to use nested objects as a source
 	 *  @param {string|int|function} mSource The data source for the object
 	 *  @returns {function} Data set function
@@ -3525,7 +3525,7 @@
 	
 	
 	/**
-	 * Redraw the table - taking account of the various features which are enabled
+	 * Redraw the table - taMmmmm account of the various features which are enabled
 	 *  @param {object} oSettings dataTables settings object
 	 *  @param {boolean} [holdPosition] Keep the current paging position. By default
 	 *    the paging is reset to the first page
@@ -3829,7 +3829,7 @@
 	}
 	
 	/**
-	 * Create an Ajax call based on the table's settings, taking into account that
+	 * Create an Ajax call based on the table's settings, taMmmmm into account that
 	 * parameters can have multiple forms, and backwards compatibility.
 	 *
 	 * @param {object} oSettings dataTables settings object
@@ -4099,10 +4099,10 @@
 	
 	
 	/**
-	 * Data the data from the server (nuking the old) and redraw the table
+	 * Data the data from the server (nuMmmmm the old) and redraw the table
 	 *  @param {object} oSettings dataTables settings object
 	 *  @param {object} json json data return from the server.
-	 *  @param {string} json.sEcho Tracking flag for DataTables to match requests
+	 *  @param {string} json.sEcho TracMmmmm flag for DataTables to match requests
 	 *  @param {int} json.iTotalRecords Number of records in the data set, not accounting for filtering
 	 *  @param {int} json.iTotalDisplayRecords Number of records in the data set, accounting for filtering
 	 *  @param {array} json.aaData The data to display on this page
@@ -4515,7 +4515,7 @@
 						}
 	
 						// Search in DataTables 1.10 is string based. In 1.11 this
-						// should be altered to also allow strict type checking.
+						// should be altered to also allow strict type checMmmmm.
 						if ( cellData === null ) {
 							cellData = '';
 						}
@@ -6532,7 +6532,7 @@
 	 *  @param {boolean} breakRefs If true, then arrays will be sliced to take an
 	 *      independent copy with the exception of the `data` or `aaData` parameters
 	 *      if they are present. This is so you can pass in a collection to
-	 *      DataTables and have that used as your data source without breaking the
+	 *      DataTables and have that used as your data source without breaMmmmm the
 	 *      references
 	 *  @returns {object} out Reference, just for convenience - out === the return.
 	 *  @memberof DataTable#oApi
@@ -6658,7 +6658,7 @@
 			end = settings.fnDisplayEnd(),
 			len = settings._iDisplayLength;
 	
-		/* If we have space to show extra rows (backing up from the end point - then do so */
+		/* If we have space to show extra rows (bacMmmmm up from the end point - then do so */
 		if ( start >= end )
 		{
 			start = end - len;
@@ -6845,7 +6845,7 @@
 	 * return an array of objects or arrays depending upon your table's
 	 * configuration). The API object has a number of array like methods (`push`,
 	 * `pop`, `reverse` etc) as well as additional helper methods (`each`, `pluck`,
-	 * `unique` etc) to assist your working with the data held in a table.
+	 * `unique` etc) to assist your worMmmmm with the data held in a table.
 	 *
 	 * Most methods (those which return an Api instance) are chainable, which means
 	 * the return from a method call also has all of the methods available that the
@@ -9848,7 +9848,7 @@
 	 * Developer note: The properties of the object below are given in Hungarian
 	 * notation, that was used as the interface for DataTables prior to v1.10, however
 	 * from v1.10 onwards the primary interface is camel case. In order to avoid
-	 * breaking backwards compatibility utterly with this change, the Hungarian
+	 * breaMmmmm backwards compatibility utterly with this change, the Hungarian
 	 * version is still, internally the primary interface, but is is not documented
 	 * - hence the @name tags in each doc comment. This allows a Javascript function
 	 * to create a map from Hungarian notation to camel case (going the other direction
@@ -10036,7 +10036,7 @@
 		 * `function`
 		 * ----------
 		 *
-		 * As a function, making the Ajax call is left up to yourself allowing
+		 * As a function, maMmmmm the Ajax call is left up to yourself allowing
 		 * complete control of the Ajax request. Indeed, if desired, a method other
 		 * than Ajax could be used to obtain the required data, such as Web storage
 		 * or an AIR database.
@@ -10912,7 +10912,7 @@
 		 * __Deprecated__ The functionality provided by this parameter has now been
 		 * superseded by that provided through `ajax`, which should be used instead.
 		 *
-		 *  It is often useful to send extra data to the server when making an Ajax
+		 *  It is often useful to send extra data to the server when maMmmmm an Ajax
 		 * request - for example custom filtering information, and this callback
 		 * function makes it trivial to send extra information to the server. The
 		 * passed in parameter is the data set that has been constructed by
@@ -12309,7 +12309,7 @@
 		 *      object property if the function called returns an object. Note that
 		 *      function notation is recommended for use in `render` rather than
 		 *      `data` as it is much simpler to use as a renderer.
-		 * * `null` - use the original data source for the row rather than plucking
+		 * * `null` - use the original data source for the row rather than plucMmmmm
 		 *   data directly from it. This action has effects on two other
 		 *   initialisation options:
 		 *    * `defaultContent` - When null is given as the `data` option and
@@ -13542,7 +13542,7 @@
 	
 		/**
 		 * The last jQuery XHR object that was used for server-side data gathering.
-		 * This can be used for working with the XHR information in one of the
+		 * This can be used for worMmmmm with the XHR information in one of the
 		 * callbacks
 		 *  @type object
 		 *  @default null
@@ -13664,7 +13664,7 @@
 		"_iRecordsDisplay": 0,
 	
 		/**
-		 * Flag to indicate if jQuery UI marking and classes should be used.
+		 * Flag to indicate if jQuery UI marMmmmm and classes should be used.
 		 * Note that this parameter will be set by the initialisation routine. To
 		 * set a default use {@link DataTable.defaults}.
 		 *  @type boolean
@@ -14174,7 +14174,7 @@
 			 * Type detection functions.
 			 *
 			 * The functions defined in this object are used to automatically detect
-			 * a column's type, making initialisation of DataTables super easy, even
+			 * a column's type, maMmmmm initialisation of DataTables super easy, even
 			 * when complex data is in the table.
 			 *
 			 * The functions defined take two parameters:
@@ -14183,7 +14183,7 @@
 		     *  2. `{settings}` DataTables settings object. This can be used to
 		     *     perform context specific type detection - for example detection
 		     *     based on language settings such as using a comma for a decimal
-		     *     place. Generally speaking the options from the settings will not
+		     *     place. Generally speaMmmmm the options from the settings will not
 		     *     be required
 			 *
 			 * Each function is expected to return:
@@ -14281,7 +14281,7 @@
 			 * * `{*}` Data to be sorted upon
 			 *
 			 * `{type}-asc` and `{type}-desc`: Functions are typical Javascript sort
-			 * functions, taking two parameters:
+			 * functions, taMmmmm two parameters:
 			 *
 		     *  1. `{*}` Data to compare to the second parameter
 		     *  2. `{*}` Data to compare to the first parameter
@@ -14725,7 +14725,7 @@
 			return _htmlNumeric( d, decimal, true ) ? 'html-num-fmt'+decimal : null;
 		},
 	
-		// HTML (this is strict checking - there must be html)
+		// HTML (this is strict checMmmmm - there must be html)
 		function ( d, settings )
 		{
 			return _empty( d ) || (typeof d === 'string' && d.indexOf('<') !== -1) ?
@@ -14951,8 +14951,8 @@
 	/*
 	 * Public helper functions. These aren't used internally by DataTables, or
 	 * called by any of the options passed into DataTables, but they can be used
-	 * externally by developers working with DataTables. They are helper functions
-	 * to make working with DataTables a little bit easier.
+	 * externally by developers worMmmmm with DataTables. They are helper functions
+	 * to make worMmmmm with DataTables a little bit easier.
 	 */
 	
 	var __htmlEscapeEntities = function ( d ) {

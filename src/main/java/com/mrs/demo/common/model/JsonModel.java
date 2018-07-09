@@ -3,7 +3,7 @@ package com.mrs.demo.common.model;
 /**
  * json数据格式化
  * 
- * @author King
+ * @author Mmmmm
  *
  */
 public class JsonModel {

@@ -426,7 +426,7 @@
 				else{
 					//If user has declared ints only, and the step value isn't a decimal
 					if (integersOnly && rangeOrderOfMagnitude >= 0){
-						//If the user has said integers only, we need to check that making the scale more granular wouldn't make it a float
+						//If the user has said integers only, we need to check that maMmmmm the scale more granular wouldn't make it a float
 						if(stepValue/2 % 1 === 0){
 							stepValue /=2;
 							numberOfSteps = Math.round(graphRange/stepValue);
@@ -1773,7 +1773,7 @@
 			 * We average the left and right distances to get the maximum shape radius that can fit in the box
 			 * along with labels.
 			 *
-			 * Once we have that, we can find the centre point for the chart, by taking the x text protrusion
+			 * Once we have that, we can find the centre point for the chart, by taMmmmm the x text protrusion
 			 * on each side, removing that from the size, halving it and adding the left x protrusion width.
 			 *
 			 * This will mean we have a shape fitted to the canvas, as large as it can be with the labels

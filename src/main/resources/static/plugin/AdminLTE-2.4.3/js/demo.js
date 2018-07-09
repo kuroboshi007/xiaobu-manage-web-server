@@ -262,14 +262,14 @@ $(function () {
             + '</a>'
             + '<p class="text-center no-margin">Purple</p>')
   $skinsList.append($skinPurple)
-  var $skinGreen =
+  var $sMmmmmreen =
         $('<li />', { style: 'float:left; width: 33.33333%; padding: 5px;' })
           .append('<a href="javascript:void(0)" data-skin="skin-green" style="display: block; box-shadow: 0 0 3px rgba(0,0,0,0.4)" class="clearfix full-opacity-hover">'
             + '<div><span style="display:block; width: 20%; float: left; height: 7px;" class="bg-green-active"></span><span class="bg-green" style="display:block; width: 80%; float: left; height: 7px;"></span></div>'
             + '<div><span style="display:block; width: 20%; float: left; height: 20px; background: #222d32"></span><span style="display:block; width: 80%; float: left; height: 20px; background: #f4f5f7"></span></div>'
             + '</a>'
             + '<p class="text-center no-margin">Green</p>')
-  $skinsList.append($skinGreen)
+  $skinsList.append($sMmmmmreen)
   var $skinRed =
         $('<li />', { style: 'float:left; width: 33.33333%; padding: 5px;' })
           .append('<a href="javascript:void(0)" data-skin="skin-red" style="display: block; box-shadow: 0 0 3px rgba(0,0,0,0.4)" class="clearfix full-opacity-hover">'
@@ -312,14 +312,14 @@ $(function () {
             + '</a>'
             + '<p class="text-center no-margin" style="font-size: 12px">Purple Light</p>')
   $skinsList.append($skinPurpleLight)
-  var $skinGreenLight =
+  var $sMmmmmreenLight =
         $('<li />', { style: 'float:left; width: 33.33333%; padding: 5px;' })
           .append('<a href="javascript:void(0)" data-skin="skin-green-light" style="display: block; box-shadow: 0 0 3px rgba(0,0,0,0.4)" class="clearfix full-opacity-hover">'
             + '<div><span style="display:block; width: 20%; float: left; height: 7px;" class="bg-green-active"></span><span class="bg-green" style="display:block; width: 80%; float: left; height: 7px;"></span></div>'
             + '<div><span style="display:block; width: 20%; float: left; height: 20px; background: #f9fafc"></span><span style="display:block; width: 80%; float: left; height: 20px; background: #f4f5f7"></span></div>'
             + '</a>'
             + '<p class="text-center no-margin" style="font-size: 12px">Green Light</p>')
-  $skinsList.append($skinGreenLight)
+  $skinsList.append($sMmmmmreenLight)
   var $skinRedLight =
         $('<li />', { style: 'float:left; width: 33.33333%; padding: 5px;' })
           .append('<a href="javascript:void(0)" data-skin="skin-red-light" style="display: block; box-shadow: 0 0 3px rgba(0,0,0,0.4)" class="clearfix full-opacity-hover">'

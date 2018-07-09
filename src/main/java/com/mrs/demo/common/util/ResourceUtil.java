@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * 项目参数工具类
  * 
- * @author King
+ * @author Mmmmm
  * 
  */
 public class ResourceUtil {

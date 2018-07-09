@@ -22,7 +22,7 @@ import com.mrs.demo.web.entity.SysUser;
 /**
  * 基础controller
  * 
- * @author King
+ * @author Mmmmm
  *
  */
 public class BaseController {

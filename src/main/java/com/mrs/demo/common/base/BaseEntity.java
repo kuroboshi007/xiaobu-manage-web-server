@@ -9,7 +9,7 @@ import com.mrs.demo.common.constant.Globals;
 /**
  * Entity基础类
  * 
- * @author King
+ * @author Mmmmm
  *
  */
 public class BaseEntity implements Serializable {

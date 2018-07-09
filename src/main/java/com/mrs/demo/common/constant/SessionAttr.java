@@ -3,7 +3,7 @@ package com.mrs.demo.common.constant;
 /**
  * session属性
  * 
- * @author King
+ * @author Mmmmm
  *
  */
 public enum SessionAttr {

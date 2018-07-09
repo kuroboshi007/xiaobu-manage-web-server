@@ -3,7 +3,7 @@ package com.mrs.demo.common.constant;
 /**
  * 全局变量定义
  * 
- * @author King
+ * @author Mmmmm
  *
  */
 public final class Globals {

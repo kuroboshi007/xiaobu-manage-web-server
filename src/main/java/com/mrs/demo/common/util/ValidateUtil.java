@@ -6,7 +6,7 @@ import java.util.regex.Pattern;
 /**
  * 验证工具类
  * 
- * @author King
+ * @author Mmmmm
  *
  */
 public class ValidateUtil{

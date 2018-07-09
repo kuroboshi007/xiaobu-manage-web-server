@@ -5,7 +5,7 @@ import java.util.List;
 /**
  * 上传Model
  * 
- * @author King
+ * @author Mmmmm
  *
  */
 public class UploadModel {

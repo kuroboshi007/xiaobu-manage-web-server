@@ -3,7 +3,7 @@ package com.mrs.demo.common.constant;
 /**
  * 系统提示信息
  * 
- * @author King
+ * @author Mmmmm
  *
  */
 public class SysMessage {
