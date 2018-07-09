@@ -16,6 +16,7 @@ public class LittleDemoApplication {
 		System.out.println("进来了");
 		 return "index";
     } */
+	
 
 	public static void main(String[] args) {
 		SpringApplication.run(LittleDemoApplication.class, args);
