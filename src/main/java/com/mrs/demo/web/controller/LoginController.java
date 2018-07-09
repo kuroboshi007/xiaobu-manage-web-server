@@ -1,6 +1,5 @@
 package com.mrs.demo.web.controller;
 
-import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -12,7 +11,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.yaml.snakeyaml.constructor.BaseConstructor;
 
 import com.mrs.demo.common.base.BaseController;
 import com.mrs.demo.common.config.Code;
@@ -66,7 +64,28 @@ public class LoginController extends BaseController{
 			}
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
-			return actionResult(Code.INTERNAL_SERVER_ERROR);
+			return actionResult(Code.INTERNAL_SERVER_ERROR,SysMessage.INTERNAL_SERVER_ERROR);
 		}
+	}
+	
+	
+	/**
+	 * 登出
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value="/logout",method=RequestMethod.GET)
+	public String logout(HttpServletRequest request){
+		
+		
+		
+		HttpSession session = request.getSession();
+		SysUser user = (SysUser) session.getAttribute(SessionAttr.USER_LOGIN.getValue());
+		logger.info(user.getUsername()+SysMessage.LOGIN_USER_OUT);
+		session.removeAttribute(SessionAttr.USER_LOGIN.getValue());
+		session.removeAttribute(SessionAttr.USER_ROLES.getValue());
+		session.removeAttribute(SessionAttr.USER_MENUS.getValue());
+		
+		return "/pages/login";
 	}
 }
