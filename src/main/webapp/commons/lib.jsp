@@ -7,9 +7,7 @@
 <c:set var="basePath" value='${pageContext.request.scheme}://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}/'/>
 
 
-<script type="text/javascript" src="${ctx}/static/plugin/jquery-3.2.1.min.js"></script>
-<script type="text/javascript" src="${ctx}/static/plugin/layer/layer.js"></script>
 
 
 
-<link href="${ctx}/static/plugin/layer/theme/default/layer.css" rel="stylesheet" type="text/css"/>
+

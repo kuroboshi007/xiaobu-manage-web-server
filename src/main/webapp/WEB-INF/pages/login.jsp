@@ -10,6 +10,7 @@
 	<link rel="stylesheet" href="${ctx}/static/plugin/bootstrap-3.3.7/css/bootstrap.min.css">
 	<link rel="stylesheet" href="${ctx}/static/plugin/font-awesome-4.7.0/css/font-awesome.min.css">
 	<link rel="stylesheet" href="${ctx}/static/plugin/AdminLTE-2.4.3/css/AdminLTE.min.css">
+	<link href="${ctx}/static/plugin/layer/theme/default/layer.css" rel="stylesheet" type="text/css"/>
 <title>login</title>
 </head>
 <body class="hold-transition login-page">
@@ -48,7 +49,9 @@
 			   </div>
 			</form> -->
 </body>
+<script type="text/javascript" src="${ctx}/static/plugin/jquery-3.2.1.min.js"></script>
 <script type="text/javascript" src="${ctx}/static/plugin/bootstrap-3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="${ctx}/static/plugin/layer/layer.js"></script>
 <script type="text/javascript">
 function login(){
 	$.ajax({
