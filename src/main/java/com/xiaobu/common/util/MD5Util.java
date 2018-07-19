@@ -62,13 +62,13 @@ public class MD5Util {
             e.printStackTrace();  
             return null;  
         }  
-    }  
-    
-    
-    
-    
-    
-    
+    }
+
+
+
+
+
+
     //****************************************************
     
 	 
@@ -151,9 +151,6 @@ public class MD5Util {
 		String ciphertext = MD5Util.generate(plaintext);
 		System.out.println("加盐后MD5：" + ciphertext);
 		System.out.println("是否是同一字符串:" + MD5Util.verify(plaintext, ciphertext));
-
-
-
 	}
 
 }

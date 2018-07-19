@@ -33,21 +33,13 @@
 	        		<div class="col-md-5 pull-right">
 	          			<button type="button" onclick="login()" class="btn btn-primary btn-block btn-flat">登录</button>
 	        		</div>
+					<div class="col-md-5 pull-left">
+						<button type="button" onclick="signup()" class="btn btn-primary btn-block btn-flat">注册</button>
+					</div>
 	      		</div>
 	    	</form>
 	  	</div>
 	</div>
-			<!-- <form id="loginForm">
-			   <div>
-			        <input name="username" type="text"/>
-			   </div>
-			   <div>
-			        <input name="password" type="password"/> 
-			   </div>
-			   <div>
-			         <button type="button" onclick="login()" class="btn btn-primary btn-block btn-flat">登录</button>
-			   </div>
-			</form> -->
 </body>
 <script type="text/javascript" src="${ctx}/static/plugin/jquery-3.2.1.min.js"></script>
 <script type="text/javascript" src="${ctx}/static/plugin/bootstrap-3.3.7/js/bootstrap.min.js"></script>
@@ -68,6 +60,10 @@ function login(){
 			}
 		}
 	});
+}
+
+function signup() {
+    window.location.href = '/signup/signup';
 }
 </script>
 </html>

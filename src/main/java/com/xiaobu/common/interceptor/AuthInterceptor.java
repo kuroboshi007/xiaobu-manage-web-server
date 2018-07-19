@@ -39,7 +39,7 @@ public class AuthInterceptor implements HandlerInterceptor{
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object obj) throws Exception {
 			HttpSession session = request.getSession(true);
-	
+
 			SysUser user = (SysUser) session.getAttribute(SessionAttr.USER_LOGIN.getValue());
 			if(user != null){
 				

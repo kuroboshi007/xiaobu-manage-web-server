@@ -26,5 +26,4 @@ public class DemoController extends BaseController {
 		request.setAttribute("user", user);
 		return "/pages/index";
 	}
-	
 }
