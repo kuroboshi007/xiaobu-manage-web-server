@@ -11,9 +11,7 @@ import com.xiaobu.common.constant.SysMessage;
 import com.xiaobu.common.util.JwtManager;
 import com.xiaobu.common.util.MD5Util;
 import com.xiaobu.web.system.entity.SdUser;
-import com.xiaobu.web.system.entity.SysUser;
 import com.xiaobu.web.system.service.SdUserService;
-import com.xiaobu.web.system.service.SysUserService;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -93,7 +91,7 @@ public class LoginController extends BaseController {
 		
 		
 		HttpSession session = request.getSession();
-		SysUser user = (SysUser) session.getAttribute(SessionAttr.USER_LOGIN.getValue());
+		SdUser user = (SdUser) session.getAttribute(SessionAttr.USER_LOGIN.getValue());
 		logger.info(user.getUsername()+SysMessage.LOGIN_USER_OUT);
 		session.removeAttribute(SessionAttr.USER_LOGIN.getValue());
 		session.removeAttribute(SessionAttr.USER_ROLES.getValue());

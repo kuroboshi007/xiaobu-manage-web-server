@@ -7,7 +7,6 @@ import javax.crypto.spec.SecretKeySpec;
 import javax.xml.bind.DatatypeConverter;
 
 import com.xiaobu.web.system.entity.SdUser;
-import com.xiaobu.web.system.entity.SysUser;
 
 import java.security.Key;
 import java.util.Date;

@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.xiaobu.web.system.entity.SysUser;
+import com.xiaobu.web.system.entity.SdUser;
 
 @Component
 public class AuthInterceptor implements HandlerInterceptor{
@@ -40,7 +40,7 @@ public class AuthInterceptor implements HandlerInterceptor{
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object obj) throws Exception {
 			HttpSession session = request.getSession(true);
 
-			SysUser user = (SysUser) session.getAttribute(SessionAttr.USER_LOGIN.getValue());
+			SdUser user = (SdUser) session.getAttribute(SessionAttr.USER_LOGIN.getValue());
 			if(user != null){
 				
 				return true;

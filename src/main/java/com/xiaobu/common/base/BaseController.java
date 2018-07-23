@@ -16,7 +16,7 @@ import com.xiaobu.common.config.Code;
 import com.xiaobu.common.constant.SessionAttr;
 import com.xiaobu.common.util.ContextHolderUtil;
 import com.xiaobu.common.util.DateConvertEditor;
-import com.xiaobu.web.system.entity.SysUser;
+import com.xiaobu.web.system.entity.SdUser;
 
 
 /**
@@ -59,10 +59,10 @@ public class BaseController {
 	 * 获取登录的当前用户信息
 	 * @return
 	 */
-	public SysUser getCurrentUser(){
+	public SdUser getCurrentUser(){
 		
 		HttpSession session = ContextHolderUtil.getSession();
-		SysUser user = (SysUser)session.getAttribute(SessionAttr.USER_LOGIN.getValue());
+		SdUser user = (SdUser)session.getAttribute(SessionAttr.USER_LOGIN.getValue());
 		
 		return user;
 	}
