@@ -8,9 +8,13 @@ import com.xiaobu.common.base.BaseController;
 import com.xiaobu.common.config.Code;
 import com.xiaobu.common.constant.SessionAttr;
 import com.xiaobu.common.constant.SysMessage;
+import com.xiaobu.common.util.JwtManager;
 import com.xiaobu.common.util.MD5Util;
+import com.xiaobu.web.system.entity.SdUser;
 import com.xiaobu.web.system.entity.SysUser;
+import com.xiaobu.web.system.service.SdUserService;
 import com.xiaobu.web.system.service.SysUserService;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,8 +30,8 @@ import java.util.UUID;
 @RequestMapping("/login")
 public class LoginController extends BaseController {
 	
-	@Autowired
-	private SysUserService sysUserService;
+    @Autowired
+    private SdUserService sdUserService;
 
 	private Logger logger = LoggerFactory.getLogger(LoginController.class);
 	
@@ -43,32 +47,38 @@ public class LoginController extends BaseController {
 	@ResponseBody
 	public Object checklogin(HttpServletRequest request,String username,String password) {
 		try {
-		    //查询用户信息
-			SysUser user = sysUserService.findByUsername(username);
-			if(user == null){
+			//查詢用戶信息
+			SdUser user = sdUserService.selectByname(username);
+			//User user = userService.findByUsername(username);
+			//SysUser user = sysUserService.findByUsername(username);
+			if(user == null) {
 				return actionResult(Code.BAD_REQUEST,SysMessage.LOGIN_USER_NOT_EXIST);
 			}
+			//首先對用戶表單中的password進行一次MD5加密
+			String MD5password = MD5Util.MD5(password);
+			//获取前五位
+			String before5 = user.getPassword().substring(0, 5);
+			//获取后五位
+			String after5 = user.getPassword().substring(user.getPassword().length()-5);
+			//获取剔除盐之后的password
+			String pwd =  user.getPassword().substring(5, user.getPassword().length()-5);
+			//生成注册時隨機生成的盐
+			String salt = before5+after5;
+			String passWordandSalt = MD5Util.MD5(MD5password+salt);
 			//验证密码
-            if(MD5Util.verify(password,user.getPassword())){
-                HttpSession session = request.getSession();
-                session.setAttribute(SessionAttr.USER_LOGIN.getValue(), user);
-
-                String token = UUID.randomUUID().toString();
-
-                user.setPassword(null);
-
-
-                logger.info(user.getUsername() + SysMessage.LOGIN_SUCCESS);
-                return actionResult(Code.OK,SysMessage.LOGIN_SUCCESS);
-            }else{
-                logger.info(user.getUsername() + SysMessage.LOGIN_USER_INFO_ERROR);
-                return actionResult(Code.BAD_REQUEST,SysMessage.LOGIN_USER_INFO_ERROR);
-            }
-
+			if(!pwd.equals(passWordandSalt)) {
+				logger.info(user.getName() + SysMessage.LOGIN_USER_INFO_ERROR);
+			    return actionResult(Code.BAD_REQUEST,SysMessage.LOGIN_USER_INFO_ERROR);
+			}
+			logger.info(user.getName() + SysMessage.LOGIN_SUCCESS);
+			String token =JwtManager.createToken(user);
+			return actionResult(Code.OK,SysMessage.LOGIN_SUCCESS,token);
 		} catch (Exception e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return actionResult(Code.INTERNAL_SERVER_ERROR,SysMessage.INTERNAL_SERVER_ERROR);
 		}
+		
 	}
 	
 	

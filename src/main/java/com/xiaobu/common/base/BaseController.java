@@ -88,7 +88,7 @@ public class BaseController {
 	
 	/** 设置响应代码 
 	 * */
-	protected Object actionResult(Code code, Object data){
+	protected Object actionResult(Code code, Object... data){
 		Map<String, Object> map = new HashMap<String, Object>();
 		if (data != null) {
 			map.put("result", data);

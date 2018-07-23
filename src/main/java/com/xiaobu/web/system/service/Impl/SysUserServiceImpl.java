@@ -24,4 +24,10 @@ public class SysUserServiceImpl implements SysUserService {
 		return sysuserdao.findByUsername(username);
 	}
 
+	@Override
+	public void add(SysUser sysuer) {
+		// TODO Auto-generated method stub
+		sysuserdao.add(sysuer);
+	}
+
 }

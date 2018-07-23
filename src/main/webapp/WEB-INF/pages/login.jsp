@@ -63,7 +63,7 @@ function login(){
 }
 
 function signup() {
-    window.location.href = '/signup/signup';
+    window.location.href = '/signup/init';
 }
 </script>
 </html>

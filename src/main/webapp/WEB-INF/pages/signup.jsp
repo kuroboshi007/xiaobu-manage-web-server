@@ -22,16 +22,16 @@
         <p class="login-box-msg">账号注册</p>
         <form id="loginForm">
             <div class="form-group has-feedback">
-                <input type="text" name="username" class="form-control" placeholder="用户名" value="admin">
+                <input type="text" name="nickname" class="form-control" placeholder="请输入用户名"  >
                 <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
             </div>
             <div class="form-group has-feedback">
-                <input type="password" name="password" class="form-control" placeholder="密码" value="123456">
+                <input type="password" name="password" class="form-control" placeholder="请输入密码" >
                 <span class="glyphicon glyphicon-lock form-control-feedback"></span>
             </div>
             <div class="row">
                 <div class="col-md-5 pull-right">
-                    <button type="button" onclick="sigup()" class="btn btn-primary btn-block btn-flat">注册</button>
+                    <button type="button" onclick="signup()" class="btn btn-primary btn-block btn-flat">注册</button>
                 </div>
             </div>
         </form>
@@ -43,6 +43,17 @@
 <script type="text/javascript" src="${ctx}/static/plugin/bootstrap-3.3.7/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="${ctx}/static/plugin/layer/layer.js"></script>
 <script type="text/javascript">
-
+     function signup(){
+    	 $.ajax({
+    			type: 'post',
+    			url: '/signup/signup',
+    			data: $('#loginForm').serialize(),
+    			dataType: 'json',
+    			success: function(data){
+    				console.log(data);
+    				layer.alert(data.result[0]);
+    			}
+    		});
+     }
 </script>
 </html>

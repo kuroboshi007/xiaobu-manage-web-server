@@ -13,4 +13,8 @@
    <a href="<c:url value="/login/logout"></c:url>">
 	<i class="icon-key"></i> Log Out </a>
   </body>
+  <script type="text/javascript">
+  
+    
+  </script>
 </html>

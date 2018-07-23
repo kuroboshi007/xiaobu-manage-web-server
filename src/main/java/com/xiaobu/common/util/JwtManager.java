@@ -5,6 +5,10 @@ import io.jsonwebtoken.*;
 
 import javax.crypto.spec.SecretKeySpec;
 import javax.xml.bind.DatatypeConverter;
+
+import com.xiaobu.web.system.entity.SdUser;
+import com.xiaobu.web.system.entity.SysUser;
+
 import java.security.Key;
 import java.util.Date;
 import java.util.HashMap;
@@ -36,7 +40,16 @@ public class JwtManager {
      * +用户信息做md5加密
      * */
     //2、tokenId的确定
-    public static String createToken(String username, String roles, String privileges){
+    public static String createToken(SdUser user){
+    	
+    	//生成随机数作为生成签名的密钥
+    	String randStr = RandomUtil.createRandomChar(10);
+    	String left = randStr.substring(0, 3);
+    	String middle = randStr.substring(3, 6);
+    	String right = randStr.substring(6);
+    	System.out.println(left);
+    	System.out.println(middle);
+    	System.out.println(right);
         //选择签名的算法
         SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.HS256;
         //获取时间戳
@@ -44,7 +57,7 @@ public class JwtManager {
         Date now = new Date(nowMillis);
 
         //生成签名密钥
-        byte[] apiKeySecretBytes = DatatypeConverter.parseBase64Binary(base64Secret);
+        byte[] apiKeySecretBytes = DatatypeConverter.parseBase64Binary(randStr);
         Key signingKey = new SecretKeySpec(apiKeySecretBytes, signatureAlgorithm.getJcaName());
 
        /* Map<String, Object> claims = new HashMap<String, Object>();
@@ -58,9 +71,10 @@ public class JwtManager {
         //添加构成JWT的参数
         JwtBuilder builder = Jwts.builder()
                 .setHeaderParam("typ", "JWT")//头部
-                .claim("user_name", username)
-                .claim("user_role", roles)
-                .claim("user_privilege", privileges)
+                .claim("user_id", user.getId())
+                .claim("user_name", user.getName())
+                .claim("user_sex", user.getGender())
+                .claim("user_type", user.getStatus())
                 .setId("tokenid")
                 .signWith(signatureAlgorithm, signingKey);//尾巴
         //添加Token过期时间
@@ -71,9 +85,18 @@ public class JwtManager {
         }
 
         //生成JWT
-        return builder.compact();
+        String token = builder.compact();
+        //当使用点时，前面加两个点，不然会报出越界异常
+        String[] tokenList = token.split("\\.");
+        
+        //新的token值按随机数2,1,3的顺序排列
+        String newToken = tokenList[0]+"."+tokenList[1]+middle+"."+left+tokenList[2]+right;
+        
+        return newToken;
     }
 
+    
+    //
     public static void validateToken(String token) {
         try{
             Claims claims = parseJWT(token);
@@ -95,7 +118,13 @@ public class JwtManager {
     }
 
     public static void main(String[] args) {
-        System.out.println(createToken("admin","add","23"));
+       // System.out.println(createToken("admin","add","23"));
+    	SdUser user = new SdUser();
+    	user.setId(1);
+    	user.setName("张飞");
+    	user.setGender(1);
+    	user.setStatus("2");
+    	createToken(user);
     }
 
 }

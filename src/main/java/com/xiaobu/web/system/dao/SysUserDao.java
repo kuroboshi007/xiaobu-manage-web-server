@@ -2,6 +2,7 @@ package com.xiaobu.web.system.dao;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.xiaobu.common.base.BaseDao;
 import com.xiaobu.web.system.entity.SysUser;
 
 /**
@@ -11,8 +12,10 @@ import com.xiaobu.web.system.entity.SysUser;
  *
  */
 @Mapper
-public interface SysUserDao {
+public interface SysUserDao extends BaseDao<SysUser, String>{
 
 	SysUser findByUsername(String username);
+
+	
 
 }

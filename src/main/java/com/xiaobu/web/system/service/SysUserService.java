@@ -12,4 +12,7 @@ public interface SysUserService {
 
 	SysUser findByUsername(String username);
 
+	void add(SysUser sysuer);
+
+
 }
