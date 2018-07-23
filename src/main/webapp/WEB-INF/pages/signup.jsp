@@ -22,12 +22,16 @@
         <p class="login-box-msg">账号注册</p>
         <form id="loginForm">
             <div class="form-group has-feedback">
-                <input type="text" name="nickname" class="form-control" placeholder="请输入用户名"  >
+                <input type="text" name="nickname" id="nickname" class="form-control" placeholder="请输入用户名"  >
                 <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
             </div>
             <div class="form-group has-feedback">
-                <input type="password" name="password" class="form-control" placeholder="请输入密码" >
+                <input type="password" name="password" id="password" class="form-control" placeholder="请输入密码" >
                 <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+            </div>
+            <div class="form-group has-feedback">
+                <input type="text" name="phone" id="phone" class="form-control" placeholder="请输入手机号" >
+                <span class="glyphicon glyphicon-earphone form-control-feedback"></span>
             </div>
             <div class="row">
                 <div class="col-md-5 pull-right">
@@ -44,16 +48,25 @@
 <script type="text/javascript" src="${ctx}/static/plugin/layer/layer.js"></script>
 <script type="text/javascript">
      function signup(){
-    	 $.ajax({
-    			type: 'post',
-    			url: '/signup/signup',
-    			data: $('#loginForm').serialize(),
-    			dataType: 'json',
-    			success: function(data){
-    				console.log(data);
-    				layer.alert(data.result[0]);
-    			}
-    		});
+
+         if($("#nickname").val()==""){
+             layer.alert("请填写用户名")
+         }else if($("#password").val()==""){
+             layer.alert("请输入密码");
+         }else if($("#phone").val()==""){
+             layer.alert("请输入电话号码");
+         }else{
+             $.ajax({
+                 type: 'post',
+                 url: '/signup/signup',
+                 data: $('#loginForm').serialize(),
+                 dataType: 'json',
+                 success: function(data){
+                     console.log(data);
+                     layer.alert(data.result[0]);
+                 }
+             });
+         }
      }
 </script>
 </html>

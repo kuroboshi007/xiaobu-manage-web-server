@@ -19,14 +19,14 @@
 			<a href="https://gitee.com/liuzhenjn/jeeidp"><b>Jee</b>IDP</a>
 		</div> -->
 		<div class="login-box-body">
-	    	<p class="login-box-msg">Sign in to start your session</p>
+	    	<p class="login-box-msg">Small Data</p>
 	    	<form id="loginForm">
 	      		<div class="form-group has-feedback">
-	        		<input type="text" name="username" class="form-control" placeholder="用户名" value="admin">
+	        		<input type="text" name="username" id="username" class="form-control" placeholder="用户名" value="admin">
 	        		<span class="glyphicon glyphicon-envelope form-control-feedback"></span>
 	      		</div>
 	      		<div class="form-group has-feedback">
-	        		<input type="password" name="password" class="form-control" placeholder="密码" value="123456">
+	        		<input type="password" name="password" id="password" class="form-control" placeholder="密码" value="123456">
 	        		<span class="glyphicon glyphicon-lock form-control-feedback"></span>
 	      		</div>
 	      		<div class="row">
@@ -46,20 +46,26 @@
 <script type="text/javascript" src="${ctx}/static/plugin/layer/layer.js"></script>
 <script type="text/javascript">
 function login(){
-	$.ajax({
-		type: 'post',
-		url: '/login/checklogin',
-		data: $('#loginForm').serialize(),
-		dataType: 'json',
-		success: function(data){
-			console.log(data);
-			if(data.code==200){
-				window.location.href = '/index';
-			}else{
-				layer.alert(data.result);
-			}
-		}
-	});
+    if($("#username").val()==""){
+        layer.alert("请输入用户名")
+	}else if($("#password").val()==""){
+        layer.alert("请输入密码")
+	}else{
+        $.ajax({
+            type: 'post',
+            url: '/login/checklogin',
+            data: $('#loginForm').serialize(),
+            dataType: 'json',
+            success: function(data){
+                console.log(data);
+                if(data.code==200){
+                    window.location.href = '/index';
+                }else{
+                    layer.alert(data.result);
+                }
+            }
+        });
+	}
 }
 
 function signup() {
