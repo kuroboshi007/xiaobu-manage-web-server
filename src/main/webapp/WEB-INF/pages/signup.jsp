@@ -33,6 +33,10 @@
                 <input type="text" name="phone" id="phone" class="form-control" placeholder="请输入手机号" >
                 <span class="glyphicon glyphicon-earphone form-control-feedback"></span>
             </div>
+            <div class="input-group">
+                <input type="text" name="vCode" id="vCode" class="form-control" placeholder="请输入验证码" >
+                <span class="input-group-addon btn btn-default" id="getSms">点击获取验证码</span>
+            </div>
             <div class="row">
                 <div class="col-md-5 pull-right">
                     <button type="button" onclick="signup()" class="btn btn-primary btn-block btn-flat">注册</button>
@@ -68,5 +72,18 @@
              });
          }
      }
+
+    $("#getSms").click(function () {
+        $.ajax({
+            type: 'post',
+            url: '/baseinterface/obtainSms',
+            data: {'number':$("#phone").val()},
+            dataType: 'json',
+            success: function(data){
+                console.log(data);
+                layer.alert(data.result[0]);
+            }
+        });
+    })
 </script>
 </html>
