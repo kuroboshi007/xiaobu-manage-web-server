@@ -28,4 +28,10 @@ public class SdUserServiceImpl implements SdUserService{
 		// TODO Auto-generated method stub
 		return sdUserDao.selectByname(nickname);
 	}
+
+	@Override
+	public SdUser selectByphone(String phone) {
+		// TODO Auto-generated method stub
+		return sdUserDao.selectByphone(phone);
+	}
 }

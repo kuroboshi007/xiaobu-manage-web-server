@@ -19,4 +19,6 @@ public interface SdUserDao {
     int updateByPrimaryKey(SdUser record);
 
 	SdUser selectByname(String nickname);
+
+	SdUser selectByphone(String phone);
 }

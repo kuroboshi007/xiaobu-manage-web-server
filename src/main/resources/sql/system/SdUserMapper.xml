@@ -182,4 +182,11 @@
     from sd_user
     where nickname = #{value}
   </select>
+  
+  <select id="selectByphone" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from sd_user
+    where phone = #{value}
+  </select>
 </mapper>

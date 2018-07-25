@@ -46,6 +46,10 @@ public class SignupController extends BaseController{
     	if(sdUserService.selectByname(sdUser.getNickname())!=null) {
     		return actionResult(Code.BAD_REQUEST,"用户名已存在");
     	}
+    	//注册前检查电话号码是否已被使用
+    	if(sdUserService.selectByphone(sdUser.getPhone())!=null) {
+    		return actionResult(Code.BAD_REQUEST,"电话号码已被注册");
+    	}
     	
     	//获取随机串
     	String randStr = RandomUtil.createRandomChar(10);

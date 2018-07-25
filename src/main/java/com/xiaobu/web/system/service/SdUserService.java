@@ -8,4 +8,6 @@ public interface SdUserService {
 
 	SdUser selectByname(String nickname);
 
+	SdUser selectByphone(String phone);
+
 }
