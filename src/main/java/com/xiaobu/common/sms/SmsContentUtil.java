@@ -1,6 +1,5 @@
 package com.xiaobu.common.sms;
 
-import com.sun.xml.internal.xsom.impl.scd.Iterators;
 
 import java.util.ArrayList;
 
@@ -21,6 +20,11 @@ public class SmsContentUtil {
     public static  final  String nationCode="86";
 
     //模板集合
-    public static final ArrayList<String> list = new ArrayList<String>(){{add("2");}};
+    public static final ArrayList<String> list = new ArrayList<String>(){{add(getcode());add("2");}};
+    
+    private static String getcode() {
+    	String code = (int) (Math.random() * 9000 + 1000) + "";
+    	return code;
+    }
 
 }

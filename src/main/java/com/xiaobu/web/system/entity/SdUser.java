@@ -1,9 +1,16 @@
 package com.xiaobu.web.system.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class SdUser {
-    private Integer id;
+import com.xiaobu.common.base.BaseEntity;
+
+public class SdUser extends BaseEntity implements Serializable{
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 
     private String openid;
 
@@ -23,19 +30,9 @@ public class SdUser {
 
     private Integer gender;
 
-    private Date createdAt;
-
-    private Date updatedAt;
-    
     private String status;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
+    
+    private String vCode;
 
     public String getOpenid() {
         return openid;
@@ -109,22 +106,6 @@ public class SdUser {
         this.gender = gender;
     }
 
-    public Date getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(Date createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public Date getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(Date updatedAt) {
-        this.updatedAt = updatedAt;
-    }
-
 	public String getStatus() {
 		return status;
 	}
@@ -132,6 +113,12 @@ public class SdUser {
 	public void setStatus(String status) {
 		this.status = status;
 	}
-    
-    
+
+	public String getvCode() {
+		return vCode;
+	}
+
+	public void setvCode(String vCode) {
+		this.vCode = vCode;
+	}
 }

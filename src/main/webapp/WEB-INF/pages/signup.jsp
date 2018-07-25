@@ -74,16 +74,19 @@
      }
 
     $("#getSms").click(function () {
-        $.ajax({
+         $.ajax({
             type: 'post',
             url: '/baseinterface/obtainSms',
             data: {'number':$("#phone").val()},
             dataType: 'json',
             success: function(data){
-                console.log(data);
-                layer.alert(data.result[0]);
+            	if(data.code == 200){
+            		layer.alert("验证码已发送");
+            	}else{
+            		layer.alert("获取验证码错误");
+            	}
             }
-        });
+        }); 
     })
 </script>
 </html>

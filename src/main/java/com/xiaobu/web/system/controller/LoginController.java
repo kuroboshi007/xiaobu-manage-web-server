@@ -10,12 +10,14 @@ import com.xiaobu.common.constant.SessionAttr;
 import com.xiaobu.common.constant.SysMessage;
 import com.xiaobu.common.util.JwtManager;
 import com.xiaobu.common.util.MD5Util;
+import com.xiaobu.common.util.ValidateUtil;
 import com.xiaobu.web.system.entity.SdUser;
 import com.xiaobu.web.system.service.SdUserService;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -33,11 +35,14 @@ public class LoginController extends BaseController {
 
 	private Logger logger = LoggerFactory.getLogger(LoginController.class);
 	
+	@Value("${AUTHOR}")
+	private String AUTHOR; 
+	
 	@RequestMapping("/login")
 	public String login(HttpServletRequest request) {
 		
 		logger.info("跳转到登陆页面");
-		
+		System.out.println(this.AUTHOR);
 		return "/pages/login";
 	}
 	
@@ -88,7 +93,9 @@ public class LoginController extends BaseController {
 	@RequestMapping(value="/logout",method=RequestMethod.GET)
 	public String logout(HttpServletRequest request){
 		
-		
+//		if(ValidateUtil.isNotEmpty(object)(request.getParameter("name"))) {
+//			
+//		}
 		
 		HttpSession session = request.getSession();
 		SdUser user = (SdUser) session.getAttribute(SessionAttr.USER_LOGIN.getValue());

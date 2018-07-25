@@ -12,7 +12,7 @@ public class LittleBuApplication {
 	
 	/*@RequestMapping("/")  //默认访问index.jsp
     String home() {  
-		System.out.println("进来了");
+		System.out.println("进来了");	
 		 return "index";
     } */
 	

@@ -10,6 +10,7 @@ import com.xiaobu.common.base.BaseController;
 import com.xiaobu.common.config.Code;
 import com.xiaobu.common.util.MD5Util;
 import com.xiaobu.common.util.RandomUtil;
+import com.xiaobu.web.redis.service.RedisService;
 import com.xiaobu.web.system.entity.SdUser;
 import com.xiaobu.web.system.service.SdUserService;
 
@@ -23,6 +24,9 @@ public class SignupController extends BaseController{
 	@Autowired
 	private SdUserService sdUserService;
 	
+	@Autowired
+	private RedisService redisService;
+	
     @RequestMapping(value="/init",method = RequestMethod.GET)
     public String init(HttpServletRequest request){
         System.out.println("跳转到注册页面");
@@ -33,6 +37,10 @@ public class SignupController extends BaseController{
     @RequestMapping(value="/signup",method = RequestMethod.POST)
     @ResponseBody
     public Object signup(SdUser sdUser) {
+    	
+    	if(!sdUser.getvCode().equals(redisService.getString(sdUser.getPhone()))) {
+    		return actionResult(Code.BAD_REQUEST,"验证码错误");
+    	}
     	
     	//注册前检查用户名是否重复
     	if(sdUserService.selectByname(sdUser.getNickname())!=null) {

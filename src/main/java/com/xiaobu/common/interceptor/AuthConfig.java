@@ -24,7 +24,7 @@ public class AuthConfig implements WebMvcConfigurer{
 		// 自定义拦截器，添加拦截路径和排除拦截路径,excludePathPatterns添加放行机制，不然死循环
 		registry.addInterceptor(authInterceptor).addPathPatterns("/**")
 				.excludePathPatterns("/css/**","/js/**","/images/**","/static/**")
-		        .excludePathPatterns("/login/login","/login/checklogin","/signup/init","/pages/signup","/signup/signup");
+		        .excludePathPatterns("/login/login","/login/checklogin","/signup/init","/pages/signup","/signup/signup","/baseinterface/**");
 	}
 	
 	@Override

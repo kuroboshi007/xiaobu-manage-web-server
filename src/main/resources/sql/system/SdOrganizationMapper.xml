@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xiaobu.web.system.dao.SdOrganizationDao">
+    <parameterMap id="parameterMap" type="com.xiaobu.web.system.entity.SdOrganization"></parameterMap>
+    <resultMap id="SdOrganizationResultMap" type="com.xiaobu.web.system.entity.SdOrganization"></resultMap>
+
+
+    <sql id="columnSql">
+		<trim suffixOverrides=",">
+			t.id,
+			t.name,
+			t.intro,
+			t.username,
+			t.password,
+			t.type,
+			t.created_at,
+			t.updated_at,
+	 	</trim>
+	</sql>
+	
+    <select id="getById" parameterType="String" resultMap="SdOrganizationResultMap">
+        select
+			<include refid="columnSql"></include>
+		from sd_organization t
+		where t.id = #{value}
+    </select>
+
+
+
+    <insert id="add" parameterMap="parameterMap">
+		insert into sd_organization
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			id,
+			name,
+			intro,
+			username,
+			password,
+			type,
+			created_at,
+			updated_at,
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			#{Id},
+			#{Name},
+			#{Intro},
+			#{Username},
+			#{Password},
+			#{Type},
+			#{CreatedAt},
+			#{UpdatedAt},
+		</trim>
+	</insert>
+	
+	
+	<update id="updateNotNull" parameterMap="parameterMap">
+		update sd_organization
+		<set>
+			<if test="Id != null">
+			id = #{Id},
+			</if>
+			<if test="Name != null">
+			name = #{Name},
+			</if>
+			<if test="Intro != null">
+			intro = #{Intro},
+			</if>
+			<if test="Username != null">
+			username = #{Username},
+			</if>
+			<if test="Password != null">
+			password = #{Password},
+			</if>
+			<if test="Type != null">
+			type = #{Type},
+			</if>
+			<if test="CreatedAt != null">
+			created_at = #{CreatedAt},
+			</if>
+			<if test="UpdatedAt != null">
+			updated_at = #{UpdatedAt},
+			</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="delete" parameterType="java.lang.Integer">
+		delete from sd_organization where id = #{value}
+	</delete>
+</mapper>

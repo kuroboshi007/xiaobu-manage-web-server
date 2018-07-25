@@ -17,15 +17,15 @@ public class BaseEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	/** 主键ID */
-	private String id;
+	private Integer id;
 	/** 创建人 */
 	private String createUser;
 	/** 创建日期 */
 	private Date createDate;
 	/** 修改人 */
-	private String updateUser;
+	private Date createdAt;
 	/** 修改日期 */
-	private Date updateDate;
+	private Date updatedAt;
 	/** 删除标识(0:正常；1：删除)默认正常 */
 	private String delFlag = Globals.USER_TYPE_NORMAL;
 	
@@ -34,10 +34,11 @@ public class BaseEntity implements Serializable {
 	/** 修改人名称 */
 	private String updateUserName;
 	
-	public String getId() {
+	
+	public Integer getId() {
 		return id;
 	}
-	public void setId(String id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 	public String getCreateUser() {
@@ -52,17 +53,19 @@ public class BaseEntity implements Serializable {
 	public void setCreateDate(Date createDate) {
 		this.createDate = createDate;
 	}
-	public String getUpdateUser() {
-		return updateUser;
+	
+	
+	public Date getCreatedAt() {
+		return createdAt;
 	}
-	public void setUpdateUser(String updateUser) {
-		this.updateUser = updateUser;
+	public void setCreatedAt(Date createdAt) {
+		this.createdAt = createdAt;
 	}
-	public Date getUpdateDate() {
-		return updateDate;
+	public Date getUpdatedAt() {
+		return updatedAt;
 	}
-	public void setUpdateDate(Date updateDate) {
-		this.updateDate = updateDate;
+	public void setUpdatedAt(Date updatedAt) {
+		this.updatedAt = updatedAt;
 	}
 	public String getDelFlag() {
 		return delFlag;
