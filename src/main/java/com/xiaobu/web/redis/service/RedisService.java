@@ -47,6 +47,6 @@ public class RedisService {
     
     //设置变量值的过期时间
     public void set(String key,String value,long timeout,TimeUnit unit) {
-	   redisTemplate.opsForValue().set(key,value,timeout,TimeUnit.SECONDS);
+	   redisTemplate.opsForValue().set(key,value,timeout,unit);
     };
 }

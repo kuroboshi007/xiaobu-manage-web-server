@@ -39,7 +39,7 @@ public class SignupController extends BaseController{
     public Object signup(SdUser sdUser) {
     	
     	if(!sdUser.getvCode().equals(redisService.getString(sdUser.getPhone()))) {
-    		return actionResult(Code.BAD_REQUEST,"验证码错误");
+    		return actionResult(Code.BAD_REQUEST,"验证码错误，请重新获取");
     	}
     	
     	//注册前检查用户名是否重复

@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 
 @Controller
 @RequestMapping("/baseinterface")
@@ -33,15 +34,15 @@ public class BaseInterfaceController extends BaseController {
     @RequestMapping(value={"/obtainSms"},method=RequestMethod.POST )
     @ResponseBody
     public Object obtainSms(String number){
-    	logger.info("电话号码："+number);
         SmsSingleSender ssender = new SmsSingleSender(SmsContentUtil.APPID, SmsContentUtil.APPKEY);
 
         try {
-            System.out.println(SmsContentUtil.list);
+            
             SmsSingleSenderResult result = ssender.sendWithParam(SmsContentUtil.nationCode,number,SmsContentUtil.TTEMPLATEID,SmsContentUtil.list,SmsContentUtil.SMSSIGN,"","");
             if(result.errMsg.equals("OK")) {
-            	//如果发送成功存入redis
-            	redisService.setString(number, SmsContentUtil.list.get(0));
+            	logger.info("电话"+number+",验证码："+SmsContentUtil.list.get(0));
+            	//如果发送成功存入redis,设置过期时间为120秒
+            	redisService.set(number, SmsContentUtil.list.get(0),120,TimeUnit.SECONDS);
             	return actionResult(Code.OK,result.errMsg);
             }else {
             	return actionResult(Code.BAD_REQUEST,result.errMsg);
