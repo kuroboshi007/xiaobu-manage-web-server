@@ -6,6 +6,9 @@ import io.jsonwebtoken.*;
 import javax.crypto.spec.SecretKeySpec;
 import javax.xml.bind.DatatypeConverter;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.xiaobu.web.system.entity.SdUser;
 
 import java.security.Key;
@@ -20,6 +23,8 @@ public class JwtManager {
     private final static String base64Secret = "MDk4ZjZiY2Q0NjIxZDM3M2NhZGU0ZTgzMjYyN2I0ZjY=";
     //过期时间
     private final static int expiresSecond = 172800000;
+    
+    private static Logger logger = LoggerFactory.getLogger(JwtManager.class);
 
     public static Claims parseJWT(String jsonWebToken) {
         try {
@@ -46,10 +51,10 @@ public class JwtManager {
     	String left = randStr.substring(0, 3);
     	String middle = randStr.substring(3, 6);
     	String right = randStr.substring(6);
-    	System.out.println(left);
-    	System.out.println(middle);
-    	System.out.println(right);
-        //选择签名的算法
+    	logger.info(left);
+    	logger.info(middle);
+    	logger.info(right);
+        //logger.info签名的算法
         SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.HS256;
         //获取时间戳
         long nowMillis = System.currentTimeMillis();

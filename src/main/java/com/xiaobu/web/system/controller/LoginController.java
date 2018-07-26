@@ -35,14 +35,13 @@ public class LoginController extends BaseController {
 
 	private Logger logger = LoggerFactory.getLogger(LoginController.class);
 	
-	@Value("${AUTHOR}")
-	private String AUTHOR; 
+	 
 	
 	@RequestMapping("/login")
 	public String login(HttpServletRequest request) {
 		
 		logger.info("跳转到登陆页面");
-		System.out.println(this.AUTHOR);
+		
 		return "/pages/login";
 	}
 	
