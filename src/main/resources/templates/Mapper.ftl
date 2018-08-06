@@ -31,7 +31,7 @@
 		</trim>
 		<trim prefix="values (" suffix=")" suffixOverrides=",">
 			<#list model_column as po>
-			${'#'}{${po.changeColumnName}},
+			${'#'}{${po.changeColumnName?uncap_first}},
 			</#list>
 		</trim>
 	</insert>
@@ -42,7 +42,7 @@
 		<set>
 			<#list columns as po>
 			<if test="${po.changeColumnName} != null">
-			${po.columnName} = ${'#'}{${po.changeColumnName}},
+			${po.columnName} = ${'#'}{${po.changeColumnName?uncap_first}},
 			</if>
 			</#list>
 		</set>

@@ -6,6 +6,7 @@ import io.jsonwebtoken.*;
 import javax.crypto.spec.SecretKeySpec;
 import javax.xml.bind.DatatypeConverter;
 
+import org.apache.shiro.authc.UsernamePasswordToken;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -26,17 +27,45 @@ public class JwtManager {
     
     private static Logger logger = LoggerFactory.getLogger(JwtManager.class);
 
-    public static Claims parseJWT(String jsonWebToken) {
+    public static Claims parseJWT(String jsonWebToken,String str) {
         try {
             Claims claims = Jwts.parser()
-                    .setSigningKey(DatatypeConverter.parseBase64Binary(base64Secret))
+                    .setSigningKey(DatatypeConverter.parseBase64Binary(str))
                     .parseClaimsJws(jsonWebToken).getBody();
             return claims;
         } catch (Exception ex) {
             return null;
         }
     }
+    
+    
+   
+   
+    
 
+    //进行token分解将加密过的token分解成原始生成token
+    public static UsernamePasswordToken TokenDecompose(String jsonWebToken) {
+    	
+    	//将token值以"."分为数组
+    	 String[] tokenList = jsonWebToken.split("\\.");
+    	 //获取盐的第二部分
+    	 String mid = tokenList[1].substring(tokenList[1].length()-3);
+    	 //获取盐的第一部分
+    	 String left = tokenList[2].substring(0, 3);
+    	 //获取盐的第三部分
+    	 String right = tokenList[2].substring(tokenList[2].length()-4);
+    	 //盐
+    	 String randStr = left+mid+right;
+    	 //token
+    	 String token = tokenList[0]+tokenList[1].substring(0,tokenList[1].length()-3)+tokenList[2].substring(3,tokenList[2].length()-4);
+    	 
+    	 
+    	 //userName =token ;password=randStr
+    	 UsernamePasswordToken JWTtoken = new UsernamePasswordToken(token, randStr);
+    	 
+    	 return JWTtoken;
+    	
+    }
 
     //1、确定加盐算法结构
     /**
@@ -44,7 +73,7 @@ public class JwtManager {
      * +用户信息做md5加密
      * */
     //2、tokenId的确定
-    public static String createToken(SdUser user){
+    public static String createToken(String userName,Integer userId,String userType){
     	
     	//生成随机数作为生成签名的密钥
     	String randStr = RandomUtil.createRandomChar(10);
@@ -75,10 +104,10 @@ public class JwtManager {
         //添加构成JWT的参数
         JwtBuilder builder = Jwts.builder()
                 .setHeaderParam("typ", "JWT")//头部
-                .claim("user_id", user.getId())
-                .claim("user_name", user.getName())
-                .claim("user_sex", user.getGender())
-                .claim("user_type", user.getStatus())
+                .claim("user_id", userId)
+                .claim("user_name", userName)
+                //.claim("user_sex", user.getGender())
+                .claim("user_type", userType)//是后台用户还是标注用户
                 .setId("tokenid")
                 .signWith(signatureAlgorithm, signingKey);//尾巴
         //添加Token过期时间
@@ -103,7 +132,7 @@ public class JwtManager {
     //
     public static void validateToken(String token) {
         try{
-            Claims claims = parseJWT(token);
+            Claims claims = parseJWT(token,"");
             String username = claims.get("user_name").toString();
             String role = claims.get("user_role").toString();
             String user_privilege = claims.get("user_privilege").toString();
@@ -128,7 +157,7 @@ public class JwtManager {
     	user.setName("张飞");
     	user.setGender(1);
     	user.setStatus("2");
-    	createToken(user);
+    	//createToken(user);
     }
 
 }

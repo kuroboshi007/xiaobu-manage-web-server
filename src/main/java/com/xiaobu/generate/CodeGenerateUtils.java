@@ -35,7 +35,7 @@ public class CodeGenerateUtils {
 	
 	private final String AUTHOR = "MuRunSen";//作者
 	private final String CURRENT_DATE = sdf.format(new Date());//创建时间
-	private final String tableName = "sd_organization";//表名
+	private final String tableName = "sd_manager";//表名
 	private final String packageName = "com.xiaobu.web.system";//包路径
 	private final String tableAnnotation = "标注平台用户";//表描述
 	private final String URL = "jdbc:postgresql://127.0.0.1:5432/smalldata";//数据库连接url

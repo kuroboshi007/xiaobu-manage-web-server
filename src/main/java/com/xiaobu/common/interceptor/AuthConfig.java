@@ -1,4 +1,4 @@
-package com.xiaobu.common.interceptor;
+/*package com.xiaobu.common.interceptor;
 
 import javax.annotation.Resource;
 
@@ -7,12 +7,12 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-/**
+*//**
  * 拦截去注册类
  * 
  * @author Mmmmm
  *
- */
+ *//*
 @Configuration
 public class AuthConfig implements WebMvcConfigurer{
 
@@ -35,3 +35,4 @@ public class AuthConfig implements WebMvcConfigurer{
 		WebMvcConfigurer.super.addResourceHandlers(registry);
 	}
 }
+*/

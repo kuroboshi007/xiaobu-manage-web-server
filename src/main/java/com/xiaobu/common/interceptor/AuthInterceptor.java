@@ -1,4 +1,4 @@
-package com.xiaobu.common.interceptor;
+/*package com.xiaobu.common.interceptor;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,27 +15,27 @@ import com.xiaobu.web.system.entity.SdUser;
 @Component
 public class AuthInterceptor implements HandlerInterceptor{
 
-	/*
+	
 	 * 视图渲染之后的操作
-	 */
+	 
 	@Override
 	public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object obj, Exception exception)
 			throws Exception {
 
 	}
 
-	/*
+	
 	 * 处理请求完成后视图渲染之前的处理操作
-	 */
+	 
 	@Override
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object obj, ModelAndView modelAndView)
 			throws Exception {
 
 	}
 
-	/*
+	
 	 * 进入controller层之前拦截请求
-	 */
+	 
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object obj) throws Exception {
 			HttpSession session = request.getSession(true);
@@ -63,3 +63,4 @@ public class AuthInterceptor implements HandlerInterceptor{
 			}
 	}
 }
+*/

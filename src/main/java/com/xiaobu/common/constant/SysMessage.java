@@ -28,6 +28,11 @@ public class SysMessage {
 	public static final String ROLE_HAS_USED_BY_USER	= "当前角色已被用户使用，暂无法删除";
 	public static final String INTERNAL_SERVER_ERROR    = "服务器错误";
 	
+	public static final String SIGNUP_USER_EXIST = "用户名已存在";
+	public static final String SIGNUP_PHONE_EXIST = "电话号码已被注册";
+	
+	public static final String VERIFICATION_CODE_ERROR = "验证码错误";
+	
 	
 	public static final char[] letters=new char[] {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'};
 	

@@ -34,4 +34,5 @@ public class SdUserServiceImpl implements SdUserService{
 		// TODO Auto-generated method stub
 		return sdUserDao.selectByphone(phone);
 	}
+
 }

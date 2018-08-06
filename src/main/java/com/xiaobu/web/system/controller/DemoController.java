@@ -13,17 +13,28 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RequestMapping("/")
 public class DemoController extends BaseController {
 
-	@RequestMapping("/login")
+	/*@RequestMapping("/login")
 	public String login(HttpServletRequest request) {
 		System.out.println("进入了");
 		return "/pages/login";
-	}
+	}*/
 	
+	//主页
 	@RequestMapping(value="index",method=RequestMethod.GET)
 	public String index(HttpServletRequest request) {
 		System.out.println("进入了");
 		SdUser user = (SdUser) request.getSession().getAttribute(SessionAttr.USER_LOGIN.getValue());
 		request.setAttribute("user", user);
 		return "/pages/index";
+	}
+	
+	
+	//默认访问登录页
+	@RequestMapping(value="/",method=RequestMethod.GET)
+	public String loginJSP(HttpServletRequest request) {
+		System.out.println("进入了");
+		SdUser user = (SdUser) request.getSession().getAttribute(SessionAttr.USER_LOGIN.getValue());
+		request.setAttribute("user", user);
+		return "/pages/login";
 	}
 }

@@ -10,7 +10,7 @@
   
   <body>
    欢迎  ${user.username}
-   <a href="<c:url value="/login/logout"></c:url>">
+   <a href="<c:url value="/logout"></c:url>">
 	<i class="icon-key"></i> Log Out </a>
   </body>
   <script type="text/javascript">

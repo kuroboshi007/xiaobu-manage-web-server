@@ -42,7 +42,8 @@ public class BaseInterfaceController extends BaseController {
             if(result.errMsg.equals("OK")) {
             	logger.info("电话"+number+",验证码："+SmsContentUtil.list.get(0));
             	//如果发送成功存入redis,设置过期时间为120秒
-            	redisService.set(number, SmsContentUtil.list.get(0),120,TimeUnit.SECONDS);
+            	//redisService.set(number, SmsContentUtil.list.get(0),120,TimeUnit.SECONDS);
+            	redisService.setString(number, SmsContentUtil.list.get(0));
             	return actionResult(Code.OK,result.errMsg);
             }else {
             	return actionResult(Code.BAD_REQUEST,result.errMsg);

@@ -21,4 +21,5 @@ public interface SdUserDao {
 	SdUser selectByname(String nickname);
 
 	SdUser selectByphone(String phone);
+
 }
