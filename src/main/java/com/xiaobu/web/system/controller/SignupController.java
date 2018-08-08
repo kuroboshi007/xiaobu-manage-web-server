@@ -39,11 +39,11 @@ public class SignupController extends BaseController{
 	@Autowired
 	private SdManagerService sdManagerService;
 	
-    @RequestMapping(value="/init",method = RequestMethod.GET)
+   /* @RequestMapping(value="/init",method = RequestMethod.GET)
     public String init(HttpServletRequest request){
         System.out.println("跳转到注册页面");
         return "/pages/signup";
-    }
+    }*/
     
     /**
       * 管理员用户注册
@@ -67,7 +67,7 @@ public class SignupController extends BaseController{
     		return actionResult(Code.BAD_REQUEST,SysMessage.SIGNUP_PHONE_EXIST);
     	}
     	
-    	//获取随机串
+    	//获取十位随机串
     	String randStr = RandomUtil.createRandomChar(10);
     	
     	//对用户表单输入密码进行首次md5加密
@@ -94,6 +94,7 @@ public class SignupController extends BaseController{
     }
     
     /**
+	 * 失效接口，目前团队成员只支持管理员分配添加
       * 团队成员注册接口
      */
     @RequestMapping(value="/signupOrganization",method = RequestMethod.POST)

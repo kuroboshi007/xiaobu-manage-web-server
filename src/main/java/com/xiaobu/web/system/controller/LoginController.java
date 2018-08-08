@@ -10,21 +10,21 @@ import com.xiaobu.common.constant.SessionAttr;
 import com.xiaobu.common.constant.SysMessage;
 import com.xiaobu.common.util.JwtManager;
 import com.xiaobu.common.util.MD5Util;
-import com.xiaobu.common.util.ValidateUtil;
+
+import com.xiaobu.web.system.entity.SdConsumer;
 import com.xiaobu.web.system.entity.SdManager;
 import com.xiaobu.web.system.entity.SdOrganization;
 import com.xiaobu.web.system.entity.SdUser;
+import com.xiaobu.web.system.service.SdConsumerService;
 import com.xiaobu.web.system.service.SdManagerService;
 import com.xiaobu.web.system.service.SdOrganizationService;
 import com.xiaobu.web.system.service.SdUserService;
 
-import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.authc.UsernamePasswordToken;
-import org.apache.shiro.subject.Subject;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -45,6 +45,9 @@ public class LoginController extends BaseController {
 	 
 	@Autowired
 	private SdManagerService sdManagerService;
+
+    @Autowired
+    private SdConsumerService sdConsumerService;
 
 	private Logger logger = LoggerFactory.getLogger(LoginController.class);
 	
@@ -73,7 +76,14 @@ public class LoginController extends BaseController {
 				}
 				userPassword = sdManager.getPassword();
 				userId = sdManager.getId();
-			}else {
+			}else if(type.equals("Consumer")){
+                SdConsumer sdConsumer = sdConsumerService.selectByUsername(username);
+                if(sdConsumer ==null){
+                    return actionResult(Code.BAD_REQUEST,SysMessage.LOGIN_USER_NOT_EXIST);
+                }
+                userPassword = sdConsumer.getPassword();
+                userId = sdConsumer.getId();
+            }else {
 				SdOrganization sdOrganization = sdOrganizationService.selectByUsername(username);
 				if(sdOrganization == null) {
 					return actionResult(Code.BAD_REQUEST,SysMessage.LOGIN_USER_NOT_EXIST);
@@ -112,7 +122,7 @@ public class LoginController extends BaseController {
         // 执行认证登陆
         subject.login(token);
         //根据权限，指定返回数据
-        String role = "admin";
+        String role = "admin"
         if ("user".equals(role)) {
             return actionResult(Code.OK,"欢迎登陆");
         }

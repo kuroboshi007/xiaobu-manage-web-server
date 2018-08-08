@@ -20,6 +20,9 @@ import org.apache.commons.beanutils.BeanUtils;
 @Service("sdManagerService")
 public class SdManagerServiceImpl implements SdManagerService {
 
+	/**
+	 * 注入dao
+	 */
     @Autowired
     private SdManagerDao sdManagerDao;
 
@@ -60,6 +63,12 @@ public class SdManagerServiceImpl implements SdManagerService {
 		return sdManagerDao.selectByphone(phone);
 	}
 
+
+	/**
+	 * 报错则回滚
+	 * @param sdManager
+	 * @return
+	 */
 	@Override
 	@Transactional(propagation = Propagation.REQUIRED,isolation = Isolation.DEFAULT,timeout=36000,rollbackFor=Exception.class)
 	public int insertAndGetId(SdManager sdManager) {

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xiaobu.web.system.dao.SdConsumerDao">
+    <parameterMap id="parameterMap" type="com.xiaobu.web.system.entity.SdConsumer"></parameterMap>
+    <resultMap id="SdConsumerResultMap" type="com.xiaobu.web.system.entity.SdConsumer"></resultMap>
+
+
+    <sql id="columnSql">
+		<trim suffixOverrides=",">
+			t.id,
+			t.name,
+			t.phone,
+			t.email,
+			t.username,
+			t.password,
+			t.created_at,
+			t.updated_at,
+	 	</trim>
+	</sql>
+	
+    <select id="getById" parameterType="String" resultMap="SdConsumerResultMap">
+        select
+			<include refid="columnSql"></include>
+		from sd_consumer t
+		where t.id = #{value}
+    </select>
+
+
+
+    <insert id="add" parameterMap="parameterMap">
+		insert into sd_consumer
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			id,
+			name,
+			phone,
+			email,
+			username,
+			password,
+			created_at,
+			updated_at,
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			#{id},
+			#{name},
+			#{phone},
+			#{email},
+			#{username},
+			#{password},
+			#{createdAt},
+			#{updatedAt},
+		</trim>
+	</insert>
+	
+	
+	<update id="updateNotNull" parameterMap="parameterMap">
+		update sd_consumer
+		<set>
+			<if test="Id != null">
+			id = #{id},
+			</if>
+			<if test="Name != null">
+			name = #{name},
+			</if>
+			<if test="Phone != null">
+			phone = #{phone},
+			</if>
+			<if test="Email != null">
+			email = #{email},
+			</if>
+			<if test="Username != null">
+			username = #{username},
+			</if>
+			<if test="Password != null">
+			password = #{password},
+			</if>
+			<if test="CreatedAt != null">
+			created_at = #{createdAt},
+			</if>
+			<if test="UpdatedAt != null">
+			updated_at = #{updatedAt},
+			</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="delete" parameterType="java.lang.Integer">
+		delete from sd_consumer where id = #{value}
+	</delete>
+
+    <select id="selectByUsername" parameterType="String" resultMap="SdConsumerResultMap">
+        select
+        <include refid="columnSql"></include>
+        from sd_consumer t
+        where t.username = #{value}
+    </select>
+</mapper>

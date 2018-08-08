@@ -53,7 +53,7 @@
 <script type="text/javascript">
      function signup(){
 
-         if($("#nickname").val()==""){
+         if($("#username").val()==""){
              layer.alert("请填写用户名")
          }else if($("#password").val()==""){
              layer.alert("请输入密码");

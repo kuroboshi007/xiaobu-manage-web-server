@@ -19,9 +19,10 @@ public class SmsContentUtil {
     //中国地区电话国家码
     public static  final  String nationCode="86";
 
-    //模板集合
+    //验证码，时间
     public static final ArrayList<String> list = new ArrayList<String>(){{add(getcode());add("2");}};
-    
+
+    //获取随机四位数的验证码
     private static String getcode() {
     	String code = (int) (Math.random() * 9000 + 1000) + "";
     	return code;
