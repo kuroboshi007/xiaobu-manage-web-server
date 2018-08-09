@@ -88,14 +88,27 @@ public class BaseController {
 	
 	/** 设置响应代码 
 	 * */
-	protected Object actionResult(Code code, Object... data){
+	protected Object actionResult(Code code, Object message){
 		Map<String, Object> map = new HashMap<String, Object>();
-		if (data != null) {
+		/*if (data != null) {
 			map.put("result", data);
-		}
+		}*/
 		map.put("code", code.value());
-		map.put("message", code.message());
+		map.put("message", message);
 		map.put("timestamp", System.currentTimeMillis());
 		return map;
 	}
+
+    /** 设置响应代码
+     * */
+    protected Object actionResult(Code code, Object message,Object data){
+        Map<String, Object> map = new HashMap<String, Object>();
+		if (data != null) {
+			map.put("result", data);
+		}
+        map.put("code", code.value());
+        map.put("message", message);
+        map.put("timestamp", System.currentTimeMillis());
+        return map;
+    }
 }

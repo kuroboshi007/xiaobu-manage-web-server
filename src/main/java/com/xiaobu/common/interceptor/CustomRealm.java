@@ -3,6 +3,14 @@ package com.xiaobu.common.interceptor;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.xiaobu.common.config.Code;
+import com.xiaobu.common.constant.SysMessage;
+import com.xiaobu.web.system.entity.SdConsumer;
+import com.xiaobu.web.system.entity.SdManager;
+import com.xiaobu.web.system.entity.SdOrganization;
+import com.xiaobu.web.system.service.SdConsumerService;
+import com.xiaobu.web.system.service.SdManagerService;
+import com.xiaobu.web.system.service.SdOrganizationService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AccountException;
 import org.apache.shiro.authc.AuthenticationException;
@@ -32,6 +40,15 @@ public class CustomRealm extends AuthorizingRealm{
 	
 	@Autowired
 	private SdUserService sdUserService;
+
+    @Autowired
+    private SdOrganizationService sdOrganizationService;
+
+    @Autowired
+    private SdManagerService sdManagerService;
+
+    @Autowired
+    private SdConsumerService sdConsumerService;
 	/**
 	 *  身份信息授权
 	 */
@@ -71,28 +88,28 @@ public class CustomRealm extends AuthorizingRealm{
 		Claims claims = JwtManager.parseJWT(jwttoken,salt);
 		
 		String username = claims.get("user_name").toString();
-		SdUser user = sdUserService.selectByname(username);
-		/*// 从数据库获取对应用户名密码的用户
-        SdUser user = sdUserService.selectByname(token.getUsername());
-        //获取用户提交表单时输入的密码
-        String password = new String((char[]) token.getCredentials());
-        //首先對用戶表單中的password進行一次MD5加密
-		String MD5password = MD5Util.MD5(password);
-		//获取前五位
-		String before5 = user.getPassword().substring(0, 5);
-		//获取后五位
-		String after5 = user.getPassword().substring(user.getPassword().length()-5);
-		//获取剔除盐之后的password
-		String pwd =  user.getPassword().substring(5, user.getPassword().length()-5);
-		//生成注册時隨機生成的盐
-		String salt = before5+after5;
-		String passWordandSalt = MD5Util.MD5(MD5password+salt);
-        if(user == null) {
-        	throw new AccountException("用户名不正确");
-        }else if(!pwd.equals(passWordandSalt)) {
-        	throw new AccountException("密码不正确");
-        }*/
-		return new SimpleAuthenticationInfo(token.getPrincipal(), user.getPassword(), getName());
+        String userType = claims.get("user_type").toString();
+        //查詢系统用戶信息
+        if(userType.equals("Manager")) {
+            SdManager sdManager=sdManagerService.selectByUsername(username);
+            if(sdManager == null) {
+                throw new AuthenticationException("token认证失败！");
+            }
+            //查询甲方用户信息
+        }else if(userType.equals("Consumer")){
+            SdConsumer sdConsumer = sdConsumerService.selectByUsername(username);
+            if(sdConsumer ==null){
+                throw new AuthenticationException("token认证失败！");
+            }
+            //查询团队用户信息
+        }else {
+            SdOrganization sdOrganization = sdOrganizationService.selectByUsername(username);
+            if(sdOrganization == null) {
+                throw new AuthenticationException("token认证失败！");
+            }
+        }
+
+		return new SimpleAuthenticationInfo(token.getPrincipal(), "Consumer", getName());
 		
 	}
 

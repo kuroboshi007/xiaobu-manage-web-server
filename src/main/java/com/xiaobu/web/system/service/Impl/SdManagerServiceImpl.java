@@ -35,8 +35,7 @@ public class SdManagerServiceImpl implements SdManagerService {
 
     @Override
     public void add(SdManager sdManager) {
-    	sdManager.setCreatedAt(new Date());
-    	sdManager.setUpdatedAt(new Date());
+
        sdManagerDao.add(sdManager);
     }
 

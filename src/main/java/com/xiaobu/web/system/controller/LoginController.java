@@ -50,16 +50,7 @@ public class LoginController extends BaseController {
     private SdConsumerService sdConsumerService;
 
 	private Logger logger = LoggerFactory.getLogger(LoginController.class);
-	
-	 
-	
-	@RequestMapping("/")
-	public String login(HttpServletRequest request) {
-		
-		logger.info("跳转到登陆页面");
-		
-		return "/pages/login";
-	}
+
 	
 	@RequestMapping(value="/checklogin",method=RequestMethod.POST)
 	@ResponseBody
@@ -68,7 +59,7 @@ public class LoginController extends BaseController {
 		Integer userId = null;
 		
 		try {
-			//查詢用戶信息
+			//查詢系统用戶信息
 			if(type.equals("Manager")) {
 				SdManager sdManager=sdManagerService.selectByUsername(username);
 				if(sdManager == null) {
@@ -76,6 +67,7 @@ public class LoginController extends BaseController {
 				}
 				userPassword = sdManager.getPassword();
 				userId = sdManager.getId();
+				//查询甲方用户信息
 			}else if(type.equals("Consumer")){
                 SdConsumer sdConsumer = sdConsumerService.selectByUsername(username);
                 if(sdConsumer ==null){
@@ -83,6 +75,7 @@ public class LoginController extends BaseController {
                 }
                 userPassword = sdConsumer.getPassword();
                 userId = sdConsumer.getId();
+                //查询团队用户信息
             }else {
 				SdOrganization sdOrganization = sdOrganizationService.selectByUsername(username);
 				if(sdOrganization == null) {
@@ -108,7 +101,7 @@ public class LoginController extends BaseController {
 			    return actionResult(Code.BAD_REQUEST,SysMessage.LOGIN_USER_INFO_ERROR);
 			}
 			logger.info(username + SysMessage.LOGIN_SUCCESS);
-			String token =JwtManager.createToken(username,userId,"1");
+			String token =JwtManager.createToken(username,userId,type);
 			return actionResult(Code.OK,SysMessage.LOGIN_SUCCESS,token);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -155,20 +148,9 @@ public class LoginController extends BaseController {
     public Object getMessage() {
         return actionResult(Code.OK,"您拥有管理员权限，可以获得该接口的信息！");
     }
-	
-	/*@RequestMapping(value = "/notLogin", method = RequestMethod.GET)
-	@ResponseBody
-    public Object notLogin() {
-        return actionResult(Code.BAD_REQUEST,"您尚未登陆！");
-    }
 
-    @RequestMapping(value = "/notRole", method = RequestMethod.GET)
-    @ResponseBody
-    public Object notRole() {
-        return actionResult(Code.BAD_REQUEST,"您没有权限！");
-    }
 
-    @RequestMapping(value = "/logout", method = RequestMethod.GET)
+    /*@RequestMapping(value = "/logout", method = RequestMethod.GET)
     @ResponseBody
     public Object logout() {
         Subject subject = SecurityUtils.getSubject();

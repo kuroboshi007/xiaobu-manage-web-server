@@ -57,7 +57,7 @@ public class JwtManager {
     	 //盐
     	 String randStr = left+mid+right;
     	 //token
-    	 String token = tokenList[0]+tokenList[1].substring(0,tokenList[1].length()-3)+tokenList[2].substring(3,tokenList[2].length()-4);
+    	 String token = tokenList[0]+"."+tokenList[1].substring(0,tokenList[1].length()-3)+"."+tokenList[2].substring(3,tokenList[2].length()-4);
     	 
     	 
     	 //userName =token ;password=randStr

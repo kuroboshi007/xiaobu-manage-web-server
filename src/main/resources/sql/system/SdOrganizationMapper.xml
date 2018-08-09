@@ -46,8 +46,8 @@
 			#{username},
 			#{password},
 			#{type},
-			#{createdAt},
-			#{updatedAt},
+            now(),
+            now(),
 		</trim>
 	</insert>
 	

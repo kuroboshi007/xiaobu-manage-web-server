@@ -39,11 +39,12 @@ public class SignupController extends BaseController{
 	@Autowired
 	private SdManagerService sdManagerService;
 	
-   /* @RequestMapping(value="/init",method = RequestMethod.GET)
+    @RequestMapping(value="/init",method = RequestMethod.GET)
+    @ResponseBody
     public String init(HttpServletRequest request){
         System.out.println("跳转到注册页面");
-        return "/pages/signup";
-    }*/
+        return "访问成功";
+    }
     
     /**
       * 管理员用户注册
@@ -53,11 +54,10 @@ public class SignupController extends BaseController{
     @RequestMapping(value="/signupManager",method = RequestMethod.POST)
     @ResponseBody
     public Object signupManager(SdManager sdManager) {
-    	
+    	//查询redis验证码是否正确
     	if(!sdManager.getvCode().equals(redisService.getString(sdManager.getPhone()))) {
     		return actionResult(Code.BAD_REQUEST,SysMessage.VERIFICATION_CODE_ERROR);
     	}
-    	
     	//注册前检查用户名是否重复
     	if(sdManagerService.selectByUsername(sdManager.getUsername())!=null) {
     		return actionResult(Code.BAD_REQUEST,SysMessage.SIGNUP_USER_EXIST);
@@ -69,7 +69,6 @@ public class SignupController extends BaseController{
     	
     	//获取十位随机串
     	String randStr = RandomUtil.createRandomChar(10);
-    	
     	//对用户表单输入密码进行首次md5加密
     	String md5Password = MD5Util.MD5(sdManager.getPassword());
     	//将加密过的password进行与随机数randStr进行一次md5加密

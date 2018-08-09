@@ -6,8 +6,13 @@ import com.xiaobu.common.base.BaseController;
 import com.xiaobu.common.config.Code;
 import com.xiaobu.common.sms.SmsContentUtil;
 import com.xiaobu.common.sms.SmsSingleSender;
+import com.xiaobu.web.pro.entity.SdLabelTask;
 import com.xiaobu.web.redis.service.RedisService;
 
+import org.apache.shiro.authz.annotation.Logical;
+import org.apache.shiro.authz.annotation.RequiresAuthentication;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,5 +59,18 @@ public class BaseInterfaceController extends BaseController {
             e.printStackTrace();
         }
         return null;
+    }
+
+    /**
+     * 发布标注任务接口
+     */
+    @RequestMapping(value = {"/issueLabelTask"},method = RequestMethod.GET)
+    @ResponseBody
+    //@RequiresRoles("Manager")//只有用户类型为manager的用户才可访问
+    @RequiresPermissions("Manager")
+    public Object issueLabelTask(SdLabelTask sdLabelTask){
+
+
+        return "访问成功";
     }
 }

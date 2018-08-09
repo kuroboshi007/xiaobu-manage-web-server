@@ -20,13 +20,13 @@ public class DemoController extends BaseController {
 	}*/
 	
 	//主页
-	@RequestMapping(value="index",method=RequestMethod.GET)
+	/*@RequestMapping(value="index",method=RequestMethod.GET)
 	public String index(HttpServletRequest request) {
 		System.out.println("进入了");
 		SdUser user = (SdUser) request.getSession().getAttribute(SessionAttr.USER_LOGIN.getValue());
 		request.setAttribute("user", user);
 		return "/pages/index";
-	}
+	}*/
 	
 	
 	//默认访问登录页

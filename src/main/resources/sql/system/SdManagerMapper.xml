@@ -43,8 +43,8 @@
 			#{email},
 			#{username},
 			#{password},
-			#{createdAt},
-			#{updatedAt},
+            now(),
+            now(),
 		</trim>
 	</insert>
 	
