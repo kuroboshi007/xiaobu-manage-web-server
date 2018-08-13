@@ -17,6 +17,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -64,13 +65,15 @@ public class BaseInterfaceController extends BaseController {
     /**
      * 发布标注任务接口
      */
-    @RequestMapping(value = {"/issueLabelTask"},method = RequestMethod.GET)
+
+    @RequestMapping(value = {"/issueLabelTask"},method = RequestMethod.POST)
     @ResponseBody
-    //@RequiresRoles("Manager")//只有用户类型为manager的用户才可访问
-    @RequiresPermissions("Manager")
+    @RequiresRoles("Manager")//只有用户类型为manager的用户才可访问
     public Object issueLabelTask(SdLabelTask sdLabelTask){
 
-
+        for(int i =0;i<5;i++){
+            System.out.println("个狗子的");
+        }
         return "访问成功";
     }
 }

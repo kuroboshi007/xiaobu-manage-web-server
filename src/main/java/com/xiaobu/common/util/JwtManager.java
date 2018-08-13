@@ -6,6 +6,7 @@ import io.jsonwebtoken.*;
 import javax.crypto.spec.SecretKeySpec;
 import javax.xml.bind.DatatypeConverter;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -44,8 +45,8 @@ public class JwtManager {
     
 
     //进行token分解将加密过的token分解成原始生成token
-    public static UsernamePasswordToken TokenDecompose(String jsonWebToken) {
-    	
+    public static Map<String,Object> TokenDecompose(String jsonWebToken) {
+    	Map<String,Object> map = new HashMap<>();
     	//将token值以"."分为数组
     	 String[] tokenList = jsonWebToken.split("\\.");
     	 //获取盐的第二部分
@@ -61,10 +62,22 @@ public class JwtManager {
     	 
     	 
     	 //userName =token ;password=randStr
-    	 UsernamePasswordToken JWTtoken = new UsernamePasswordToken(token, randStr);
-    	 
-    	 return JWTtoken;
-    	
+
+        Claims claims =parseJWT(token,randStr);
+
+        String userName= "";
+        String userType = "";
+
+        if (StringUtils.isNotBlank(claims.get("user_name").toString())) {
+            userName= claims.get("user_name").toString();
+        }
+        if (StringUtils.isNotBlank(claims.get("user_type").toString())) {
+            userType=claims.get("user_type").toString();
+        }
+        map.put("username",userName);
+        map.put("userType",userType);
+        return map;
+
     }
 
     //1、确定加盐算法结构

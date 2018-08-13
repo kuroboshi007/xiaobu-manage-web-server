@@ -1,5 +1,6 @@
 package com.xiaobu.common.interceptor;
 
+import org.apache.shiro.ShiroException;
 import org.apache.shiro.authc.AccountException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -15,5 +16,10 @@ public class ExceptionController extends BaseController{
     @ExceptionHandler(AccountException.class)
     public Object handleShiroException(Exception ex) {
         return actionResult(Code.BAD_REQUEST,ex.getMessage());
+    }
+
+    @ExceptionHandler(ShiroException.class)
+    public Object handle401() {
+        return actionResult(Code.BAD_REQUEST,"您没有权限访问！");
     }
 }
