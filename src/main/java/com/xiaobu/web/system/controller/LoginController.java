@@ -108,21 +108,6 @@ public class LoginController extends BaseController {
 			e.printStackTrace();
 			return actionResult(Code.INTERNAL_SERVER_ERROR,SysMessage.INTERNAL_SERVER_ERROR);
 		}
-		/* // 从SecurityUtils里边创建一个 subject
-        Subject subject = SecurityUtils.getSubject();
-        // 在认证提交前准备 token（令牌）
-        UsernamePasswordToken token = new UsernamePasswordToken(username, password);
-        // 执行认证登陆
-        subject.login(token);
-        //根据权限，指定返回数据
-        String role = "admin"
-        if ("user".equals(role)) {
-            return actionResult(Code.OK,"欢迎登陆");
-        }
-        if ("admin".equals(role)) {
-            return actionResult(Code.OK,"欢迎来到管理员页面");
-        } 
-        return actionResult(Code.BAD_REQUEST,"权限错误！");*/
 	}
 	
 	

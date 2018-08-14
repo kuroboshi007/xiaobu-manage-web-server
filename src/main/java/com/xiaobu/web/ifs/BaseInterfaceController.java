@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.io.IOException;
-import java.util.concurrent.TimeUnit;
+
 
 @Controller
 @RequestMapping("/baseinterface")
@@ -69,11 +69,13 @@ public class BaseInterfaceController extends BaseController {
     @RequestMapping(value = {"/issueLabelTask"},method = RequestMethod.POST)
     @ResponseBody
     @RequiresRoles("Manager")//只有用户类型为manager的用户才可访问
+    @RequiresAuthentication
     public Object issueLabelTask(SdLabelTask sdLabelTask){
 
         for(int i =0;i<5;i++){
             System.out.println("个狗子的");
         }
+
         return "访问成功";
     }
 }

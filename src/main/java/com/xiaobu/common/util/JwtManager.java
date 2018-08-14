@@ -7,6 +7,7 @@ import javax.crypto.spec.SecretKeySpec;
 import javax.xml.bind.DatatypeConverter;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -68,11 +69,15 @@ public class JwtManager {
         String userName= "";
         String userType = "";
 
-        if (StringUtils.isNotBlank(claims.get("user_name").toString())) {
-            userName= claims.get("user_name").toString();
-        }
-        if (StringUtils.isNotBlank(claims.get("user_type").toString())) {
-            userType=claims.get("user_type").toString();
+        try {
+            if (StringUtils.isNotBlank(claims.get("user_name").toString())) {
+                userName= claims.get("user_name").toString();
+            }
+            if (StringUtils.isNotBlank(claims.get("user_type").toString())) {
+                userType=claims.get("user_type").toString();
+            }
+        } catch (Exception e) {
+            throw new AuthenticationException("token认证失败！");
         }
         map.put("username",userName);
         map.put("userType",userType);

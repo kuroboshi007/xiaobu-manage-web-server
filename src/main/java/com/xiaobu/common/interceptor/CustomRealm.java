@@ -19,7 +19,7 @@ import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.authc.SimpleAuthenticationInfo;
-import org.apache.shiro.authc.UsernamePasswordToken;
+
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
@@ -83,8 +83,6 @@ public class CustomRealm extends AuthorizingRealm{
         }
 	}
 	
-	
-	
 	/**
 	 * 
 	 *身份信息验证
@@ -120,9 +118,7 @@ public class CustomRealm extends AuthorizingRealm{
                 }
             }
         }
-
 		return new SimpleAuthenticationInfo(token, token, "custom_realm");
-
 	}
 
 }

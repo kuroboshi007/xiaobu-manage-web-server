@@ -8,6 +8,7 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.authz.UnauthorizedException;
 import org.apache.shiro.web.filter.authc.BasicHttpAuthenticationFilter;
@@ -36,7 +37,7 @@ public class JWTFilter extends BasicHttpAuthenticationFilter{
             try {
                 executeLogin(request, response);
             } catch (Exception e) {
-                response401(request, response);
+                throw new AuthenticationException("token认证失败！");
             }
         }
         return true;
@@ -86,13 +87,13 @@ public class JWTFilter extends BasicHttpAuthenticationFilter{
     /**
      * 将非法请求跳转到 /401
      */
-    private void response401(ServletRequest req, ServletResponse resp) {
+   /* private void response401(ServletRequest req, ServletResponse resp) {
         try {
             HttpServletResponse httpServletResponse = (HttpServletResponse) resp;
             httpServletResponse.sendRedirect("/401");
         } catch (IOException e) {
             logger.error(e.getMessage());
         }
-    }
+    }*/
 
 }
