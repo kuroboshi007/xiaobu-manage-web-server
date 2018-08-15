@@ -1,4 +1,6 @@
 package com.xiaobu.web.pro.service.Impl;
+import com.github.pagehelper.PageHelper;
+import com.xiaobu.common.model.PageModel;
 import com.xiaobu.web.pro.entity.SdCollectTask;
 import com.xiaobu.web.pro.service.SdCollectTaskService;
 import com.xiaobu.web.pro.dao.SdCollectTaskDao;
@@ -33,7 +35,14 @@ public class SdCollectTaskServiceImpl implements SdCollectTaskService {
     public void update(SdCollectTask sdCollectTask){
        sdCollectTaskDao.updateNotNull(sdCollectTask);
     }
-    
+
+    @Override
+    public PageModel<SdCollectTask> selectConsumerInfos(SdCollectTask sdCollectTask, PageModel<SdCollectTask> page) {
+        PageHelper.offsetPage(page.getStart(), page.getLength());
+        page.initData(sdCollectTaskDao.findByPage(sdCollectTask));
+        return page;
+    }
+
     @Override
 	public void delete(Integer id) {
 

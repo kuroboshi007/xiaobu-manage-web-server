@@ -1,5 +1,6 @@
 package com.xiaobu.web.pro.service;
 
+import com.xiaobu.common.model.PageModel;
 import com.xiaobu.web.pro.entity.SdCollectTask;
 /**
 * 描述：标注平台用户 服务实现层接口
@@ -22,4 +23,5 @@ public interface SdCollectTaskService {
     //SdCollectTaskDTO updateSdCollectTask(SdCollectTaskDTO sdCollectTaskDTO) throws Exception;
     void update(SdCollectTask sdCollectTask);
 
+    PageModel<SdCollectTask> selectConsumerInfos(SdCollectTask sdCollectTask, PageModel<SdCollectTask> page);
 }

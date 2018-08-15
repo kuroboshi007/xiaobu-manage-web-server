@@ -51,12 +51,16 @@ public class LoginController extends BaseController {
 
 	private Logger logger = LoggerFactory.getLogger(LoginController.class);
 
-	
+    /**
+     * 系统管理员登录接口
+     * @param request
+     * @param username
+     * @param password
+     * @return
+     */
 	@RequestMapping(value="/checkManagerLogin",method=RequestMethod.POST)
 	@ResponseBody
 	public Object checkManagerLogin(HttpServletRequest request,String username,String password) {
-
-		
 		try {
 			//查詢系统用戶信息
 				SdManager sdManager=sdManagerService.selectByUsername(username);
@@ -92,6 +96,13 @@ public class LoginController extends BaseController {
 		}
 	}
 
+    /**
+     * 甲方人员登录接口
+     * @param request
+     * @param username
+     * @param password
+     * @return
+     */
     @RequestMapping(value="/checkConsumerLogin",method=RequestMethod.POST)
     @ResponseBody
     public Object checkConsumerLogin(HttpServletRequest request,String username,String password) {
@@ -132,6 +143,13 @@ public class LoginController extends BaseController {
     }
 
 
+    /**
+     * 团队管理员登录接口
+     * @param request
+     * @param username
+     * @param password
+     * @return
+     */
     @RequestMapping(value="/checkOrganizationLogin",method=RequestMethod.POST)
     @ResponseBody
     public Object checkOrganizationLogin(HttpServletRequest request,String username,String password) {

@@ -152,4 +152,17 @@
 	<delete id="delete" parameterType="java.lang.Integer">
 		delete from sd_collect_task where id = #{value}
 	</delete>
+
+    <select id="findByPage" parameterMap="parameterMap" resultMap="SdCollectTaskResultMap">
+        select
+        <include refid="columnSql"></include>
+        from sd_collect_task t
+        <where>
+            1=1
+            <if test="name != null and name != ''">
+                and t.name  like '%${name}%'
+            </if>
+        </where>
+
+    </select>
 </mapper>

@@ -1,9 +1,12 @@
 package com.xiaobu.web.pro.controller;
+import com.xiaobu.common.constant.SysMessage;
+import com.xiaobu.common.model.PageModel;
 import com.xiaobu.web.pro.service.SdCollectTaskService;
 import com.xiaobu.web.pro.entity.SdCollectTask;
 import com.xiaobu.common.base.BaseController;
 import com.xiaobu.common.config.Code;
 import com.xiaobu.common.util.ValidateUtil;
+import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 
@@ -46,8 +49,8 @@ public class SdCollectTaskController extends BaseController{
 
     /**
     * 描述:创建标注平台用户
-    * 保存
-    * @param sdCollectTaskDTO  标注平台用户DTO
+    * 保存标注平台用户DTO
+    * @param
     */
     @RequestMapping(value = "/save", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public Object create(@RequestBody SdCollectTask sdCollectTask) throws Exception {
@@ -83,4 +86,18 @@ public class SdCollectTaskController extends BaseController{
 	}
 	return actionResult(Code.INTERNAL_SERVER_ERROR);
   }
+
+     @RequestMapping(value = "/selectCollectTaskInfo",method = RequestMethod.POST)
+     @ResponseBody
+     @RequiresRoles(SysMessage.MANAGER)
+    public Object selectCollectTaskInfo(SdCollectTask sdCollectTask, PageModel<SdCollectTask> page){
+         try {
+             PageModel<SdCollectTask> pages = sdCollectTaskService.selectConsumerInfos(sdCollectTask,page);
+             return actionResult(Code.OK,"获取成功",pages);
+         } catch (Exception e) {
+             e.printStackTrace();
+             return actionResult(Code.INTERNAL_SERVER_ERROR,"获取失败");
+         }
+     }
+
 }
