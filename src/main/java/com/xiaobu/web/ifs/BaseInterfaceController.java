@@ -6,9 +6,13 @@ import com.xiaobu.common.base.BaseController;
 import com.xiaobu.common.config.Code;
 import com.xiaobu.common.sms.SmsContentUtil;
 import com.xiaobu.common.sms.SmsSingleSender;
+import com.xiaobu.web.pro.entity.SdCollectTask;
 import com.xiaobu.web.pro.entity.SdLabelTask;
+import com.xiaobu.web.pro.service.SdCollectTaskService;
 import com.xiaobu.web.redis.service.RedisService;
 
+import com.xiaobu.web.system.entity.SdConsumer;
+import com.xiaobu.web.system.service.SdConsumerService;
 import org.apache.shiro.authz.annotation.Logical;
 import org.apache.shiro.authz.annotation.RequiresAuthentication;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -23,6 +27,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Controller
@@ -33,6 +39,12 @@ public class BaseInterfaceController extends BaseController {
 	
 	@Autowired
 	private RedisService redisService;
+
+    @Autowired
+    private SdCollectTaskService sdCollectTaskService;
+
+    @Autowired
+    private SdConsumerService sdConsumerService;
 
     /**
      * 短信验证码接口
@@ -63,9 +75,27 @@ public class BaseInterfaceController extends BaseController {
     }
 
     /**
+     * 查询甲方信息接口
+     */
+    @RequestMapping(value = {"/selectConsumerInfo"},method = RequestMethod.POST)
+    @ResponseBody
+    @RequiresRoles("Manager")//只有用户类型为manager的用户才可访问
+    @RequiresAuthentication
+    public Object selectConsumerInfo(){
+        List<SdConsumer> sdConsumers = new ArrayList<>();
+
+        try {
+            sdConsumers = sdConsumerService.selectConsumerInfos();
+            return actionResult(Code.OK,"获取成功",sdConsumers);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return actionResult(Code.INTERNAL_SERVER_ERROR,"获取失败");
+        }
+
+    }
+    /**
      * 发布标注任务接口
      */
-
     @RequestMapping(value = {"/issueLabelTask"},method = RequestMethod.POST)
     @ResponseBody
     @RequiresRoles("Manager")//只有用户类型为manager的用户才可访问
@@ -77,5 +107,16 @@ public class BaseInterfaceController extends BaseController {
         }
 
         return "访问成功";
+    }
+
+    /**
+     * 发布采集任务接口
+     */
+    @RequestMapping(value = {"/issueCollectTask"},method = RequestMethod.POST)
+    @ResponseBody
+    @RequiresRoles("Manager")
+    @RequiresAuthentication
+    public Object issueCollectTask(SdCollectTask sdCollectTask){
+        return null;
     }
 }

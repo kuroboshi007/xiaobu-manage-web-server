@@ -5,6 +5,8 @@ import org.apache.ibatis.annotations.Mapper;
 import com.xiaobu.common.base.BaseDao;
 import com.xiaobu.web.system.entity.SdConsumer;
 
+import java.util.List;
+
 /**
 * 描述：标注平台用户DTO
 * @author MuRunSen
@@ -14,4 +16,6 @@ import com.xiaobu.web.system.entity.SdConsumer;
 public interface SdConsumerDao extends BaseDao<SdConsumer, Integer>{
 
     SdConsumer selectByUsername(String username);
+
+    List<SdConsumer> selectConsumerInfos();
 }

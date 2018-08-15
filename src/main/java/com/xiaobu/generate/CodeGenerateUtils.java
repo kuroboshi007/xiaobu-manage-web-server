@@ -35,14 +35,14 @@ public class CodeGenerateUtils {
 	
 	private final String AUTHOR = "MuRunSen";//作者
 	private final String CURRENT_DATE = sdf.format(new Date());//创建时间
-	private final String tableName = "sd_label_task";//表名
+	private final String tableName = "sd_collect_task";//表名
 	private final String packageName = "com.xiaobu.web.pro";//包路径
 	private final String tableAnnotation = "标注平台用户";//表描述
 	private final String URL = "jdbc:postgresql://127.0.0.1:5432/smalldata_temp";//数据库连接url
 	private final String USER = "postgres";//用户名
 	private final String PASSWORD = "123456";//密码
 	private final String DRIVER = "org.postgresql.Driver";//数据库驱动
-	private final String diskPath = "D://";//生成到哪个盘
+	private final String diskPath = "D://com//xiaobu//web//";//生成到哪个盘
 	private final String changeTableName = replaceUnderLineAndUpperCase(tableName);
 	private final List<ColumnClass> columnClassList = new ArrayList<>();
 	private String pk_Key="";
@@ -88,6 +88,7 @@ public class CodeGenerateUtils {
     public void generateFileByTemplate(final String templateName,File file,Map<String,Object> dataMap) throws Exception{
         Template template = FreeMarkerTemplateUtils.getTemplate(templateName);
         FileOutputStream fos = new FileOutputStream(file);
+
         
         if(ValidateUtil.isNotEmpty(dataMap.get("pkField"))) {
         	dataMap.put("pkField",dataMap.get("pkField"));
@@ -136,6 +137,10 @@ public class CodeGenerateUtils {
             }
             while(pkRSet.next()) {
             	pk_Key = (String) pkRSet.getObject(4);
+            }
+            File mapperFile = new File(diskPath);
+            if(!mapperFile.exists()){
+                mapperFile.mkdirs();
             }
             //生成Model文件
             generateModelFile(resultSet);

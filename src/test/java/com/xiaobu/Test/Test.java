@@ -3,18 +3,19 @@ package com.xiaobu.Test;
 import java.util.Date;
 import java.util.Random;
 
+import com.xiaobu.common.config.Dictionarydata;
 import com.xiaobu.common.constant.SysMessage;
 import com.xiaobu.common.util.MD5Util;
 
 public class Test {
 
     public static void main(String[] args){
-    	String password ="123456";
+    	/*String password ="123456";
     	Random rand = new Random();
     	String randStr = "";
     	int count =0;
     	//生成随机数串，例：AZTR987dsds
-    	/*int index;
+    	*//*int index;
     	boolean[] flags =new boolean[SysMessage.letters.length];
     	for(int i=0;i<10;i++) {
     		do{
@@ -24,7 +25,7 @@ public class Test {
 			randStr += c;
 			flags[index]=true;
 
-    	}*/
+    	}*//*
     	while(true) {
     		int index = rand.nextInt(SysMessage.letters.length);
     		char temp = SysMessage.letters[index];
@@ -45,6 +46,7 @@ public class Test {
     	System.out.println(after5);
     	System.out.println(passWordandSalt);
     	String user_password = before5+passWordandSalt+after5;
-    	System.out.println(user_password);
+    	System.out.println(user_password);*/
+        System.out.println(Dictionarydata.CHECKOUT_PASS);
     }
 }

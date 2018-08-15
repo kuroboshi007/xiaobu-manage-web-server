@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xiaobu.web.pro.dao.SdCollectTaskDao">
+    <parameterMap id="parameterMap" type="com.xiaobu.web.pro.entity.SdCollectTask"></parameterMap>
+    <resultMap id="SdCollectTaskResultMap" type="com.xiaobu.web.pro.entity.SdCollectTask"></resultMap>
+
+
+    <sql id="columnSql">
+		<trim suffixOverrides=",">
+			t.id,
+			t.parent_id,
+			t.consumer_id,
+			t.organization_id,
+			t.name,
+			t.intro,
+			t.detail,
+			t.categroy,
+			t.type,
+			t.example,
+			t.total,
+			t.price,
+			t.duration,
+			t.promiseTime,
+			t.deadline,
+			t.count,
+			t.doneNum,
+			t.status,
+			t.startTime,
+	 	</trim>
+	</sql>
+	
+    <select id="getById" parameterType="String" resultMap="SdCollectTaskResultMap">
+        select
+			<include refid="columnSql"></include>
+		from sd_collect_task t
+		where t.id = #{value}
+    </select>
+
+
+
+    <insert id="add" parameterMap="parameterMap">
+		insert into sd_collect_task
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			id,
+			parent_id,
+			consumer_id,
+			organization_id,
+			name,
+			intro,
+			detail,
+			categroy,
+			type,
+			example,
+			total,
+			price,
+			duration,
+			promiseTime,
+			deadline,
+			count,
+			doneNum,
+			status,
+			startTime,
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			#{id},
+			#{parentId},
+			#{consumerId},
+			#{organizationId},
+			#{name},
+			#{intro},
+			#{detail},
+			#{categroy},
+			#{type},
+			#{example},
+			#{total},
+			#{price},
+			#{duration},
+			#{promiseTime},
+			#{deadline},
+			#{count},
+			#{doneNum},
+			#{status},
+			#{startTime},
+		</trim>
+	</insert>
+	
+	
+	<update id="updateNotNull" parameterMap="parameterMap">
+		update sd_collect_task
+		<set>
+			<if test="Id != null">
+			id = #{id},
+			</if>
+			<if test="ParentId != null">
+			parent_id = #{parentId},
+			</if>
+			<if test="ConsumerId != null">
+			consumer_id = #{consumerId},
+			</if>
+			<if test="OrganizationId != null">
+			organization_id = #{organizationId},
+			</if>
+			<if test="Name != null">
+			name = #{name},
+			</if>
+			<if test="Intro != null">
+			intro = #{intro},
+			</if>
+			<if test="Detail != null">
+			detail = #{detail},
+			</if>
+			<if test="Categroy != null">
+			categroy = #{categroy},
+			</if>
+			<if test="Type != null">
+			type = #{type},
+			</if>
+			<if test="Example != null">
+			example = #{example},
+			</if>
+			<if test="Total != null">
+			total = #{total},
+			</if>
+			<if test="Price != null">
+			price = #{price},
+			</if>
+			<if test="Duration != null">
+			duration = #{duration},
+			</if>
+			<if test="PromiseTime != null">
+			promiseTime = #{promiseTime},
+			</if>
+			<if test="Deadline != null">
+			deadline = #{deadline},
+			</if>
+			<if test="Count != null">
+			count = #{count},
+			</if>
+			<if test="DoneNum != null">
+			doneNum = #{doneNum},
+			</if>
+			<if test="Status != null">
+			status = #{status},
+			</if>
+			<if test="StartTime != null">
+			startTime = #{startTime},
+			</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="delete" parameterType="java.lang.Integer">
+		delete from sd_collect_task where id = #{value}
+	</delete>
+</mapper>

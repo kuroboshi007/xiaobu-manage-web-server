@@ -93,4 +93,10 @@
         from sd_consumer t
         where t.username = #{value}
     </select>
+
+    <select id="selectConsumerInfos" resultMap="SdConsumerResultMap">
+        select
+        <include refid="columnSql"></include>
+        from sd_consumer t
+    </select>
 </mapper>

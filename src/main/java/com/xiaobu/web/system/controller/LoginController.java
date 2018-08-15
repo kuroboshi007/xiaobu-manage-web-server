@@ -52,38 +52,20 @@ public class LoginController extends BaseController {
 	private Logger logger = LoggerFactory.getLogger(LoginController.class);
 
 	
-	@RequestMapping(value="/checklogin",method=RequestMethod.POST)
+	@RequestMapping(value="/checkManagerLogin",method=RequestMethod.POST)
 	@ResponseBody
-	public Object checklogin(HttpServletRequest request,String username,String password,String type) {
-		String userPassword = "";
-		Integer userId = null;
+	public Object checkManagerLogin(HttpServletRequest request,String username,String password) {
+
 		
 		try {
 			//查詢系统用戶信息
-			if(type.equals("Manager")) {
 				SdManager sdManager=sdManagerService.selectByUsername(username);
 				if(sdManager == null) {
 					return actionResult(Code.BAD_REQUEST,SysMessage.LOGIN_USER_NOT_EXIST);
 				}
-				userPassword = sdManager.getPassword();
-				userId = sdManager.getId();
+            String	userPassword = sdManager.getPassword();
+            Integer	userId = sdManager.getId();
 				//查询甲方用户信息
-			}else if(type.equals("Consumer")){
-                SdConsumer sdConsumer = sdConsumerService.selectByUsername(username);
-                if(sdConsumer ==null){
-                    return actionResult(Code.BAD_REQUEST,SysMessage.LOGIN_USER_NOT_EXIST);
-                }
-                userPassword = sdConsumer.getPassword();
-                userId = sdConsumer.getId();
-                //查询团队用户信息
-            }else {
-				SdOrganization sdOrganization = sdOrganizationService.selectByUsername(username);
-				if(sdOrganization == null) {
-					return actionResult(Code.BAD_REQUEST,SysMessage.LOGIN_USER_NOT_EXIST);
-				}
-				userPassword = sdOrganization.getPassword();
-				userId = sdOrganization.getId();
-			}
 			//首先對用戶表單中的password進行一次MD5加密
 			String MD5password = MD5Util.MD5(password);
 			//获取前五位
@@ -101,7 +83,7 @@ public class LoginController extends BaseController {
 			    return actionResult(Code.BAD_REQUEST,SysMessage.LOGIN_USER_INFO_ERROR);
 			}
 			logger.info(username + SysMessage.LOGIN_SUCCESS);
-			String token =JwtManager.createToken(username,userId,type);
+			String token =JwtManager.createToken(username,userId,SysMessage.MANAGER);
 			return actionResult(Code.OK,SysMessage.LOGIN_SUCCESS,token);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -109,8 +91,86 @@ public class LoginController extends BaseController {
 			return actionResult(Code.INTERNAL_SERVER_ERROR,SysMessage.INTERNAL_SERVER_ERROR);
 		}
 	}
-	
-	
+
+    @RequestMapping(value="/checkConsumerLogin",method=RequestMethod.POST)
+    @ResponseBody
+    public Object checkConsumerLogin(HttpServletRequest request,String username,String password) {
+
+        try {
+            //查詢系统用戶信息
+                SdConsumer sdConsumer = sdConsumerService.selectByUsername(username);
+                if(sdConsumer ==null){
+                    return actionResult(Code.BAD_REQUEST,SysMessage.LOGIN_USER_NOT_EXIST);
+                }
+            String userPassword = sdConsumer.getPassword();
+            Integer  userId = sdConsumer.getId();
+                //查询团队用户信息
+            //首先對用戶表單中的password進行一次MD5加密
+            String MD5password = MD5Util.MD5(password);
+            //获取前五位
+            String before5 = userPassword.substring(0, 5);
+            //获取后五位
+            String after5 = userPassword.substring(userPassword.length()-5);
+            //获取剔除盐之后的password
+            String pwd =  userPassword.substring(5, userPassword.length()-5);
+            //生成注册時隨機生成的盐
+            String salt = before5+after5;
+            String passWordandSalt = MD5Util.MD5(MD5password+salt);
+            //验证密码
+            if(!pwd.equals(passWordandSalt)) {
+                logger.info(username + SysMessage.LOGIN_USER_INFO_ERROR);
+                return actionResult(Code.BAD_REQUEST,SysMessage.LOGIN_USER_INFO_ERROR);
+            }
+            logger.info(username + SysMessage.LOGIN_SUCCESS);
+            String token =JwtManager.createToken(username,userId,SysMessage.CONSUMER);
+            return actionResult(Code.OK,SysMessage.LOGIN_SUCCESS,token);
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            return actionResult(Code.INTERNAL_SERVER_ERROR,SysMessage.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+
+    @RequestMapping(value="/checkOrganizationLogin",method=RequestMethod.POST)
+    @ResponseBody
+    public Object checkOrganizationLogin(HttpServletRequest request,String username,String password) {
+
+        try {
+            //查詢系统用戶信息
+
+                SdOrganization sdOrganization = sdOrganizationService.selectByUsername(username);
+                if(sdOrganization == null) {
+                    return actionResult(Code.BAD_REQUEST,SysMessage.LOGIN_USER_NOT_EXIST);
+                }
+            String userPassword = sdOrganization.getPassword();
+            Integer userId = sdOrganization.getId();
+
+            //首先對用戶表單中的password進行一次MD5加密
+            String MD5password = MD5Util.MD5(password);
+            //获取前五位
+            String before5 = userPassword.substring(0, 5);
+            //获取后五位
+            String after5 = userPassword.substring(userPassword.length()-5);
+            //获取剔除盐之后的password
+            String pwd =  userPassword.substring(5, userPassword.length()-5);
+            //生成注册時隨機生成的盐
+            String salt = before5+after5;
+            String passWordandSalt = MD5Util.MD5(MD5password+salt);
+            //验证密码
+            if(!pwd.equals(passWordandSalt)) {
+                logger.info(username + SysMessage.LOGIN_USER_INFO_ERROR);
+                return actionResult(Code.BAD_REQUEST,SysMessage.LOGIN_USER_INFO_ERROR);
+            }
+            logger.info(username + SysMessage.LOGIN_SUCCESS);
+            String token =JwtManager.createToken(username,userId,SysMessage.ORGANIZATION);
+            return actionResult(Code.OK,SysMessage.LOGIN_SUCCESS,token);
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            return actionResult(Code.INTERNAL_SERVER_ERROR,SysMessage.INTERNAL_SERVER_ERROR);
+        }
+    }
 	/**
 	 * 登出
 	 * @param request
@@ -128,12 +188,6 @@ public class LoginController extends BaseController {
 		
 		return "/pages/login";
 	}
-	
-	@RequestMapping(value = "/getMessage", method = RequestMethod.POST)
-    public Object getMessage() {
-        return actionResult(Code.OK,"您拥有管理员权限，可以获得该接口的信息！");
-    }
-
 
     /*@RequestMapping(value = "/logout", method = RequestMethod.GET)
     @ResponseBody

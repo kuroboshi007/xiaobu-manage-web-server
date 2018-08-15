@@ -3,6 +3,8 @@ package com.xiaobu.web.system.service;
 import com.xiaobu.web.system.entity.SdConsumer;
 import com.xiaobu.web.system.entity.SdManager;
 
+import java.util.List;
+
 /**
 * 描述：标注平台用户 服务实现层接口
 * @author MuRunSen
@@ -25,4 +27,6 @@ public interface SdConsumerService {
     void update(SdConsumer sdConsumer);
 
     SdConsumer selectByUsername(String username);
+
+    List<SdConsumer> selectConsumerInfos();
 }

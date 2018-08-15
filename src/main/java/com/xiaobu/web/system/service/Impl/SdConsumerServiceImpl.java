@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.apache.commons.beanutils.BeanUtils;
 
+import java.util.List;
+
 /**
 * 描述：标注平台用户 服务实现层
 * @author MuRunSen
@@ -43,5 +45,10 @@ public class SdConsumerServiceImpl implements SdConsumerService {
 
 	public SdConsumer selectByUsername(String username){
         return sdConsumerDao.selectByUsername(username);
+    }
+
+    @Override
+    public List<SdConsumer> selectConsumerInfos() {
+        return sdConsumerDao.selectConsumerInfos();
     }
 }
