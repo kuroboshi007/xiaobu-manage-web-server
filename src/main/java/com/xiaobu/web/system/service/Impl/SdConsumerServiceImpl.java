@@ -1,14 +1,15 @@
 package com.xiaobu.web.system.service.Impl;
-import com.xiaobu.common.persistence.Page;
+import com.github.pagehelper.PageHelper;
+import com.xiaobu.common.model.PageModel;
+
 import com.xiaobu.web.system.entity.SdConsumer;
-import com.xiaobu.web.system.entity.SdManager;
 import com.xiaobu.web.system.service.SdConsumerService;
 import com.xiaobu.web.system.dao.SdConsumerDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.apache.commons.beanutils.BeanUtils;
 
-import java.util.List;
+
+
 
 /**
 * 描述：标注平台用户 服务实现层
@@ -49,8 +50,10 @@ public class SdConsumerServiceImpl implements SdConsumerService {
     }
 
     @Override
-    public Page<SdConsumer> selectConsumerInfos(SdConsumer sdConsumers,Page<SdConsumer> page) {
-        page.setResult(sdConsumerDao.findByPage(sdConsumers));
+    public PageModel<SdConsumer> selectConsumerInfos(SdConsumer sdConsumers, PageModel<SdConsumer> page) {
+        PageHelper.offsetPage(page.getStart(), page.getLength());
+        page.initData(sdConsumerDao.findByPage(sdConsumers));
         return page;
     }
+
 }

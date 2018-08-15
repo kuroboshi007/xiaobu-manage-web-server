@@ -1569,7 +1569,7 @@
         throw new Error('Invalid format type.');
       }
     },
-    validParts: function (type) {
+    valxiaobuarts: function (type) {
       if (type === 'standard') {
         return /t|hh?|HH?|p|P|z|Z|ii?|ss?|dd?|DD?|mm?|MM?|yy(?:yy)?/g;
       } else if (type === 'php') {
@@ -1582,8 +1582,8 @@
     parseFormat: function (format, type) {
       // IE treats \0 as a string end in inputs (truncating the value),
       // so it's a bad format delimiter, anyway
-      var separators = format.replace(this.validParts(type), '\0').split('\0'),
-        parts = format.match(this.validParts(type));
+      var separators = format.replace(this.valxiaobuarts(type), '\0').split('\0'),
+        parts = format.match(this.valxiaobuarts(type));
       if (!separators || !separators.length || !parts || parts.length === 0) {
         throw new Error('Invalid date format.');
       }

@@ -16,7 +16,7 @@
 <body class="hold-transition login-page">
 <div class="login-box">
     <!-- <div class="login-logo">
-        <a href="https://gitee.com/liuzhenjn/jeeidp"><b>Jee</b>IDP</a>
+        <a href="https://gitee.com/liuzhenjn/jeexiaobu"><b>Jee</b>xiaobu</a>
     </div> -->
     <div class="login-box-body">
         <p class="login-box-msg">账号注册</p>
