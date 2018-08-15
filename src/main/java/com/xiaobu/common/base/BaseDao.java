@@ -21,6 +21,15 @@ public interface BaseDao<T,PK> {
 	 * @return
 	 */
 	public Page<T> findByPage(T model);
+
+    /**
+     * 分页查询
+     *
+     * @param model
+     * @param page
+     * @return
+     */
+    public List<T> findByPage(T model,Page<T> page);
 	
 	/**
 	 * 条件查询

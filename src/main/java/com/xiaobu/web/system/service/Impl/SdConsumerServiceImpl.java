@@ -1,4 +1,5 @@
 package com.xiaobu.web.system.service.Impl;
+import com.xiaobu.common.persistence.Page;
 import com.xiaobu.web.system.entity.SdConsumer;
 import com.xiaobu.web.system.entity.SdManager;
 import com.xiaobu.web.system.service.SdConsumerService;
@@ -48,7 +49,8 @@ public class SdConsumerServiceImpl implements SdConsumerService {
     }
 
     @Override
-    public List<SdConsumer> selectConsumerInfos() {
-        return sdConsumerDao.selectConsumerInfos();
+    public Page<SdConsumer> selectConsumerInfos(SdConsumer sdConsumers,Page<SdConsumer> page) {
+        page.setResult(sdConsumerDao.findByPage(sdConsumers));
+        return page;
     }
 }

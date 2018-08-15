@@ -4,6 +4,7 @@ import com.github.qcloudsms.SmsSingleSenderResult;
 import com.github.qcloudsms.httpclient.HTTPException;
 import com.xiaobu.common.base.BaseController;
 import com.xiaobu.common.config.Code;
+import com.xiaobu.common.persistence.Page;
 import com.xiaobu.common.sms.SmsContentUtil;
 import com.xiaobu.common.sms.SmsSingleSender;
 import com.xiaobu.web.pro.entity.SdCollectTask;
@@ -81,11 +82,11 @@ public class BaseInterfaceController extends BaseController {
     @ResponseBody
     @RequiresRoles("Manager")//只有用户类型为manager的用户才可访问
     @RequiresAuthentication
-    public Object selectConsumerInfo(){
-        List<SdConsumer> sdConsumers = new ArrayList<>();
+    public Object selectConsumerInfo(SdConsumer sdConsumers,Page<SdConsumer> page){
+        //List<SdConsumer> sdConsumers = new ArrayList<>();
 
         try {
-            sdConsumers = sdConsumerService.selectConsumerInfos();
+            Page<SdConsumer> pages = sdConsumerService.selectConsumerInfos(sdConsumers,page);
             return actionResult(Code.OK,"获取成功",sdConsumers);
         } catch (Exception e) {
             e.printStackTrace();

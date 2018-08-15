@@ -1,5 +1,6 @@
 package com.xiaobu.web.system.service;
 
+import com.xiaobu.common.persistence.Page;
 import com.xiaobu.web.system.entity.SdConsumer;
 import com.xiaobu.web.system.entity.SdManager;
 
@@ -28,5 +29,5 @@ public interface SdConsumerService {
 
     SdConsumer selectByUsername(String username);
 
-    List<SdConsumer> selectConsumerInfos();
+    public  Page<SdConsumer> selectConsumerInfos(SdConsumer sdConsumers,Page<SdConsumer> page);
 }

@@ -97,7 +97,7 @@ public class LoginController extends BaseController {
     public Object checkConsumerLogin(HttpServletRequest request,String username,String password) {
 
         try {
-            //查詢系统用戶信息
+            //查詢甲方用戶信息
                 SdConsumer sdConsumer = sdConsumerService.selectByUsername(username);
                 if(sdConsumer ==null){
                     return actionResult(Code.BAD_REQUEST,SysMessage.LOGIN_USER_NOT_EXIST);
@@ -137,8 +137,7 @@ public class LoginController extends BaseController {
     public Object checkOrganizationLogin(HttpServletRequest request,String username,String password) {
 
         try {
-            //查詢系统用戶信息
-
+            //查詢团体用戶信息
                 SdOrganization sdOrganization = sdOrganizationService.selectByUsername(username);
                 if(sdOrganization == null) {
                     return actionResult(Code.BAD_REQUEST,SysMessage.LOGIN_USER_NOT_EXIST);

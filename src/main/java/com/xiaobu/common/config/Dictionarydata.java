@@ -11,87 +11,88 @@ public enum Dictionarydata {
     IS_ISSUE(1),
 
     /**
-     * 已满额
-     */
-    FULFIL_QUOTA(2),
-
-    /**
-     * 待验收
-     * @param value
-     */
-    FOR_ACCEPTANCE(3),
-
-    /**
-     * 验收失败
-     * @param value
-     */
-    ACCEPTANCE_ERROR(4),
-
-    /**
-     *已完结
-     * @param value
-     */
-    IS_FINISH(5),
-
-    /**
-     * 废弃
-     * @param value
-     */
-    DISCARD(6),
-
-    /**
      * 已开始
      * @param value
      */
-    IS_START(7),
-
-    /**
-     * 待审核
-     * @param value
-     */
-    FOR_INSPECTION(8),
-
-    /**
-     * 审核失败
-     * @param value
-     */
-    INSPECTION_ERROR(9),
-
-    /**
-     * 审核通过
-     * @param value
-     */
-    INSPECTION_PASS(10),
-
-    /**
-     * 已结算
-     * @param value
-     */
-    IS_CLOSE_ACCOUNT(11),
+    IS_START(2),
 
     /**
      * 待检验
      * @param value
      */
-    FOR_CHECKOUT(12),
+    FOR_CHECKOUT(3),
 
     /**
      * 检验失败
      * @param value
      */
-    CHECKOUT_ERROR(13),
+    CHECKOUT_ERROR(4),
 
     /**
-     * 检验通过
+     * 检验成功
      * @param value
      */
-    CHECKOUT_PASS(14),
+    CHECKOUT_PASS(5),
+
+    /**
+     * 待审核
+     * @param value
+     */
+    FOR_INSPECTION(6),
+
+    /**
+     * 审核失败
+     * @param value
+     */
+    INSPECTION_ERROR(7),
+
+    /**
+     * 审核成功
+     * @param value
+     */
+    INSPECTION_PASS(8),
+
+    /**
+     * 已满额
+     */
+    FULFIL_QUOTA(9),
+
+    /**
+     * 待验收
+     * @param value
+     */
+    FOR_ACCEPTANCE(10),
+
+    /**
+     * 验收失败
+     * @param value
+     */
+    ACCEPTANCE_ERROR(11),
 
     /**
      * 验收成功
      * @param value
      */
-    ACCEPTANCE_SUCCESS(15);
+    ACCEPTANCE_SUCCESS(12),
+
+    /**
+     *已完结
+     * @param value
+     */
+    IS_FINISH(13),
+
+    /**
+     * 已结算
+     * @param value
+     */
+    IS_CLOSE_ACCOUNT(14),
+
+    /**
+     * 废弃
+     * @param value
+     */
+    DISCARD(15);
+
 
     private final Integer value;
     private Dictionarydata(Integer value) {

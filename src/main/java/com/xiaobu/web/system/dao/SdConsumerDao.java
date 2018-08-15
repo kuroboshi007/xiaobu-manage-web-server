@@ -1,4 +1,5 @@
 package com.xiaobu.web.system.dao;
+import com.xiaobu.common.persistence.Page;
 import com.xiaobu.web.system.entity.SdManager;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -17,5 +18,5 @@ public interface SdConsumerDao extends BaseDao<SdConsumer, Integer>{
 
     SdConsumer selectByUsername(String username);
 
-    List<SdConsumer> selectConsumerInfos();
+    Page<SdConsumer> selectConsumerInfos(SdConsumer sdConsumers,Page<SdConsumer> page);
 }
