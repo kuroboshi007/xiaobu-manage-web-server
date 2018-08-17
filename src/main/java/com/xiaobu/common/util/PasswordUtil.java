@@ -8,13 +8,13 @@ import java.util.List;
 /**
  * 密码加密工具类
  */
-public class PassworUtil {
+public class PasswordUtil {
 
 
     /**
      * 加密密码
      * @param password
-     * @Author  卢鑫丽
+     * @Author  Luxinli
      * @return
      */
     public static String encryptionPwd(String password) {
@@ -38,7 +38,7 @@ public class PassworUtil {
      * 解密密码
      * @param password
      * @param password_db
-     *  @Author  卢鑫丽
+     *  @Author  Luxinli
      * @return
      */
     public static List<String> decryptPwd(String password, String password_db){
