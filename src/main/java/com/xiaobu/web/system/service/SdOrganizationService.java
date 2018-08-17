@@ -1,5 +1,6 @@
 package com.xiaobu.web.system.service;
 
+import com.xiaobu.common.model.PageModel;
 import com.xiaobu.web.system.entity.SdOrganization;
 /**
 * 描述：标注平台用户 服务实现层接口
@@ -14,16 +15,16 @@ public interface SdOrganizationService {
     */
     SdOrganization getById(Integer id)throws Exception;
 
-    //SdOrganizationDTO createSdOrganization(SdOrganizationDTO sdOrganizationDTO) throws Exception;
     void add(SdOrganization sdOrganization);
 
     void delete(Integer id) throws Exception;
 
-    //SdOrganizationDTO updateSdOrganization(SdOrganizationDTO sdOrganizationDTO) throws Exception;
     void update(SdOrganization sdOrganization);
 
 	SdOrganization selectByUsername(String username);
 
 	void insertAndGetId(SdOrganization sdOrganization);
+
+	PageModel<SdOrganization> selectOrganizationInfo(SdOrganization sdOrganization,PageModel<SdOrganization> page);
 
 }

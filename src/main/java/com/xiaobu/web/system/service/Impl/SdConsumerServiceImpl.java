@@ -1,14 +1,14 @@
 package com.xiaobu.web.system.service.Impl;
+
 import com.github.pagehelper.PageHelper;
 import com.xiaobu.common.model.PageModel;
-
+import com.xiaobu.web.system.dao.SdConsumerDao;
 import com.xiaobu.web.system.entity.SdConsumer;
 import com.xiaobu.web.system.service.SdConsumerService;
-import com.xiaobu.web.system.dao.SdConsumerDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
+import java.util.Date;
 
 
 /**
@@ -23,27 +23,6 @@ public class SdConsumerServiceImpl implements SdConsumerService {
     private SdConsumerDao sdConsumerDao;
 
 
-    @Override
-    public SdConsumer getById(Integer id) throws Exception {
-        SdConsumer sdConsumer = sdConsumerDao.getById(id);
-        return sdConsumer;
-    }
-
-    @Override
-    public void add(SdConsumer sdConsumer) {
-       sdConsumerDao.add(sdConsumer);
-    }
-
-    @Override
-    public void update(SdConsumer sdConsumer){
-       sdConsumerDao.updateNotNull(sdConsumer);
-    }
-    
-    @Override
-	public void delete(Integer id) {
-
-		sdConsumerDao.delete(id);
-	}
 
 	public SdConsumer selectByUsername(String username){
         return sdConsumerDao.selectByUsername(username);
@@ -51,9 +30,27 @@ public class SdConsumerServiceImpl implements SdConsumerService {
 
     @Override
     public PageModel<SdConsumer> selectConsumerInfos(SdConsumer sdConsumers, PageModel<SdConsumer> page) {
+	    System.out.println(page.getStart()+"------------"+page.getLength());
         PageHelper.offsetPage(page.getStart(), page.getLength());
         page.initData(sdConsumerDao.findByPage(sdConsumers));
         return page;
     }
 
+
+    @Override
+    public void insertConsumerInfo(SdConsumer sdConsumer) {
+        sdConsumer.setCreatedAt(new Date());
+        sdConsumer.setUpdatedAt(new Date());
+        sdConsumerDao.insertConsumerInfo(sdConsumer);
+    }
+
+    @Override
+    public void updateConsumerInfo(SdConsumer sdConsumer) {
+        sdConsumerDao.updateNotNull(sdConsumer);
+    }
+
+    @Override
+    public void deletConsumer(int id) {
+        sdConsumerDao.delete(id);
+    }
 }

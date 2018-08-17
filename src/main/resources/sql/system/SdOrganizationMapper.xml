@@ -10,6 +10,7 @@
 			t.id,
 			t.name,
 			t.intro,
+			t.phone,
 			t.username,
 			t.password,
 			t.created_at,
@@ -17,68 +18,62 @@
 	 	</trim>
 	</sql>
 	
-    <select id="getById" parameterType="String" resultMap="SdOrganizationResultMap">
+    <select id="findByPage" parameterMap="parameterMap" resultMap="SdOrganizationResultMap">
         select
 			<include refid="columnSql"></include>
 		from sd_organization t
-		where t.id = #{value}
+		<where>
+			<if test="username != null and username != ''">
+				and t.username like '%${username}%'
+			</if>
+			<if test="name != null and name != ''">
+				and t.name like '%${name}%'
+			</if>
+		</where>
     </select>
 
 
 
-    <insert id="add" parameterMap="parameterMap">
-		insert into sd_organization
-		<trim prefix="(" suffix=")" suffixOverrides=",">
-			
-			name,
-			intro,
-			username,
-			password,
-			created_at,
-			updated_at,
-		</trim>
-		<trim prefix="values (" suffix=")" suffixOverrides=",">
-			
-			#{name},
-			#{intro},
-			#{username},
-			#{password},
-            now(),
-            now(),
-		</trim>
+	<insert id="add" parameterMap="parameterMap">
+		insert into sd_organization(name,intro,phone,username,password,created_at,updated_at)
+		values(#{name},#{intro},#{phone},#{username},#{password},#{createdAt},#{updatedAt})
 	</insert>
-	
+
+
 	
 	<update id="updateNotNull" parameterMap="parameterMap">
 		update sd_organization
 		<set>
-			
-			<if test="name != null">
-			name = #{name},
+			<if test=" name != null">
+				name = #{name},
 			</if>
-			<if test="intro != null">
-			intro = #{intro},
+			<if test=" intro != null">
+				intro = #{intro},
 			</if>
-			<if test="username != null">
-			username = #{username},
+			<if test=" phone != null">
+				phone = #{phone},
 			</if>
-			<if test="password != null">
-			password = #{password},
+			<if test=" username != null">
+				username = #{username},
 			</if>
-			<if test="createdAt != null">
-			created_at = #{createdAt},
+			<if test=" password != null">
+				password = #{password},
 			</if>
-			<if test="updatedAt != null">
-			updated_at = #{updatedAt},
+			<if test=" createdAt != null">
+				created_at = #{createdAt},
+			</if>
+			<if test=" updatedAt != null">
+				updated_at = #{updatedAt},
 			</if>
 		</set>
 		where id = #{id}
 	</update>
-	
+
 	<delete id="delete" parameterType="java.lang.Integer">
-		delete from sd_organization where id = #{value}
+		delete from sd_organization where id = #{id}
 	</delete>
-	
+
+
 	<select id="selectByUsername" parameterType="String" resultMap="SdOrganizationResultMap">
 	      select
 			<include refid="columnSql"></include>

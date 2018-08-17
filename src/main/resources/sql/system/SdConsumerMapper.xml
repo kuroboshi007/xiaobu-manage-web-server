@@ -18,74 +18,6 @@
 	 	</trim>
 	</sql>
 	
-    <select id="getById" parameterType="String" resultMap="SdConsumerResultMap">
-        select
-			<include refid="columnSql"></include>
-		from sd_consumer t
-		where t.id = #{value}
-    </select>
-
-
-
-    <insert id="add" parameterMap="parameterMap">
-		insert into sd_consumer
-		<trim prefix="(" suffix=")" suffixOverrides=",">
-			id,
-			name,
-			phone,
-			email,
-			username,
-			password,
-			created_at,
-			updated_at,
-		</trim>
-		<trim prefix="values (" suffix=")" suffixOverrides=",">
-			#{id},
-			#{name},
-			#{phone},
-			#{email},
-			#{username},
-			#{password},
-			now(),
-            now(),
-		</trim>
-	</insert>
-	
-	
-	<update id="updateNotNull" parameterMap="parameterMap">
-		update sd_consumer
-		<set>
-			<if test="Id != null">
-			id = #{id},
-			</if>
-			<if test="Name != null">
-			name = #{name},
-			</if>
-			<if test="Phone != null">
-			phone = #{phone},
-			</if>
-			<if test="Email != null">
-			email = #{email},
-			</if>
-			<if test="Username != null">
-			username = #{username},
-			</if>
-			<if test="Password != null">
-			password = #{password},
-			</if>
-			<if test="CreatedAt != null">
-			created_at = #{createdAt},
-			</if>
-			<if test="UpdatedAt != null">
-			updated_at = #{updatedAt},
-			</if>
-		</set>
-		where id = #{id}
-	</update>
-	
-	<delete id="delete" parameterType="java.lang.Integer">
-		delete from sd_consumer where id = #{value}
-	</delete>
 
     <select id="selectByUsername" parameterType="String" resultMap="SdConsumerResultMap">
         select
@@ -105,15 +37,52 @@
         <include refid="columnSql"></include>
         from sd_consumer t
         <where>
-           <!-- <if test="username != null and username != ''">
+            <if test="username != null and username != ''">
                 and t.username like '%${username}%'
             </if>
             <if test="name != null and name != ''">
                 and t.name like '%${name}%'
             </if>
-            <if test="orgId != null">
-                and t.org_id = #{orgId}
-            </if>-->
         </where>
+		order by t.id asc
     </select>
+
+	<insert id="insertConsumerInfo" parameterMap="parameterMap">
+		insert into sd_consumer(name,phone,email,username,password,created_at,updated_at)
+		values(#{name},#{phone},#{email},#{username},#{password},#{createdAt},#{updatedAt})
+	</insert>
+
+
+	<update id="updateNotNull" parameterMap="parameterMap">
+		update sd_consumer
+		<set>
+			<if test="name != null">
+				name = #{name},
+			</if>
+			<if test="phone != null">
+				phone = #{phone},
+			</if>
+			<if test="email != null">
+				email = #{email},
+			</if>
+			<if test="username != null">
+				username = #{username},
+			</if>
+			<if test="password != null">
+				password = #{password},
+			</if>
+			<if test="createdAt != null">
+				created_at = #{createdAt},
+			</if>
+			<if test="updatedAt != null">
+				updated_at = #{updatedAt},
+			</if>
+		</set>
+		where id = #{id}
+	</update>
+
+	<delete id="delete" parameterType="java.lang.Integer">
+		delete from sd_consumer where id = #{value}
+	</delete>
+
 </mapper>

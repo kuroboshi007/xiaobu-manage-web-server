@@ -26,6 +26,11 @@ public class SdOrganization extends BaseEntity implements Serializable {
     private String intro;
 
     /**
+     *
+     */
+    private String phone;
+
+    /**
     *
     */
     private String username;
@@ -99,5 +104,11 @@ public class SdOrganization extends BaseEntity implements Serializable {
 		this.vCode = vCode;
 	}
 
+    public String getPhone() {
+        return phone;
+    }
 
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
 }

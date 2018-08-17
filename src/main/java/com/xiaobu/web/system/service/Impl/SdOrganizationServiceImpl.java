@@ -1,7 +1,10 @@
 package com.xiaobu.web.system.service.Impl;
+
+import com.github.pagehelper.PageHelper;
+import com.xiaobu.common.model.PageModel;
+import com.xiaobu.web.system.dao.SdOrganizationDao;
 import com.xiaobu.web.system.entity.SdOrganization;
 import com.xiaobu.web.system.service.SdOrganizationService;
-import com.xiaobu.web.system.dao.SdOrganizationDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
@@ -9,8 +12,6 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
-
-import org.apache.commons.beanutils.BeanUtils;
 
 /**
 * 描述：标注平台用户 服务实现层
@@ -32,14 +33,16 @@ public class SdOrganizationServiceImpl implements SdOrganizationService {
 
     @Override
     public void add(SdOrganization sdOrganization) {
-       sdOrganizationDao.add(sdOrganization);
+    	sdOrganization.setCreatedAt(new Date());
+    	sdOrganization.setUpdatedAt(new Date());
+        sdOrganizationDao.add(sdOrganization);
     }
 
     @Override
     public void update(SdOrganization sdOrganization){
        sdOrganizationDao.updateNotNull(sdOrganization);
     }
-    
+
     @Override
 	public void delete(Integer id) {
 
@@ -54,7 +57,7 @@ public class SdOrganizationServiceImpl implements SdOrganizationService {
 	@Override
 	@Transactional(propagation = Propagation.REQUIRED,isolation = Isolation.DEFAULT,timeout=36000,rollbackFor=Exception.class)
 	public void insertAndGetId(SdOrganization sdOrganization) {
-		
+
 		try {
 			sdOrganization.setCreatedAt(new Date());
 			sdOrganization.setUpdatedAt(new Date());
@@ -64,5 +67,12 @@ public class SdOrganizationServiceImpl implements SdOrganizationService {
 			e.printStackTrace();
 			throw new RuntimeException("注册失败");
 		}
+	}
+
+	@Override
+	public PageModel<SdOrganization> selectOrganizationInfo(SdOrganization sdOrganization, PageModel<SdOrganization> page) {
+		PageHelper.offsetPage(page.getStart(),page.getLength());
+		page.initData(sdOrganizationDao.findByPage(sdOrganization));
+		return page;
 	}
 }

@@ -14,9 +14,9 @@ import com.github.pagehelper.Page;
 public class PageModel<T> {
 
 	private Integer draw;
-	private Integer start;
-	private Integer length;
-	private Integer recordsTotal;
+	private Integer start;//起始行
+	private Integer length;//每页需展示的数据条数
+	private Integer recordsTotal;//总记录数
 	private Integer recordsFiltered;
 	private List<T> data;
 	

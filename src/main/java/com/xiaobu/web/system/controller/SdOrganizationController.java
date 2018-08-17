@@ -1,9 +1,15 @@
 package com.xiaobu.web.system.controller;
+import com.github.pagehelper.Page;
+import com.xiaobu.common.constant.SysMessage;
+import com.xiaobu.common.model.PageModel;
+import com.xiaobu.common.util.PassworUtil;
 import com.xiaobu.web.system.service.SdOrganizationService;
 import com.xiaobu.web.system.entity.SdOrganization;
 import com.xiaobu.common.base.BaseController;
 import com.xiaobu.common.config.Code;
 import com.xiaobu.common.util.ValidateUtil;
+import org.apache.shiro.authz.annotation.RequiresAuthentication;
+import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 
@@ -33,54 +39,93 @@ public class SdOrganizationController extends BaseController{
     private SdOrganizationService sdOrganizationService;
 
     /**
-    * 描述：根据Id 查询
-    * @param id  标注平台用户id
-    */
-    @RequestMapping(value = "/findById/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+     * 团体组织信息List接口
+     */
+    @RequestMapping(value = "/selectOrganizationInfo",method = RequestMethod.POST)
     @ResponseBody
-    public Object findById(@PathVariable("id") Integer id)throws Exception {
-        SdOrganization sdOrganization = sdOrganizationService.getById(id);
-        
-        return actionResult(Code.OK,sdOrganization);
+    @RequiresRoles("Manager")//只有用户类型为manager的用户才可访问
+    @RequiresAuthentication
+    public Object selectOrganizationInfo(SdOrganization sdOrganization, PageModel<SdOrganization> page){
+        try {
+            PageModel<SdOrganization> pages = sdOrganizationService.selectOrganizationInfo(sdOrganization,page);
+            logger.info("查询成功");
+            return actionResult(Code.OK,"获取成功",pages);
+        }catch (Exception e){
+            e.printStackTrace();
+            logger.info("查询失败");
+            return actionResult(Code.INTERNAL_SERVER_ERROR,"获取失败");
+
+        }
     }
 
     /**
-    * 描述:创建标注平台用户
-    * 保存
-    * @param sdOrganizationDTO  标注平台用户DTO
-    */
-    @RequestMapping(value = "/save", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public Object create(@RequestBody SdOrganization sdOrganization) throws Exception {
-    try {
-        // 修改
-		if(ValidateUtil.isNotEmpty(sdOrganization.getId())){
-			
-			sdOrganizationService.update(sdOrganization);
-		}
-		// 新增
-			else{
-				sdOrganizationService.add(sdOrganization);
-			}
-		} catch (Exception e) {
-			
-			logger.error(e.getMessage(), e);
-		}
-        return actionResult(Code.OK);
+     * 新增团体组织信息接口
+     */
+    @RequestMapping(value = "/insertOrganizationInfo",method = RequestMethod.POST)
+    @ResponseBody
+    @RequiresRoles("Manager")//只有用户类型为manager的用户才可访问
+    @RequiresAuthentication
+    public  Object insertOrganizationInfo(SdOrganization sdOrganization){
+        try {
+            //判断账号是否已在数据库存在
+            if(sdOrganizationService.selectByUsername(sdOrganization.getUsername()) != null){
+                logger.info(sdOrganization.getUsername()+"该用户已存在");
+                return actionResult(Code.BAD_REQUEST,"用户名已存在");
+            }
+            else{
+                //对用户密码进行加密
+               String encryption_pwd =  PassworUtil.encryptionPwd(sdOrganization.getPassword());
+               sdOrganization.setPassword(encryption_pwd);
+                sdOrganizationService.add(sdOrganization);
+                logger.info(sdOrganization.getUsername()+"新增成功");
+                return actionResult(Code.OK,SysMessage.COMMON_ADD_SUCCESS);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+            logger.info(sdOrganization.getUsername()+"新增失败");
+            return actionResult(Code.INTERNAL_SERVER_ERROR,"新增失败");
+
+        }
+    }
+
+
+    /**
+     * 修改团体组织信息接口
+     */
+    @RequestMapping(value = "/updateOrganizationInfo",method = RequestMethod.POST)
+    @ResponseBody
+    @RequiresRoles("Manager")//只有用户类型为manager的用户才可访问
+    @RequiresAuthentication
+    public Object updateOrganizationInfo(SdOrganization sdOrganization){
+        try {
+            sdOrganizationService.update(sdOrganization);
+            logger.info(sdOrganization.getName()+"修改成功");
+            return actionResult(Code.OK,SysMessage.COMMON_UPDATE_SUCCESS);
+        }catch (Exception e){
+            e.printStackTrace();
+            logger.info(sdOrganization.getName()+"修改失败");
+            return actionResult(Code.INTERNAL_SERVER_ERROR,"修改失败");
+        }
     }
 
     /**
-    * 描述：删除标注平台用户
-    * @param id 标注平台用户id
-    */
-    @RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public Object deleteById(@PathVariable("id") Integer id) throws Exception {
-    try {
-        	sdOrganizationService.delete(id);
-    	} catch (Exception e) {
-		
-		logger.error(e.getMessage(), e);
-		return actionResult(Code.OK);
-	}
-	return actionResult(Code.INTERNAL_SERVER_ERROR);
-  }
+     * 根据id删除团体组织信息接口
+     */
+    @RequestMapping(value = "/deleteOrganizationInfo",method = RequestMethod.GET)
+    @ResponseBody
+    @RequiresRoles("Manager")//只有用户类型为manager的用户才可访问
+    @RequiresAuthentication
+    public Object deleteOrganizationInfo(int id){
+        try {
+            sdOrganizationService.delete(id);
+            logger.info("删除成功");
+            return actionResult(Code.OK,SysMessage.COMMON_DELETE_SUCCESS);
+        }catch (Exception e){
+            e.printStackTrace();
+            logger.info("删除失败");
+            return actionResult(Code.INTERNAL_SERVER_ERROR,"删除失败");
+        }
+    }
+
+
 }

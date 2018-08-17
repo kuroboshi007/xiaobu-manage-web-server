@@ -76,25 +76,7 @@ public class BaseInterfaceController extends BaseController {
         return null;
     }
 
-    /**
-     * 查询甲方信息接口
-     */
-    @RequestMapping(value = {"/selectConsumerInfo"},method = RequestMethod.POST)
-    @ResponseBody
-    @RequiresRoles("Manager")//只有用户类型为manager的用户才可访问
-    @RequiresAuthentication
-    public Object selectConsumerInfo(SdConsumer sdConsumers,PageModel<SdConsumer> page){
-        //List<SdConsumer> sdConsumers = new ArrayList<>();
 
-        try {
-            PageModel<SdConsumer> pages = sdConsumerService.selectConsumerInfos(sdConsumers,page);
-            return actionResult(Code.OK,"获取成功",pages);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return actionResult(Code.INTERNAL_SERVER_ERROR,"获取失败");
-        }
-
-    }
     /**
      * 发布标注任务接口
      */

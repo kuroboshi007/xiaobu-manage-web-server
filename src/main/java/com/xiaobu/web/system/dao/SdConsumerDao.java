@@ -17,4 +17,9 @@ import java.util.List;
 public interface SdConsumerDao extends BaseDao<SdConsumer, Integer>{
 
     SdConsumer selectByUsername(String username);
+
+    void  insertConsumerInfo(SdConsumer sdConsumer);
+
+    void updateNotNull(SdConsumer sdConsumer);
+
 }

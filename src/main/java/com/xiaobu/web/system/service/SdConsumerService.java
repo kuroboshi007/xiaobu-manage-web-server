@@ -14,21 +14,14 @@ import java.util.List;
 */
 public interface SdConsumerService {
 
-    /**
-    * 描述：根据Id获取DTO
-    * @param id
-    */
-    SdConsumer getById(Integer id)throws Exception;
-
-    //SdConsumerDTO createSdConsumer(SdConsumerDTO sdConsumerDTO) throws Exception;
-    void add(SdConsumer sdConsumer);
-
-    void delete(Integer id) throws Exception;
-
-    //SdConsumerDTO updateSdConsumer(SdConsumerDTO sdConsumerDTO) throws Exception;
-    void update(SdConsumer sdConsumer);
 
     SdConsumer selectByUsername(String username);
 
     public PageModel<SdConsumer> selectConsumerInfos(SdConsumer sdConsumers, PageModel<SdConsumer> page);
+
+    void  insertConsumerInfo(SdConsumer sdConsumer);
+
+    void updateConsumerInfo(SdConsumer sdConsumer);
+
+    void deletConsumer(int id);
 }
