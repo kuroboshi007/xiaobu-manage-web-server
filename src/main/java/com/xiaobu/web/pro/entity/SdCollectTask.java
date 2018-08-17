@@ -48,7 +48,7 @@ public class SdCollectTask extends BaseEntity implements Serializable {
     /**
     *主分类
     */
-    private Integer categroy;
+    //private Integer categroy;
 
     /**
     *自分类
@@ -146,13 +146,13 @@ public class SdCollectTask extends BaseEntity implements Serializable {
         this.detail = detail;
     }
 
-    public Integer getCategroy() {
+    /*public Integer getCategroy() {
         return this.categroy;
     }
 
     public void setCategroy(Integer categroy) {
         this.categroy = categroy;
-    }
+    }*/
 
     public Integer getType() {
         return this.type;

@@ -2,6 +2,7 @@ package com.xiaobu.web.system.controller;
 
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.xiaobu.common.base.BaseController;
@@ -30,8 +31,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.UUID;
-
 
 @Controller
 @RequestMapping("/login")
@@ -58,9 +57,9 @@ public class LoginController extends BaseController {
      * @param password
      * @return
      */
-	@RequestMapping(value="/checkManagerLogin",method=RequestMethod.POST)
+	@RequestMapping(value="/checkManagerLogin",method=RequestMethod.GET)
 	@ResponseBody
-	public Object checkManagerLogin(HttpServletRequest request,String username,String password) {
+	public Object checkManagerLogin(HttpServletRequest request, HttpServletResponse response, String username, String password) {
 		try {
 			//查詢系统用戶信息
 				SdManager sdManager=sdManagerService.selectByUsername(username);
@@ -88,6 +87,12 @@ public class LoginController extends BaseController {
 			}
 			logger.info(username + SysMessage.LOGIN_SUCCESS);
 			String token =JwtManager.createToken(username,userId,SysMessage.MANAGER);
+            request.setAttribute("userName",sdManager.getUsername());
+            request.setAttribute("userEmail",sdManager.getEmail());
+            request.setAttribute("userPhone",sdManager.getPhone());
+            request.setAttribute("userType",SysMessage.MANAGER);
+            response.addHeader("Set-Cookie", "token="+token+"; Path=/; HttpOnly");
+			//return "index";
 			return actionResult(Code.OK,SysMessage.LOGIN_SUCCESS,token);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

@@ -19,6 +19,6 @@ public class DemoController extends BaseController {
 
 		SdUser user = (SdUser) request.getSession().getAttribute(SessionAttr.USER_LOGIN.getValue());
 		request.setAttribute("user", user);
-		return "/pages/login";
+		return "index";
 	}
 }

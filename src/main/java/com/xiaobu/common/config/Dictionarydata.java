@@ -76,16 +76,16 @@ public enum Dictionarydata {
     ACCEPTANCE_SUCCESS(12),
 
     /**
-     *已完结
-     * @param value
-     */
-    IS_FINISH(13),
-
-    /**
      * 已结算
      * @param value
      */
-    IS_CLOSE_ACCOUNT(14),
+    IS_CLOSE_ACCOUNT(13),
+
+    /**
+     *已完结
+     * @param value
+     */
+    IS_FINISH(14),
 
     /**
      * 废弃

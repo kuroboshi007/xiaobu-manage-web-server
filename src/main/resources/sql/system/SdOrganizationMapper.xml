@@ -12,7 +12,6 @@
 			t.intro,
 			t.username,
 			t.password,
-			t.type,
 			t.created_at,
 			t.updated_at,
 	 	</trim>
@@ -35,7 +34,6 @@
 			intro,
 			username,
 			password,
-			type,
 			created_at,
 			updated_at,
 		</trim>
@@ -45,7 +43,6 @@
 			#{intro},
 			#{username},
 			#{password},
-			#{type},
             now(),
             now(),
 		</trim>
@@ -67,9 +64,6 @@
 			</if>
 			<if test="password != null">
 			password = #{password},
-			</if>
-			<if test="type != null">
-			type = #{type},
 			</if>
 			<if test="createdAt != null">
 			created_at = #{createdAt},
@@ -99,7 +93,6 @@
 			intro,
 			username,
 			password,
-			type,
 			created_at,
 			updated_at,
 		</trim>
@@ -108,7 +101,6 @@
 			#{intro},
 			#{username},
 			#{password},
-			#{type},
 			#{createdAt},
 			#{updatedAt},
 		</trim>
