@@ -190,10 +190,10 @@
 
 
 ###### 5\.甲方信息
-> ####### 5\.1甲方信息列表List接口
-> 说明：<br>
-> 请求方式：POST<br>
-> 请求地址：/sdConsumer/selectConsumerInfo
+>###### 5\.1甲方信息列表List接口 
+>说明：  
+>请求方式：POST  
+>请求地址：/sdConsumer/selectConsumerInfo
 > ##### 请求参数：
 >                名称           说明                           数据类型         必选
 >                start        分页数据起始位子                  Integer          Y
@@ -223,9 +223,10 @@
 			    "timestamp": 1534319154679
 				}
 
-> ####### 5\.2新增甲方信息接口
->说明：<br>
->请求方式：POST <br>
+
+>###### 5\.2新增甲方信息接口
+>说明：  
+>请求方式：POST  
 >请求地址：/sdConsumer/insertConsumerInfo
 > ##### 请求参数：
 >            名称              说明         数据类型       必选
@@ -247,9 +248,9 @@
    				"timestamp": 1534411596050
              }
 
-> ####### 5\.3修改甲方信息接口
->说明：<br>
->请求方式：POST <br>
+>###### 5\.3修改甲方信息接口
+>说明：  
+>请求方式：POST  
 >请求地址：/sdConsumer/updateConsumerInfo
 > ##### 请求参数：
 >            名称              说明         数据类型       必选
@@ -271,11 +272,11 @@
    				"timestamp": 1534411596050
              }
 
-				
-> ####### 5\.4删除甲方信息接口
->说明：<br>
->请求方式：GET <br>
->请求地址：/sdConsumer/deleteConsumer
+		
+>###### 5\.4删除甲方信息接口
+>说明：  
+>请求方式：GET  
+>请求地址：/sdConsumer/deleteConsumer	
 > ##### 请求参数：
 >            名称              说明         数据类型       必选
 >            id                              int          Y
@@ -296,10 +297,10 @@
 
 
 ###### 6\.团体组织信息
-> ####### 6\.1团体组织信息List接口
-> 说明：<br>
-> 请求方式：POST<br>
-> 请求地址：/sdOrganization/selectOrganizationInfo
+>###### 6\.1团体组织信息List接口 
+>说明：  
+>请求方式：POST  
+>请求地址：/sdOrganization/selectOrganizationInfo
 > ##### 请求参数：
 >                名称           说明                           数据类型         必选
 >                start        分页数据起始位子                  Integer          Y
@@ -331,9 +332,9 @@
 
 
 
-> ####### 6\.2新增团体组织信息接口
->说明：<br>
->请求方式：POST <br>
+>###### 6\.2新增团体组织信息接口
+>说明：  
+>请求方式：POST  
 >请求地址：/sdOrganization/insertOrganizationInfo
 > ##### 请求参数：
 >            名称              说明         数据类型       必选
@@ -356,9 +357,9 @@
 
 
 
-> ####### 6\.3修改团体组织信息接口
->说明：<br>
->请求方式：POST <br>
+>###### 6\.3修改团体组织信息接口
+>说明：  
+>请求方式：POST  
 >请求地址：/sdOrganization/updateOrganizationInfo
 > ##### 请求参数：
 >            名称              说明         数据类型       必选
@@ -378,9 +379,9 @@
    				"timestamp": 1534411596050
              }
 
-> ####### 6\.4删除团体组织信息接口
->说明：<br>
->请求方式：POST <br>
+>###### 6\.4删除团体组织信息接口
+>说明：  
+>请求方式：GET  
 >请求地址：/sdOrganization/deleteOrganizationInfo
 > ##### 请求参数：
 >            名称              说明         数据类型       必选
