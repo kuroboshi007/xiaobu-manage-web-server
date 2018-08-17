@@ -1,27 +1,22 @@
 package com.xiaobu.web.system.controller;
-import com.github.pagehelper.Page;
 import com.xiaobu.common.constant.SysMessage;
 import com.xiaobu.common.model.PageModel;
-import com.xiaobu.common.util.PassworUtil;
+import com.xiaobu.common.util.PasswordUtil;
 import com.xiaobu.web.system.service.SdOrganizationService;
 import com.xiaobu.web.system.entity.SdOrganization;
 import com.xiaobu.common.base.BaseController;
 import com.xiaobu.common.config.Code;
-import com.xiaobu.common.util.ValidateUtil;
 import org.apache.shiro.authz.annotation.RequiresAuthentication;
 import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 
 /**
@@ -40,6 +35,7 @@ public class SdOrganizationController extends BaseController{
 
     /**
      * 团体组织信息List接口
+     * @Author Luxinli
      */
     @RequestMapping(value = "/selectOrganizationInfo",method = RequestMethod.POST)
     @ResponseBody
@@ -60,6 +56,7 @@ public class SdOrganizationController extends BaseController{
 
     /**
      * 新增团体组织信息接口
+     * @Author Luxinli
      */
     @RequestMapping(value = "/insertOrganizationInfo",method = RequestMethod.POST)
     @ResponseBody
@@ -74,7 +71,7 @@ public class SdOrganizationController extends BaseController{
             }
             else{
                 //对用户密码进行加密
-               String encryption_pwd =  PassworUtil.encryptionPwd(sdOrganization.getPassword());
+               String encryption_pwd =  PasswordUtil.encryptionPwd(sdOrganization.getPassword());
                sdOrganization.setPassword(encryption_pwd);
                 sdOrganizationService.add(sdOrganization);
                 logger.info(sdOrganization.getUsername()+"新增成功");
@@ -91,6 +88,7 @@ public class SdOrganizationController extends BaseController{
 
     /**
      * 修改团体组织信息接口
+     * @Author Luxinli
      */
     @RequestMapping(value = "/updateOrganizationInfo",method = RequestMethod.POST)
     @ResponseBody
@@ -110,6 +108,7 @@ public class SdOrganizationController extends BaseController{
 
     /**
      * 根据id删除团体组织信息接口
+     * @Author Luxinli
      */
     @RequestMapping(value = "/deleteOrganizationInfo",method = RequestMethod.GET)
     @ResponseBody

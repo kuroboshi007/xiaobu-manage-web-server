@@ -4,8 +4,7 @@ import com.xiaobu.common.base.BaseController;
 import com.xiaobu.common.config.Code;
 import com.xiaobu.common.constant.SysMessage;
 import com.xiaobu.common.model.PageModel;
-import com.xiaobu.common.util.PassworUtil;
-import com.xiaobu.common.util.ValidateUtil;
+import com.xiaobu.common.util.PasswordUtil;
 import com.xiaobu.web.system.entity.SdConsumer;
 import com.xiaobu.web.system.service.SdConsumerService;
 import org.apache.shiro.authz.annotation.RequiresAuthentication;
@@ -13,7 +12,6 @@ import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -34,6 +32,7 @@ public class SdConsumerController extends BaseController{
 
     /**
      * 甲方信息列表List接口
+     * @Author Luxinli
      */
     @RequestMapping(value = {"/selectConsumerInfo"},method = RequestMethod.POST)
     @ResponseBody
@@ -52,6 +51,7 @@ public class SdConsumerController extends BaseController{
 
     /**
      * 新增甲方信息接口
+     * @Author Luxinli
      */
     @RequestMapping(value = "/insertConsumerInfo",method = RequestMethod.POST)
     @ResponseBody
@@ -67,7 +67,7 @@ public class SdConsumerController extends BaseController{
                 else{
                     //不存在插入该用户信息
                     //对用户的密码进行加密
-                    String encryption_pwd =  PassworUtil.encryptionPwd(sdConsumer.getPassword());
+                    String encryption_pwd =  PasswordUtil.encryptionPwd(sdConsumer.getPassword());
                     sdConsumer.setPassword(encryption_pwd);
                   sdConsumerService.insertConsumerInfo(sdConsumer);
                   logger.info(sdConsumer.getUsername()+"新增成功");
@@ -85,6 +85,7 @@ public class SdConsumerController extends BaseController{
     /**
      * 修改甲方信息接口
      * @param sdConsumer
+     * @Author Luxinli
      * @return
      */
     @RequestMapping(value = "/updateConsumerInfo",method = RequestMethod.POST)
@@ -106,6 +107,7 @@ public class SdConsumerController extends BaseController{
     /**
      * 删除甲方信息接口
      * @param id
+     * @Author Luxinli
      * @return
      */
    @RequestMapping(value = "/deleteConsumer",method = RequestMethod.GET)
