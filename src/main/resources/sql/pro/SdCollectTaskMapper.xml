@@ -11,7 +11,7 @@
 			t.parent_id,
 			t.consumer_id,
 			t.organization_id,
-			t.name,
+			t."name",
 			t.intro,
 			t.detail,
 			t.type,
@@ -19,12 +19,12 @@
 			t.total,
 			t.price,
 			t.duration,
-			t.promiseTime,
-			t.deadline,
+			t."promiseTime",
+            to_char(t."deadline",'YYYY-MM-DD'),
 			t.count,
-			t.doneNum,
+			t."doneNum",
 			t.status,
-			t.startTime,
+            to_char(t."startTime",'YYYY-MM-DD'),
 	 	</trim>
 	</sql>
 	
@@ -40,7 +40,6 @@
     <insert id="add" parameterMap="parameterMap">
 		insert into sd_collect_task
 		<trim prefix="(" suffix=")" suffixOverrides=",">
-			id,
 			parent_id,
 			consumer_id,
 			organization_id,
@@ -52,15 +51,14 @@
 			total,
 			price,
 			duration,
-			promiseTime,
+            "promiseTime",
 			deadline,
 			count,
-			doneNum,
+			"doneNum",
 			status,
-			startTime,
+			"startTime",
 		</trim>
 		<trim prefix="values (" suffix=")" suffixOverrides=",">
-			#{id},
 			#{parentId},
 			#{consumerId},
 			#{organizationId},
@@ -72,7 +70,7 @@
 			#{total},
 			#{price},
 			#{duration},
-			#{promiseTime},
+			#{promisetime},
 			#{deadline},
 			#{count},
 			#{doneNum},
@@ -118,8 +116,8 @@
 			<if test="duration != null">
 			duration = #{duration},
 			</if>
-			<if test="promiseTime != null">
-			promiseTime = #{promiseTime},
+			<if test="promisetime != null">
+			promiseTime = #{promisetime},
 			</if>
 			<if test="deadline != null">
 			deadline = #{deadline},
@@ -146,14 +144,27 @@
 
     <select id="findByPage" parameterMap="parameterMap" resultMap="SdCollectTaskResultMap">
         select
-        <include refid="columnSql"></include>
+        <include refid="columnSql"></include>,
+        sd.dictdata_name as typeName,
+        sc."name" as consumerName,
+        so."name" as organizationName
         from sd_collect_task t
+        LEFT JOIN sd_organization so on t.organization_id = so."id"
+        left JOIN sd_consumer sc on t.consumer_id = sc."id"
+        LEFT JOIN sd_dictionarydata sd ON t."type" = sd.dictdata_value
         <where>
             1=1
             <if test="name != null and name != ''">
                 and t.name  like '%${name}%'
             </if>
+            <if test="type != null and type != ''">
+                and t.type = #{type}
+            </if>
+            <if test="consumerId != null and consumerId != ''">
+                and t.consumer_id = #{consumerId}
+            </if>
+            AND sd.dictdata_type = '0002'
         </where>
-
+        ORDER BY t.id ASC
     </select>
 </mapper>

@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.*;
 * @date 2018-08-08 09:39:32
 */
 @Controller
-@RequestMapping("/sdConsumer")
+@RequestMapping("/consumer/api/sdConsumer")
 public class SdConsumerController extends BaseController{
 
     private Logger logger = LoggerFactory.getLogger(SdConsumerController.class);

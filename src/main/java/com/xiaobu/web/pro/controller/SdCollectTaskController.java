@@ -87,17 +87,4 @@ public class SdCollectTaskController extends BaseController{
 	return actionResult(Code.INTERNAL_SERVER_ERROR);
   }
 
-     @RequestMapping(value = "/selectCollectTaskInfo",method = RequestMethod.POST)
-     @ResponseBody
-     @RequiresRoles(SysMessage.MANAGER)
-    public Object selectCollectTaskInfo(SdCollectTask sdCollectTask, PageModel<SdCollectTask> page){
-         try {
-             PageModel<SdCollectTask> pages = sdCollectTaskService.selectConsumerInfos(sdCollectTask,page);
-             return actionResult(Code.OK,"获取成功",pages);
-         } catch (Exception e) {
-             e.printStackTrace();
-             return actionResult(Code.INTERNAL_SERVER_ERROR,"获取失败");
-         }
-     }
-
 }

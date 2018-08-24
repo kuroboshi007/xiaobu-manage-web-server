@@ -5,6 +5,7 @@ import java.util.Map;
 
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -34,11 +35,17 @@ public class JWTFilter extends BasicHttpAuthenticationFilter{
     @Override
     protected boolean isAccessAllowed(ServletRequest request, ServletResponse response, Object mappedValue) {
         if (isLoginAttempt(request, response)) {
+           // try {
             try {
                 executeLogin(request, response);
             } catch (Exception e) {
-                throw new AuthenticationException("token认证失败！");
+                e.printStackTrace();
             }
+            // } catch (Exception e) {
+              //  throw new AuthenticationException(e.getMessage());
+                //token验证错误跳转到登录页面
+                //responselogin(request,response);
+          //  }
         }
         return true;
     }
@@ -50,14 +57,32 @@ public class JWTFilter extends BasicHttpAuthenticationFilter{
     @Override
     protected boolean isLoginAttempt(ServletRequest request, ServletResponse response) {
         HttpServletRequest req = (HttpServletRequest) request;
-        String authorization = req.getHeader("Token");
+        //String authorization = req.getHeader("Token");
+        Cookie[] token = req.getCookies();
+
+        String authorization=null;
+        if(token != null && token.length>0){
+            for(Cookie cookie:token){
+                if(cookie.getName().equals("Token")){
+                    authorization  = cookie.getValue();
+                }
+            }
+        }
         return authorization != null;
     }
 	
 	@Override
     protected boolean executeLogin(ServletRequest request, ServletResponse response) throws Exception {
         HttpServletRequest httpServletRequest = (HttpServletRequest) request;
-        String token = httpServletRequest.getHeader("Token");
+        String token=null;
+        Cookie[] cookies = httpServletRequest.getCookies();
+        if(cookies != null && cookies.length>0){
+            for(Cookie cookie:cookies){
+                if(cookie.getName().equals("Token")){
+                    token  = cookie.getValue();
+                }
+            }
+        }
         JWTToken jwttoken = new JWTToken(token);
         // 提交给realm进行登入，如果错误他会抛出异常并被捕获
         getSubject(request, response).login(jwttoken);
@@ -87,13 +112,13 @@ public class JWTFilter extends BasicHttpAuthenticationFilter{
     /**
      * 将非法请求跳转到 /401
      */
-   /* private void response401(ServletRequest req, ServletResponse resp) {
+    private void responselogin(ServletRequest req, ServletResponse resp) {
         try {
             HttpServletResponse httpServletResponse = (HttpServletResponse) resp;
-            httpServletResponse.sendRedirect("/401");
+            httpServletResponse.sendRedirect("/login");
         } catch (IOException e) {
             logger.error(e.getMessage());
         }
-    }*/
+    }
 
 }

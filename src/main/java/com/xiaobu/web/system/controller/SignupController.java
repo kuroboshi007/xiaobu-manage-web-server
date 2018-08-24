@@ -24,7 +24,7 @@ import com.xiaobu.web.system.service.SdUserService;
 import javax.servlet.http.HttpServletRequest;
 
 @Controller
-@RequestMapping("/signup")
+@RequestMapping("/sys/api/signup")
 public class SignupController extends BaseController{
 
 	@Autowired
@@ -48,7 +48,8 @@ public class SignupController extends BaseController{
     
     /**
       * 管理员用户注册
-     * @param SdManager
+     * SdManager
+     * @param
      * @return
      */
     @RequestMapping(value="/signupManager",method = RequestMethod.POST)
@@ -83,7 +84,7 @@ public class SignupController extends BaseController{
     	try {
     		sdManagerService.insertAndGetId(sdManager);
     		int userId= sdManager.getId();
-    		String token =JwtManager.createToken(sdManager.getUsername(),userId,"1");
+    		String token =JwtManager.createToken(sdManager.getUsername(),userId,SysMessage.MANAGER);
 			return actionResult(Code.OK,token);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

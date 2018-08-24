@@ -1,5 +1,6 @@
 package com.xiaobu.web.pro.entity;
 import java.io.Serializable;
+import java.util.Date;
 
 import com.xiaobu.common.base.BaseEntity;
 
@@ -55,6 +56,11 @@ public class SdCollectTask extends BaseEntity implements Serializable {
     */
     private Integer type;
 
+    /***
+     * 自分类名称
+     */
+    private String typeName;
+
     /**
     *示例
     */
@@ -74,7 +80,7 @@ public class SdCollectTask extends BaseEntity implements Serializable {
     /**
     *交付甲方的时间
     */
-    private String promiseTime;
+    private String promisetime;
 
     /**
     *采集期限
@@ -95,8 +101,35 @@ public class SdCollectTask extends BaseEntity implements Serializable {
     private Integer status;
 
     /**
+     * 甲方名称
+     */
+    private String consumerName;
+
+    /**
+     * 团队名称
+     */
+    private String organizationName;
+    /**
     *任务开始时间
     */
+
+    /**
+     * 任务开始时间
+     */
+    private Date startTime;
+    /**
+     * 任务期限
+     */
+    private Date deadline;
+
+    /**
+     *甲方总价
+     */
+    private Double total;
+    /**
+     *单价
+     */
+    private Double price;
 
     public Integer getParentId() {
         return this.parentId;
@@ -154,6 +187,14 @@ public class SdCollectTask extends BaseEntity implements Serializable {
         this.categroy = categroy;
     }*/
 
+    public String getTypeName() {
+        return typeName;
+    }
+
+    public void setTypeName(String typeName) {
+        this.typeName = typeName;
+    }
+
     public Integer getType() {
         return this.type;
     }
@@ -178,12 +219,12 @@ public class SdCollectTask extends BaseEntity implements Serializable {
         this.duration = duration;
     }
 
-    public String getPromiseTime() {
-        return this.promiseTime;
+    public String getPromisetime() {
+        return this.promisetime;
     }
 
-    public void setPromiseTime(String promiseTime) {
-        this.promiseTime = promiseTime;
+    public void setPromisetime(String promisetime) {
+        this.promisetime = promisetime;
     }
 
     public Integer getCount() {
@@ -210,5 +251,50 @@ public class SdCollectTask extends BaseEntity implements Serializable {
         this.status = status;
     }
 
+    public void setConsumerName(String consumerName) {
+        this.consumerName = consumerName;
+    }
 
+    public String getConsumerName() {
+        return consumerName;
+    }
+
+    public void setOrganizationName(String organizationName) {
+        this.organizationName = organizationName;
+    }
+
+    public String getOrganizationName() {
+        return organizationName;
+    }
+
+    public Date getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(Date startTime) {
+        this.startTime = startTime;
+    }
+
+    public Date getDeadline() {
+        return deadline;
+    }
+
+    public void setDeadline(Date deadline) {
+        this.deadline = deadline;
+    }
+
+    public Double getTotal() {
+        return this.total;
+    }
+
+    public void setTotal(Double total) {
+        this.total = total;
+    }
+    public Double getPrice() {
+        return this.price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
+    }
 }

@@ -25,7 +25,7 @@ import org.springframework.stereotype.Controller;
 * @date 2018-07-31 11:40:29
 */
 @Controller
-@RequestMapping("/sdOrganization")
+@RequestMapping("/organization/api/sdOrganization")
 public class SdOrganizationController extends BaseController{
 
     private Logger logger = LoggerFactory.getLogger(SdOrganizationController.class);

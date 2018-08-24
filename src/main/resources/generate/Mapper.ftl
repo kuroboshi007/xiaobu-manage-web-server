@@ -8,7 +8,7 @@
     <sql id="columnSql">
 		<trim suffixOverrides=",">
 		<#list columns as po>
-			t.${po.columnName},
+			t."${po.columnName}",
 		</#list>
 	 	</trim>
 	</sql>

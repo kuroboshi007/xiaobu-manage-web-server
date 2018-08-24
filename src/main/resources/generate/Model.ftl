@@ -29,6 +29,13 @@ public class ${table_name} extends BaseEntity implements Serializable {
     private Date ${model.changeColumnName?uncap_first};
 
     </#if>
+    <#if model.columnType = 'timestamptz' >
+         private Date ${model.changeColumnName?uncap_first};
+
+    </#if>
+     <#if model.columnType = 'float8' >
+    private Double ${model.changeColumnName?uncap_first};
+     </#if>
         </#list>
     </#if>
 
@@ -63,6 +70,24 @@ public class ${table_name} extends BaseEntity implements Serializable {
         this.${model.changeColumnName?uncap_first} = ${model.changeColumnName?uncap_first};
     }
 
+</#if>
+<#if model.columnType = 'timestamptz' >
+    public Date get${model.changeColumnName}() {
+        return this.${model.changeColumnName?uncap_first};
+    }
+
+    public void set${model.changeColumnName}(Date ${model.changeColumnName?uncap_first}) {
+        this.${model.changeColumnName?uncap_first} = ${model.changeColumnName?uncap_first};
+    }
+</#if>
+<#if model.columnType = 'float8' >
+    public Double get${model.changeColumnName}() {
+        return this.${model.changeColumnName?uncap_first};
+    }
+
+    public void set${model.changeColumnName}(Double ${model.changeColumnName?uncap_first}) {
+        this.${model.changeColumnName?uncap_first} = ${model.changeColumnName?uncap_first};
+    }
 </#if>
 </#list>
 </#if>

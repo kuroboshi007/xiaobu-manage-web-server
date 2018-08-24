@@ -1,7 +1,16 @@
 package com.xiaobu.web.system.service.Impl;
 
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
+import com.xiaobu.common.constant.SysMessage;
+import com.xiaobu.web.system.dao.SdConsumerDao;
+import com.xiaobu.web.system.dao.SdManagerDao;
+import com.xiaobu.web.system.dao.SdOrganizationDao;
+import com.xiaobu.web.system.entity.SdConsumer;
+import com.xiaobu.web.system.entity.SdManager;
+import com.xiaobu.web.system.entity.SdOrganization;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +23,18 @@ public class SdUserServiceImpl implements SdUserService{
 
 	@Autowired
 	private SdUserDao sdUserDao;
+
+    /**
+     * 注入dao
+     */
+    @Autowired
+    private SdManagerDao sdManagerDao;
+
+    @Autowired
+    private SdConsumerDao sdConsumerDao;
+
+    @Autowired
+    private SdOrganizationDao sdOrganizationDao;
 	
 	@Override
 	public void insert(SdUser sdUser) {
@@ -34,5 +55,33 @@ public class SdUserServiceImpl implements SdUserService{
 		// TODO Auto-generated method stub
 		return sdUserDao.selectByphone(phone);
 	}
+
+    @Override
+    public Map<String, Object> getUserInfo(Map<String,Object> map,String username) {
+        Map<String,Object>  userInfo = new HashMap<>();
+        //查詢系统用戶信息
+        if(map.get("userType").equals("Manager")) {
+                SdManager sdManager=sdManagerDao.selectByUsername(username);
+                userInfo.put("userName",sdManager.getUsername());
+                userInfo.put("userEmail",sdManager.getEmail());
+                userInfo.put("userPhone",sdManager.getPhone());
+                userInfo.put("userType",SysMessage.MANAGER);
+                //查询甲方用户信息
+            }else if(map.get("userType").equals("Consumer")){
+                SdConsumer sdConsumer = sdConsumerDao.selectByUsername(username);
+                userInfo.put("userName",sdConsumer.getUsername());
+                userInfo.put("userEmail",sdConsumer.getEmail());
+                userInfo.put("userPhone",sdConsumer.getPhone());
+                userInfo.put("userType",SysMessage.CONSUMER);
+                //查询团队用户信息
+            }else {
+                SdOrganization sdOrganization = sdOrganizationDao.selectByUsername(username);
+                userInfo.put("userName",sdOrganization.getUsername());
+                userInfo.put("userEmail",sdOrganization.getName());
+                userInfo.put("userPhone",sdOrganization.getPhone());
+                userInfo.put("userType",SysMessage.ORGANIZATION);
+        }
+        return userInfo;
+    }
 
 }

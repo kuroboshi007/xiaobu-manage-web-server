@@ -4,6 +4,8 @@ import com.github.qcloudsms.SmsSingleSenderResult;
 import com.github.qcloudsms.httpclient.HTTPException;
 import com.xiaobu.common.base.BaseController;
 import com.xiaobu.common.config.Code;
+import com.xiaobu.common.config.Dictionarydata;
+import com.xiaobu.common.constant.SysMessage;
 import com.xiaobu.common.model.PageModel;
 
 import com.xiaobu.common.sms.SmsContentUtil;
@@ -15,6 +17,8 @@ import com.xiaobu.web.redis.service.RedisService;
 
 import com.xiaobu.web.system.entity.SdConsumer;
 import com.xiaobu.web.system.service.SdConsumerService;
+import com.xiaobu.web.system.service.SdDictionarydataService;
+import org.apache.commons.lang.StringUtils;
 import org.apache.shiro.authz.annotation.Logical;
 import org.apache.shiro.authz.annotation.RequiresAuthentication;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -30,11 +34,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 @Controller
-@RequestMapping("/baseinterface")
+@RequestMapping("/sya/api/baseinterface")
 public class BaseInterfaceController extends BaseController {
 	
 	private static Logger logger = LoggerFactory.getLogger(BaseInterfaceController.class);
@@ -47,6 +53,9 @@ public class BaseInterfaceController extends BaseController {
 
     @Autowired
     private SdConsumerService sdConsumerService;
+
+    @Autowired
+    private SdDictionarydataService sdDictionarydataService;
 
     /**
      * 短信验证码接口
@@ -101,6 +110,56 @@ public class BaseInterfaceController extends BaseController {
     @RequiresRoles("Manager")
     @RequiresAuthentication
     public Object issueCollectTask(SdCollectTask sdCollectTask){
-        return null;
+
+        try {
+            //发布任务，设置状态为1
+            sdCollectTask.setStatus(Dictionarydata.IS_ISSUE.value());
+            sdCollectTaskService.add(sdCollectTask);
+            return actionResult(Code.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return actionResult(Code.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    /**
+     * 采集任务列表分页
+     * @param sdCollectTask
+     * @param page
+     * @return
+     */
+    @RequestMapping(value = "/selectCollectTaskInfo",method = RequestMethod.POST)
+    @ResponseBody
+    @RequiresRoles(SysMessage.MANAGER)
+    @RequiresAuthentication
+    public Object selectCollectTaskInfo(SdCollectTask sdCollectTask, PageModel<SdCollectTask> page){
+        try {
+            PageModel<SdCollectTask> pages = sdCollectTaskService.selectConsumerInfos(sdCollectTask,page);
+            return actionResult(Code.OK,"获取成功",pages);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return actionResult(Code.INTERNAL_SERVER_ERROR,"获取失败");
+        }
+    }
+
+    /**
+     * 获取数据字典
+     * @param types
+     * @return
+     */
+    @RequestMapping(value = "/selectDictionaryType",method = RequestMethod.GET)
+    @ResponseBody
+    @RequiresRoles(SysMessage.MANAGER)
+    public Object selectDictionaryType(String types){
+        Map<String,Object> map = new HashMap<>();
+        try {
+            if(StringUtils.isNotEmpty(types)){
+                map  = sdDictionarydataService.selectDictionaryType(types);
+            }
+            return actionResult(Code.OK,map);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return actionResult(Code.INTERNAL_SERVER_ERROR);
+        }
     }
 }

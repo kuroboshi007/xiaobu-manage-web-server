@@ -95,26 +95,26 @@ public class CustomRealm extends AuthorizingRealm{
         String token = (String) authenticationToken.getCredentials();
 		Map<String,Object> map = JwtManager.TokenDecompose(token);
 		if(StringUtils.isBlank(map.get("username").toString())){
-            throw new AuthenticationException("token invalid");
+            throw new AuthenticationException("token 过期！");
         }else{
             String username = map.get("username").toString();
             //查詢系统用戶信息
             if(map.get("userType").equals("Manager")) {
                 SdManager sdManager=sdManagerService.selectByUsername(username);
                 if(sdManager == null) {
-                    throw new AuthenticationException("token认证失败！");
+                    throw new AuthenticationException("系统用户token认证失败！");
                 }
                 //查询甲方用户信息
             }else if(map.get("userType").equals("Consumer")){
                 SdConsumer sdConsumer = sdConsumerService.selectByUsername(username);
                 if(sdConsumer ==null){
-                    throw new AuthenticationException("token认证失败！");
+                    throw new AuthenticationException("甲方token认证失败！");
                 }
                 //查询团队用户信息
             }else {
                 SdOrganization sdOrganization = sdOrganizationService.selectByUsername(username);
                 if(sdOrganization == null) {
-                    throw new AuthenticationException("token认证失败！");
+                    throw new AuthenticationException("团队用户token认证失败！");
                 }
             }
         }

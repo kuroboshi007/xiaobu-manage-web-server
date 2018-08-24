@@ -31,9 +31,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.HashMap;
+import java.util.Map;
+
 
 @Controller
-@RequestMapping("/login")
+@RequestMapping("/sys/api/login")
 public class LoginController extends BaseController {
 	
     @Autowired
@@ -57,7 +60,7 @@ public class LoginController extends BaseController {
      * @param password
      * @return
      */
-	@RequestMapping(value="/checkManagerLogin",method=RequestMethod.GET)
+	@RequestMapping(value="/checkManagerLogin",method=RequestMethod.POST)
 	@ResponseBody
 	public Object checkManagerLogin(HttpServletRequest request, HttpServletResponse response, String username, String password) {
 		try {
@@ -87,13 +90,21 @@ public class LoginController extends BaseController {
 			}
 			logger.info(username + SysMessage.LOGIN_SUCCESS);
 			String token =JwtManager.createToken(username,userId,SysMessage.MANAGER);
+			/*Map<String,Object> map = new HashMap<String,Object>();
+			map.put("userName",sdManager.getUsername());
+            map.put("userEmail",sdManager.getEmail());
+            map.put("userPhone",sdManager.getPhone());
+            map.put("userType",SysMessage.MANAGER);
             request.setAttribute("userName",sdManager.getUsername());
             request.setAttribute("userEmail",sdManager.getEmail());
             request.setAttribute("userPhone",sdManager.getPhone());
             request.setAttribute("userType",SysMessage.MANAGER);
-            response.addHeader("Set-Cookie", "token="+token+"; Path=/; HttpOnly");
-			//return "index";
-			return actionResult(Code.OK,SysMessage.LOGIN_SUCCESS,token);
+            HttpSession session = request.getSession();
+            session.setAttribute("userInfo",map);
+            request.setAttribute("userInfo",map);*/
+            response.addHeader("Set-Cookie", "Token="+token+"; Path=/; HttpOnly");
+			//return "200";
+			return actionResult(Code.OK,SysMessage.LOGIN_SUCCESS);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

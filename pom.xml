@@ -207,10 +207,27 @@
 	</dependencies>
 
 	<build>
+        <!--打包后的项目名称  -->
+        <finalName>com.springboot.xiaobu</finalName>
+        <!--<resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <targetPath>${project.build.directory}\classes</targetPath>
+            </resource>
+            <resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                    &lt;!&ndash; 这里必须包含.xml否则Mybatis的xml无法打包 &ndash;&gt;
+                    <include>**/*.xml</include>
+                </includes>
+                <filtering>true</filtering>
+            </resource>
+        </resources>-->
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+
 			</plugin>
 		</plugins>
 	</build>

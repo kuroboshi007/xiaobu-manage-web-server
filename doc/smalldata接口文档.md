@@ -5,7 +5,7 @@
 ##### 1\.注册：
 > ###### 1\.1管理员用注册接口
 > 说明：标注数据管理后台的管理员用户注册  
-> 接口地址：/signup/signupManager  
+> 接口地址：/sys/api/signup/signupManager  
 > 请求方式：POST  
 > ##### 请求参数： 
 >                名称           说明         数据类型         必选
@@ -30,7 +30,7 @@
 ##### 2\.登录
 > ###### 2\.1系统管理员登录接口
 > 说明：  
-> 接口地址：/login/checkManagerLogin  
+> 接口地址：/sys/api/login/checkManagerLogin  
 > 请求方式：POST
 > ##### 请求参数：
 >                名称           说明         数据类型         必选
@@ -65,7 +65,7 @@
 					</html>  
 > ##### 2\.2甲方人员登录接口
 > 说明：  
-> 接口地址：/login/checkConsumerLogin  
+> 接口地址：/sys/api/login/checkConsumerLogin  
 > 请求方式：POST
 > ##### 请求参数：
 >                名称           说明         数据类型         必选
@@ -100,7 +100,7 @@
 					</html>  
 > ##### 2\.3团队管理员登录接口
 > 说明：  
-> 接口地址：/login/checkOrganizationLogin  
+> 接口地址：/sys/api/login/checkOrganizationLogin  
 > 请求方式：POST
 > ##### 请求参数：
 >                名称           说明         数据类型         必选
@@ -136,7 +136,7 @@
 ##### 3\.获取短信验证码接口
 >说明：注册时获取手机短信验证码  
 >请求方式：POST  
->请求地址：/baseinterface/obtainSms
+>请求地址：/sya/api/baseinterface/obtainSms
 > ##### 请求参数： 
 >                名称           说明         数据类型         必选
 >              number        电话号码        String             Y
@@ -158,7 +158,7 @@
 >###### 4\.1采集任务列表List接口
 >说明：  
 >请求方式：POST  
->请求地址：/sdCollectTask/selectCollectTaskInfo
+>请求地址：/sya/api/baseinterface/selectCollectTaskInfo
 > ##### 请求参数： 
 >                名称           说明                           数据类型         必选
 >                start        分页数据起始位子                  Integer          Y
@@ -193,7 +193,7 @@
 >###### 5\.1甲方信息列表List接口 
 >说明：  
 >请求方式：POST  
->请求地址：/sdConsumer/selectConsumerInfo
+>请求地址：/consumer/api/sdConsumer/selectConsumerInfo
 > ##### 请求参数：
 >                名称           说明                           数据类型         必选
 >                start        分页数据起始位子                  Integer          Y
@@ -227,7 +227,7 @@
 >###### 5\.2新增甲方信息接口
 >说明：  
 >请求方式：POST  
->请求地址：/sdConsumer/insertConsumerInfo
+>请求地址：/consumer/api/sdConsumer/insertConsumerInfo
 > ##### 请求参数：
 >            名称              说明         数据类型       必选
 >            name              姓名         String        
@@ -251,7 +251,7 @@
 >###### 5\.3修改甲方信息接口
 >说明：  
 >请求方式：POST  
->请求地址：/sdConsumer/updateConsumerInfo
+>请求地址：/consumer/api/sdConsumer/updateConsumerInfo
 > ##### 请求参数：
 >            名称              说明         数据类型       必选
 >            id                             int            Y
@@ -276,7 +276,7 @@
 >###### 5\.4删除甲方信息接口
 >说明：  
 >请求方式：GET  
->请求地址：/sdConsumer/deleteConsumer	
+>请求地址：/consumer/api/sdConsumer/deleteConsumer	
 > ##### 请求参数：
 >            名称              说明         数据类型       必选
 >            id                              int          Y
@@ -300,7 +300,7 @@
 >###### 6\.1团体组织信息List接口 
 >说明：  
 >请求方式：POST  
->请求地址：/sdOrganization/selectOrganizationInfo
+>请求地址：/organization/api/sdOrganization/selectOrganizationInfo
 > ##### 请求参数：
 >                名称           说明                           数据类型         必选
 >                start        分页数据起始位子                  Integer          Y
@@ -335,7 +335,7 @@
 >###### 6\.2新增团体组织信息接口
 >说明：  
 >请求方式：POST  
->请求地址：/sdOrganization/insertOrganizationInfo
+>请求地址：/organization/api/sdOrganization/insertOrganizationInfo
 > ##### 请求参数：
 >            名称              说明         数据类型       必选
 >            name              姓名         String        
@@ -360,7 +360,7 @@
 >###### 6\.3修改团体组织信息接口
 >说明：  
 >请求方式：POST  
->请求地址：/sdOrganization/updateOrganizationInfo
+>请求地址：/organization/api/sdOrganization/updateOrganizationInfo
 > ##### 请求参数：
 >            名称              说明         数据类型       必选
 >            name              姓名         String        
@@ -382,7 +382,7 @@
 >###### 6\.4删除团体组织信息接口
 >说明：  
 >请求方式：GET  
->请求地址：/sdOrganization/deleteOrganizationInfo
+>请求地址：/organization/api/sdOrganization/deleteOrganizationInfo
 > ##### 请求参数：
 >            名称              说明         数据类型       必选
 >            id                            int            Y
@@ -397,4 +397,26 @@
     			"code": 200,
     			"message": "删除成功",
    				"timestamp": 1534411596050
+             }
+######7\.获取数据字典
+>说明：  
+>请求方式：POST  
+>请求地址：/sya/api/baseinterface/selectDictionaryType
+> ##### 请求参数：
+>            名称              说明         数据类型       必选
+>            types            数据字典表，    String        Y  
+>                             例"0001,0002"
+> ##### 应答参数：
+>            名称              说明         数据类型
+>            code             请求状态      String
+>            message          返回信息      String
+>            timestamp        时间戳 
+>            result           返回数据      Object
+> ###### 返回信息示例：
+
+             {
+    			"code": 200,
+    			"message": "修改成功",
+   				"timestamp": 1534411596050
+                "result":[]
              }

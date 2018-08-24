@@ -25,7 +25,7 @@ public class JwtManager {
     //加密私钥
     private final static String base64Secret = "MDk4ZjZiY2Q0NjIxZDM3M2NhZGU0ZTgzMjYyN2I0ZjY=";
     //过期时间
-    private final static int expiresSecond = 172800000;
+    private final static int expiresSecond = 1800000;
     
     private static Logger logger = LoggerFactory.getLogger(JwtManager.class);
 
@@ -39,11 +39,6 @@ public class JwtManager {
             return null;
         }
     }
-    
-    
-   
-   
-    
 
     //进行token分解将加密过的token分解成原始生成token
     public static Map<String,Object> TokenDecompose(String jsonWebToken) {
@@ -68,16 +63,17 @@ public class JwtManager {
 
         String userName= "";
         String userType = "";
-
-        try {
-            if (StringUtils.isNotBlank(claims.get("user_name").toString())) {
-                userName= claims.get("user_name").toString();
+        if(claims!=null){
+            try {
+                if (StringUtils.isNotBlank(claims.get("user_name").toString())) {
+                    userName= claims.get("user_name").toString();
+                }
+                if (StringUtils.isNotBlank(claims.get("user_type").toString())) {
+                    userType=claims.get("user_type").toString();
+                }
+            } catch (Exception e) {
+                throw new AuthenticationException("分析token认证失败！");
             }
-            if (StringUtils.isNotBlank(claims.get("user_type").toString())) {
-                userType=claims.get("user_type").toString();
-            }
-        } catch (Exception e) {
-            throw new AuthenticationException("token认证失败！");
         }
         map.put("username",userName);
         map.put("userType",userType);
